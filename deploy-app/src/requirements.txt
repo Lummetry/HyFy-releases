@@ -1,0 +1,7 @@
+python-multipart
+requests
+uvicorn
+fastapi
+bcrypt
+PyYAML
+python-jose

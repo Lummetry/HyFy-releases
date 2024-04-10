@@ -1,0 +1,16 @@
+repository: git@github.com:Lummetry/HyFy-releases.git
+deployments:
+  - application: optizone
+    environment: staging
+    directory_name: optizone
+    backend_deployment_name: optiz-be-app
+    frontend_deployment_name: optiz-fe
+    namespace: hyfy
+
+  - application: preventics
+    environment: staging
+    directory_name: preventics
+    backend_deployment_name: prevx-be-app
+    frontend_deployment_name: prevx-fe
+    namespace: hyfy
+  # Add more deployments as needed

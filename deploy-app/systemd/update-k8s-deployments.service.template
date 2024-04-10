@@ -1,0 +1,12 @@
+[Unit]
+Description=Update Kubernetes Deployments
+After=network.target
+
+[Service]
+Type=simple
+User=itadmin
+ExecStart=/path/to/update-k8s-deployments.sh
+WorkingDirectory=/path/to
+
+[Install]
+WantedBy=multi-user.target

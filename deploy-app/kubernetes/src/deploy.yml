@@ -1,0 +1,96 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hyfy-deploy-app-deployment
+  namespace: hyfy-deploy-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deploy-app
+  template:
+    metadata:
+      labels:
+        app: deploy-app
+    spec:
+      containers:
+        - name: hyfy-deploy-app-container
+          image: aixpand/deploy-app:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - secretRef:
+                name: deploy-app-secrets
+          volumeMounts:
+            - name: deploy-app-storage
+              mountPath: /app/storage
+      volumes:
+        - name: deploy-app-storage
+          persistentVolumeClaim:
+            claimName: deploy-app-nfs-pvc
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: hyfy-deploy-app-deployment
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 172.31.255.148
+    path: "/nfs/k8s/deploy_app_storage"
+  template:
+    spec:
+      containers:
+        - name: hyfy-deploy-app-container
+---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: hyfy-deploy-app-deployment
+#   namespace: hyfy-deploy-app
+# spec:
+#   accessModes:
+#     - ReadWriteMany
+#   resources:
+#     requests:
+#       storage: 1Gi
+#   volumeName: deploy-app-nfs-pv
+#   template:
+#     spec:
+#       containers:
+#         - name: hyfy-deploy-app-container
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hyfy-deploy-app-deployment
+  namespace: hyfy-deploy-app
+spec:
+  type: NodePort
+  ports:
+    - port: 30084
+      targetPort: 8000
+      nodePort: 30084
+  selector:
+    app: deploy-app
+  template:
+    spec:
+      containers:
+        - name: hyfy-deploy-app-container
+# For development purpose
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: storage-claim
+  namespace: hyfy-deploy-app
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
