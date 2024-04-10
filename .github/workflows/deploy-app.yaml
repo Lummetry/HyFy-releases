@@ -24,7 +24,6 @@ jobs:
           cd deploy-app/src && \
            docker build -t aixpand/deploy-app:latest . && \
            docker push aixpand/deploy-app:latest
-          done
         shell: bash
 
       - name: Logout from Docker Hub
