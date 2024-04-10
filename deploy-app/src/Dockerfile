@@ -20,6 +20,7 @@ WORKDIR /app
 # Copy the FastAPI application code and the requirements.txt file to the container
 COPY backend/ ./backend
 COPY requirements.txt .
+COPY seed.sh ./seed.sh
 
 RUN apt update && apt upgrade -y && apt install -y git
 

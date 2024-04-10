@@ -20,7 +20,7 @@ fi
 if ! kubectl get namespace $NAMESPACE &> /dev/null
 then
     echo "Namespace $NAMESPACE not found, applying it"
-    kubectl apply -f ./src/namespace.yaml
+    kubectl apply -f ./src/namespace.yml
 fi
 
 # check if secrets.yml exists, if not copy the .secrets.yml file to secrets.yml, and stop execution
@@ -35,14 +35,14 @@ fi
 if ! kubectl get secret $SECRET_NAME -n $NAMESPACE &> /dev/null
 then
     echo "Secret $SECRET_NAME not found, applying it"
-    kubectl apply -f ./src/secrets.yaml
+    kubectl apply -f ./src/secrets.yml
 fi
 
 # check if deployment exists on cluster if not apply it
 if ! kubectl get deployment $DEPLOYMENT_NAME -n $NAMESPACE &> /dev/null
 then
     echo "Deployment $DEPLOYMENT_NAME not found, applying it"
-    kubectl apply -f ./src/deploy.yaml
+    kubectl apply -f ./src/deploy.yml
 fi
 
 # end of installation, print the status of the deployment

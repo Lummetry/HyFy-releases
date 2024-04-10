@@ -1,6 +1,6 @@
 .idea
 .venv
 __pycache__
-.secrets.yml
 storage/*.csv
 debug.sh
+secrets.yml

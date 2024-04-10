@@ -1,0 +1,31 @@
+name: Process Edge Device Releases
+
+on:
+  push:
+    paths:
+      - 'deploy-app/src/**'
+
+jobs:
+  handle-edge-device-releases:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build, tag and push image
+        run: |
+          # change to the directory where the Dockerfile is located
+          cd deploy-app/src && \
+           docker build -t aixpand/deploy-app:latest . && \
+           docker push aixpand/deploy-app:latest
+          done
+        shell: bash
+
+      - name: Logout from Docker Hub
+        run: docker logout

@@ -47,22 +47,22 @@ spec:
       containers:
         - name: hyfy-deploy-app-container
 ---
-# apiVersion: v1
-# kind: PersistentVolumeClaim
-# metadata:
-#   name: hyfy-deploy-app-deployment
-#   namespace: hyfy-deploy-app
-# spec:
-#   accessModes:
-#     - ReadWriteMany
-#   resources:
-#     requests:
-#       storage: 1Gi
-#   volumeName: deploy-app-nfs-pv
-#   template:
-#     spec:
-#       containers:
-#         - name: hyfy-deploy-app-container
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: hyfy-deploy-app-deployment
+  namespace: hyfy-deploy-app
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  volumeName: deploy-app-nfs-pv
+  template:
+    spec:
+      containers:
+        - name: hyfy-deploy-app-container
 ---
 apiVersion: v1
 kind: Service
@@ -77,20 +77,33 @@ spec:
       nodePort: 30084
   selector:
     app: deploy-app
-  template:
-    spec:
-      containers:
-        - name: hyfy-deploy-app-container
-# For development purpose
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: storage-claim
-  namespace: hyfy-deploy-app
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
+
+# for development purposes
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: hyfy-deploy-app-deployment
+#   labels:
+#     type: local
+# spec:
+#   storageClassName: manual
+#   capacity:
+#     storage: 1Gi
+#   accessModes:
+#     - ReadWriteOnce
+#   hostPath:
+#     path: /Users/paul/Programming/Work/AiXpand/HyFy-releases/deploy-app/src/storage
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: deploy-app-nfs-pvc
+#   namespace: hyfy-deploy-app
+# spec:
+#   storageClassName: manual
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 1Gi
