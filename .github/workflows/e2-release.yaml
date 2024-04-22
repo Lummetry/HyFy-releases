@@ -5,6 +5,10 @@ on:
     paths:
       - 'e2/release.yaml'
 
+concurrency:
+  group: e2-release-process
+  cancel-in-progress: false
+
 jobs:
   handle-edge-device-releases:
     runs-on: ubuntu-latest
