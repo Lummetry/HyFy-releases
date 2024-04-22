@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { UserModel } from "../models/User";
+import { AlertDialogProps } from "../components/AlertDialog";
 
 interface GlobalContextType {
     user: UserModel | null;
@@ -10,6 +11,9 @@ interface GlobalContextType {
     addSnackBar?: ({message, type, duration}: SnackbarType) => void;
     getSnackBars?: () => SnackbarType[];
     removeSnackBar?: (id: number) => void;
+    addAlertDialog?: ({title, message}: AlertDialogProps) => void;
+    getAlertDialogs?: () => AlertDialogProps[];
+    removeAlertDialog?: (id: number) => void;
 }
 
 interface GlobalProviderProps {
@@ -32,7 +36,10 @@ const globalContextDefaultValues: GlobalContextType = {
     logout: () => {},
     addSnackBar: () => {},
     getSnackBars: () => [],
-    removeSnackBar: () => {}
+    removeSnackBar: () => {},
+    addAlertDialog: () => {},
+    getAlertDialogs: () => [],
+    removeAlertDialog: () => {},
 };
 
 const GlobalContext = createContext<GlobalContextType>(globalContextDefaultValues);
@@ -42,6 +49,7 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
     const [user, setUser] = useState<UserModel | null>(null);
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
     const [snackBars, setSnackBars] = useState<SnackbarType[]>([]);
+    const [alertDialogs, setAlertDialogs] = useState<AlertDialogProps[]>([]);
 
     useEffect(() => {
         const user = localStorage.getItem("user");
@@ -95,7 +103,30 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
         return snackBars;
     }
 
-    return <GlobalContext.Provider value={{user, isLoggedIn, updateUser, logout, addSnackBar, getSnackBars, removeSnackBar}}>{children}</GlobalContext.Provider>;
+    const addAlertDialog = ({ title, message }: AlertDialogProps) => {
+        const id = Math.floor(Math.random() * 10000);
+        const alertDialog = { id, title, message, state: true };
+        setAlertDialogs([...alertDialogs, alertDialog]);
+    }
+
+    const removeAlertDialog = (id: number) => {
+        const updatedDialogs = alertDialogs.map(dialog => {
+            if (dialog.id === id) {
+                return { ...dialog, state: false }; // Modify state to false to hide the dialog
+            }
+            return dialog;
+        });
+        setAlertDialogs(updatedDialogs);
+    }
+
+    const getAlertDialogs = () => {
+        return alertDialogs;
+    }
+
+    return <GlobalContext.Provider 
+                value={{user, isLoggedIn, updateUser, logout, addSnackBar, getSnackBars, removeSnackBar, addAlertDialog, removeAlertDialog, getAlertDialogs}}>
+                {children}
+            </GlobalContext.Provider>;
 };
 
 export default GlobalContext;

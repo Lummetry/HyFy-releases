@@ -14,6 +14,7 @@ import GlobalContext from "../contexts/GlobalContext";
 import Snackbar from '@mui/material/Snackbar';
 import { Alert } from "@mui/material";
 import { APP_NAME } from "../Constants";
+import AlertDialog from "../components/AlertDialog";
 
 
 interface MainLayoutProps {
@@ -22,7 +23,7 @@ interface MainLayoutProps {
 
 const MainLayout = ({ children }: MainLayoutProps) => {
   const [open, setOpen] = useState(true);
-  const { logout, getSnackBars, removeSnackBar } = useContext(GlobalContext);
+  const { logout, getSnackBars, removeSnackBar, getAlertDialogs, removeAlertDialog } = useContext(GlobalContext);
   const drawerWidth = 240;
 
   const toggleDrawer = () => {
@@ -39,7 +40,6 @@ const MainLayout = ({ children }: MainLayoutProps) => {
     const snackBars = getSnackBars();
 
     const handleClose = (id: number) => {
-      console.log('Close button clicked');
       if (removeSnackBar) {
         removeSnackBar(id);
       }
@@ -59,6 +59,25 @@ const MainLayout = ({ children }: MainLayoutProps) => {
               {snack.message}
             </Alert>
         </Snackbar>
+        ))}
+      </>
+    );
+  };
+
+  const RenderAlertDialog = () => {
+    if (!getAlertDialogs) return null;
+    const alertDialogs = getAlertDialogs();
+
+    const handleClose = (id: number) => {
+      if (removeAlertDialog) {
+        removeAlertDialog(id);
+      }
+    };
+
+    return (
+      <>
+        {alertDialogs.map((alert) => (
+          <AlertDialog state={alert.state} handleClose={handleClose} key={alert.id} id={alert.id} title={alert.title} message={alert.message} />
         ))}
       </>
     );
@@ -120,6 +139,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
         </Box>
 
         <RenderSnackbar />
+        <RenderAlertDialog />
       </Box>
     </Box>
   );

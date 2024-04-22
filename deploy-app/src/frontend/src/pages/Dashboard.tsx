@@ -126,7 +126,7 @@ const Dashboard = () => {
         tableRows: []
     });
 
-    const { addSnackBar } = useContext(GlobalContext);
+    const { addSnackBar, addAlertDialog } = useContext(GlobalContext);
 
     const k8sTableColumns = [
         { label: 'Version', field: 'version' },
@@ -231,7 +231,8 @@ const Dashboard = () => {
                 fromVersion,
                 toVersion
             } as TagDataDTO;
-    
+            
+            setLoading(true);
             gitService.deployVersion(tagData).then(() => {
                 let message = `Deployed ${row.version} to ${env}`;
                 if (addSnackBar) {
@@ -241,10 +242,12 @@ const Dashboard = () => {
                 // update the state by calling the loadDataForTab function
                 loadDataForTab(directory);
             }).catch((error) => {
-                let message = `Error: ${error.response?.data?.detail || error.message}`;
-                if (addSnackBar) {
-                    addSnackBar({ message, type: 'error', duration: 10000 });
+                let message = `${error.response?.data?.detail || error.message}`;
+                if (addAlertDialog) {
+                    addAlertDialog({ message, title: 'Error' });
                 }
+            }).finally(() => {
+                setLoading(false);
             });
         };
     
