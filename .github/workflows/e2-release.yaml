@@ -21,22 +21,19 @@ jobs:
       - name: Pull, tag, and push images
         run: |
           # Parse the release.yaml file to extract versions
-          yq e '... comments=""' e2/release.yaml > temp.yaml
-          ENVS=$(yq e '.application.envs' temp.yaml)
+          yq e '.application.envs[] | .name + ":" + (.version | tostring)' e2/release.yaml > temp.yaml
+          ENVS=$(cat temp.yaml)
           echo "Recap step: attempting to process the following releases:"
+          echo "$ENVS"
+
+          echo "Processing step:"
           echo "$ENVS" | while IFS=: read -r env version; do
             version=${version//[[:space:]]/}  # Trim whitespace from version
             IMAGE="aixpand/exe_eng:$version"
             NEW_TAG="aixpand/exe_eng:$env"
+
             echo "Environment: $env <- Version: $version"
-          done
-          
-          echo "Processing step:"
-          echo "$ENVS" | while IFS=: read -r env version; do
-            version=${version//[[:space:]]/} 
-            IMAGE="aixpand/exe_eng:$version"
-            NEW_TAG="aixpand/exe_eng:$env"
-            
+
             # Pull the specified version
             echo "Pulling $IMAGE..."
             if ! docker pull $IMAGE; then

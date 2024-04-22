@@ -3,10 +3,10 @@ name: Deploy application to Docker Hub
 on:
   push:
     paths:
-      - 'deploy-app/src/**'
+      - 'deploy-app/**'
 
 jobs:
-  handle-edge-device-releases:
+  handle-docker-hub-deployments:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
