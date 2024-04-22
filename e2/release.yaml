@@ -5,7 +5,7 @@ application:
     version: 3.30.240
   - info: qa environment
     name: qa
-    version: 3.30.190
+    version: 3.30.240
   - info: preprod environment
     name: preprod
     version: 3.30.190
