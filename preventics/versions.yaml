@@ -9,6 +9,12 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    1.1.1:
+      backend:
+        image: aixpand/backend:release-1.96.0
+      frontend:
+        image: aixpand/investigator:banksight-0.54.5
+      summary: Added areaMapping support on plugin schema, allows for better integration with UI.
     1.0.11:
       backend:
         image: aixpand/backend:release-1.95.1
