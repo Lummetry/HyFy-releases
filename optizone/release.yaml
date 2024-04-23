@@ -1,20 +1,16 @@
 application:
+  envs:
+  - info: Staging
+    name: staging
+    version: 1.1.2
+  - info: QA
+    name: qa
+    version: 0.0.0
+  - info: Preprod
+    name: preprod
+    version: 0.0.0
+  - info: Prod
+    name: prod
+    version: 0.0.0
   name: Optizone
   type: k8s
-
-  envs:
-  - name: staging
-    info: Staging
-    version: 1.1.1
-
-  - name: qa
-    info: QA
-    version: 0.0.0
-
-  - name: preprod
-    info: Preprod
-    version: 0.0.0
-
-  - name: prod
-    info: Prod
-    version: 0.0.0
