@@ -8,10 +8,13 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
-    3.30.250: 
+    3.30.260:
+      summary: Synthetic version for testing
+
+    3.30.250:
       summary: Update planogram, local commands bypass network (even faster commands), update vac
-  
-    3.30.240: 
+
+    3.30.240:
       summary: Faster commands, working hours quick-fix
   
     3.30.230: 

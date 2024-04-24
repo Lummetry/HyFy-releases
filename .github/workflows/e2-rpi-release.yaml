@@ -1,4 +1,4 @@
-name: Process Edge Device Releases
+name: Process Edge Device Releases (RPi)
 
 on:
   push:
@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  handle-edge-device-releases:
+  handle-edge-device-rpi-releases:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -22,25 +22,25 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Pull, tag, and push AMD64 images
+      - name: Pull, tag, and push ARM64 (RPi) images
         run: |
           # Parse the release.yaml file to extract versions
-          yq e '.application.envs[] | .name + ":" + (.version | tostring)' e2/release.yaml > temp.yaml
-          ENVS=$(cat temp.yaml)
+          yq e '.application.envs[] | .name + ":" + (.version | tostring)' e2/release.yaml > temp_arm_rpi.yaml
+          ENVS=$(cat temp_arm_rpi.yaml)
           echo "Recap step: attempting to process the following releases:"
           echo "$ENVS"
 
           echo "Processing step:"
           echo "$ENVS" | while IFS=: read -r env version; do
             version=${version//[[:space:]]/}  # Trim whitespace from version
-            IMAGE="aixpand/exe_eng:$version"
-            NEW_TAG="aixpand/exe_eng:$env"
+            IMAGE="aixpand/exe_eng:rpi_$version"
+            NEW_TAG="aixpand/exe_eng:rpi_$env"
 
             echo "Environment: $env <- Version: $version"
 
             # Pull the specified version
             echo "Pulling $IMAGE..."
-            if ! docker pull $IMAGE; then
+            if ! docker pull --platform=linux/arm64 $IMAGE; then
               echo "Failed to pull image $IMAGE"
               exit 1
             fi
