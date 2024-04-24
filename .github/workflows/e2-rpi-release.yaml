@@ -1,4 +1,4 @@
-name: Process Edge Device Releases (RPi)
+name: RPi/arm64 Execution Engine releases
 
 on:
   push:
