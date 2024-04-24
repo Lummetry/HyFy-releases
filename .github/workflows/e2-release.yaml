@@ -22,7 +22,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Pull, tag, and push images
+      - name: Pull, tag, and push AMD64 images
         run: |
           # Parse the release.yaml file to extract versions
           yq e '.application.envs[] | .name + ":" + (.version | tostring)' e2/release.yaml > temp.yaml
@@ -53,6 +53,10 @@ jobs:
             docker push $NEW_TAG
           done
         shell: bash
+
+        # add also for tegra_$ENV & rpi_$ENV
+        # use docker pull --platform=linux/arm64 for tegra & rpi
+        # test! test! test!
 
       - name: Logout from Docker Hub
         run: docker logout
