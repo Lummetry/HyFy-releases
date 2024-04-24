@@ -33,7 +33,7 @@ jobs:
           echo "Processing step:"
           echo "$ENVS" | while IFS=: read -r env version; do
             version=${version//[[:space:]]/}  # Trim whitespace from version
-            IMAGE="aixpand/exe_eng:rpi_$version"
+            IMAGE="aixpand/exe_eng:rpi-$version"
             NEW_TAG="aixpand/exe_eng:rpi_$env"
 
             echo "Environment: $env <- Version: $version"
