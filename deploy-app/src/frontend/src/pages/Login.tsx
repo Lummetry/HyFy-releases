@@ -4,6 +4,8 @@ import { UserService } from "../services/user.service";
 import GlobalContext from "../contexts/GlobalContext";
 import { useNavigate } from "react-router-dom";
 
+import { APP_NAME } from "../Constants";
+
 const Login = () => {
   const [username, setUsername] = useState("");
   const [usernameError, setUsernameError] = useState(false);
@@ -79,7 +81,7 @@ const Login = () => {
         }}
       >
         <Typography component="h1" variant="h5">
-          Sign in
+        {APP_NAME} - Sign in
         </Typography>
         <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleSubmit}>
           <TextField
