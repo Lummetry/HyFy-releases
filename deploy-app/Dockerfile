@@ -31,11 +31,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY --from=react-build /app/frontend/dist /app/frontend/dist
 
 # Copy the entrypoint script
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+ADD ver.txt .
+ADD entrypoint.sh .
+RUN chmod +x entrypoint.sh
 
 # Set the entrypoint script to run before the application starts
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["./entrypoint.sh"]
 
 # Set the command to run the application
 # Make sure the FastAPI app is configured to serve the static files from the React build directory
