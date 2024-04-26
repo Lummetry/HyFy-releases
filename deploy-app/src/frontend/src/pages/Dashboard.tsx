@@ -7,7 +7,6 @@ import DeployButton from '../components/DeployButton';
 import GlobalContext from '../contexts/GlobalContext';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import CommitIcon from '@mui/icons-material/Commit';
-import { render } from 'react-dom';
 import ChangeListDialog from '../components/ChangeListDialog';
 
 export interface TagDataDTO {
