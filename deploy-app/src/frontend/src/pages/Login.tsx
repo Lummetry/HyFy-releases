@@ -13,6 +13,16 @@ const Login = () => {
   const { updateUser, addSnackBar } = useContext(GlobalContext);
   const navigate = useNavigate();
 
+  const userService = new UserService();
+  // obtain the token from local storage
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      userService.setToken(token);
+      navigate("/dashboard");
+    }
+  }, []);
+
   // validate username
   useEffect(() => {
     if (username.length > 0) {
@@ -38,7 +48,6 @@ const Login = () => {
       setPasswordError(true);
     }
 
-    const userService = new UserService();
     userService.login(username, password).then((token) => {
       userService.setToken(token.access_token);
       

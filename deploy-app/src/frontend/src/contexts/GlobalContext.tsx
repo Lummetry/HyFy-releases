@@ -11,7 +11,7 @@ interface GlobalContextType {
     addSnackBar?: ({message, type, duration}: SnackbarType) => void;
     getSnackBars?: () => SnackbarType[];
     removeSnackBar?: (id: number) => void;
-    addAlertDialog?: ({title, message}: AlertDialogProps) => void;
+    addAlertDialog?: ({title, message, bullets}: AlertDialogProps) => void;
     getAlertDialogs?: () => AlertDialogProps[];
     removeAlertDialog?: (id: number) => void;
 }
@@ -53,8 +53,9 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
 
     useEffect(() => {
         const user = localStorage.getItem("user");
+        const token = localStorage.getItem("token");
         if (user) {
-            setUser(JSON.parse(user));
+            setUser({...JSON.parse(user), token});
             setIsLoggedIn(true);
         }
     }, []);
@@ -103,9 +104,9 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
         return snackBars;
     }
 
-    const addAlertDialog = ({ title, message }: AlertDialogProps) => {
+    const addAlertDialog = ({ title, message, bullets }: AlertDialogProps) => {
         const id = Math.floor(Math.random() * 10000);
-        const alertDialog = { id, title, message, state: true };
+        const alertDialog = { id, title, message, bullets, state: true };
         setAlertDialogs([...alertDialogs, alertDialog]);
     }
 

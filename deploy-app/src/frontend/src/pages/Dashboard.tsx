@@ -6,8 +6,11 @@ import BasicTableWithActions from '../components/BasicTableWithActions';
 import DeployButton from '../components/DeployButton';
 import GlobalContext from '../contexts/GlobalContext';
 import RefreshIcon from '@mui/icons-material/Refresh';
+import CommitIcon from '@mui/icons-material/Commit';
+import { render } from 'react-dom';
+import ChangeListDialog from '../components/ChangeListDialog';
 
-interface TagDataDTO {
+export interface TagDataDTO {
     tag: string;
     directory: string;
     environment: string;
@@ -87,24 +90,6 @@ const gitService = new GitService();
 //     }
 // };
 
-const getRowsForApp = (appData: ConfigApplicationDto, envs: EnvInfo[]) => {
-    const { versions, type } = appData;
-
-    if (type === 'k8s') {
-        return Object.keys(versions).map(version => ({
-            version,
-            images: `${versions[version].backend?.image || 'N/A'}\n${versions[version].frontend?.image || 'N/A'}`,
-            summary: versions[version].summary || 'No summary available',
-            assigned_to: environmentsForVersions(version, envs) || '',
-        }));
-    } else {
-        return Object.keys(versions).map(version => ({
-            version,
-            summary: versions[version].summary || 'No summary available',
-            assigned_to: environmentsForVersions(version, envs) || '',
-        }));
-    }
-};
 
 const environmentsForVersions = (version: string, envs: EnvInfo[]): string => {
     return envs
@@ -118,13 +103,18 @@ const Dashboard = () => {
     const [loading, setLoading] = useState(false);
     const [dashboardState, setDashboardState] = useState<{
         config: GetConfigsDto[],
+        versionData: ConfigApplicationDto,
         selectedEnv: EnvInfo[],
         tableRows: (K8STableRow[] | E2TableRow[])
     }>({
         config: [],
+        versionData: {} as ConfigApplicationDto,
         selectedEnv: [],
         tableRows: []
     });
+
+    const [changeList, setChangeList] = useState<{ [directory: string]: TagDataDTO[] }>({});
+    const [openChangeListDialog, setOpenChangeListDialog] = useState(false);
 
     const { addSnackBar, addAlertDialog } = useContext(GlobalContext);
 
@@ -150,6 +140,43 @@ const Dashboard = () => {
         {label: 'Assigned To', field: 'assigned_to'},
     ];
 
+    const getRowsForApp = (appData: ConfigApplicationDto, envs: EnvInfo[], changes: { [directory: string]: TagDataDTO[] }) => {
+        const { versions, type } = appData;
+    
+        return Object.keys(versions).map(versionKey => {
+            const versionData = versions[versionKey];
+            const assignedEnvironments = environmentsForVersions(versionKey, envs).split(', ');
+            const directory = dashboardState.config[selectedTab]?.directory_name;
+    
+            // Retrieve changes for the current directory
+            const directoryChanges = changes[directory] || [];
+    
+            // Filter changes that match the current version
+            const changeEnvironments = directoryChanges
+                .filter(change => change.tag === versionKey)
+                .filter(change => !assignedEnvironments.includes(change.environment))
+                .map(change => `<span style="color: green;">${change.environment}</span>`);
+    
+            const assignedToFormatted = [...assignedEnvironments, ...changeEnvironments].join(', ');
+    
+            if (type === 'k8s') {
+                return {
+                    version: versionKey,
+                    images: `${versionData.backend?.image || 'N/A'}\n${versionData.frontend?.image || 'N/A'}`,
+                    summary: versionData.summary || 'No summary available',
+                    assigned_to: assignedToFormatted,
+                };
+            } else {
+                return {
+                    version: versionKey,
+                    summary: versionData.summary || 'No summary available',
+                    assigned_to: assignedToFormatted,
+                };
+            }
+        });
+    };
+    
+
     // new state management functions
     const loadDataForTab = async (directoryName: string) => {
         setLoading(true);
@@ -157,10 +184,13 @@ const Dashboard = () => {
             const configData = await gitService.getConfig(directoryName);
             // const releaseData = await gitService.getReleases(directoryName);
             const versionData = await gitService.getVersions(directoryName);
+            const currentChanges = changeList || [];
+
             setDashboardState(prevState => ({
                 ...prevState,
+                versionData: versionData.application,
                 selectedEnv: configData.application.envs,
-                tableRows: getRowsForApp(versionData.application, configData.application.envs)
+                tableRows: getRowsForApp(versionData.application, configData.application.envs, currentChanges)
             }));
         } catch (error: Error|any) {
             let message = `Error: ${error.response?.data?.detail || error.message}`;
@@ -211,6 +241,81 @@ const Dashboard = () => {
         }
     }, [selectedTab, dashboardState.config]);
 
+    useEffect(() => {
+        if (dashboardState.config.length > selectedTab) {
+
+            const directory = dashboardState.config[selectedTab]?.directory_name;
+            if (changeList[directory]?.length === 0) {
+                return;
+            }
+
+            gitService.checkPrecedenceForChangeList(changeList[directory]).then((response) => {
+                console.log('Check precedence response', response);
+
+                /**
+                 * Example response:
+                 * {
+                        "success": false,
+                        "message": [
+                            {
+                                "higher_env": "qa",
+                                "current_version": "1.0.10",
+                                "proposed_env": "preprod",
+                                "proposed_version": "1.0.11",
+                                "error": "Proposed version 1.0.11 for preprod is higher than qa's version 1.0.10"
+                            },
+                            {
+                                "higher_env": "qa",
+                                "current_version": "1.0.10",
+                                "proposed_env": "prod",
+                                "proposed_version": "1.0.11",
+                                "error": "Proposed version 1.0.11 for prod is higher than qa's version 1.0.10"
+                            }
+                        ]
+                    }
+                }
+                 */
+
+                if (response.success == false) {
+                    const title = 'Precedence Check Failed';
+                    const message = `The following errors were found in the change list:`;
+                    const bullets: string[] = [];
+
+                    response.message.forEach((item: any) => {
+                        bullets.push(`${item.error}`);
+                    });
+
+                    console.log('Precedence check failed', bullets);
+
+                    if (addAlertDialog) {
+                        addAlertDialog({ message, title, bullets });
+                    }
+
+                    // remove items that violate precedence from the changeList
+                    setChangeList(prevState => {
+                        const currentList = prevState[directory] || [];
+                        const updatedList = currentList.filter(item => {
+                            return response.message.some((error: any) => {
+                                return item.environment !== error.proposed_env;
+                            });
+                        });
+
+                        return { ...prevState, [directory]: updatedList };
+                    });
+                }
+
+            }).catch((error) => {
+                console.error('Check precedence error', error);
+            });
+
+            // Update the table rows with the new change list
+            setDashboardState((prevState) => ({
+                ...prevState,
+                tableRows: getRowsForApp(prevState.versionData, prevState.selectedEnv, changeList),
+            }));
+        }
+    }, [changeList]);
+
     const handleTabChange = (_event: React.ChangeEvent<{}>, newValue: number) => {
         setSelectedTab(newValue);
         // If needed, trigger data loading for the newly selected tab
@@ -231,30 +336,83 @@ const Dashboard = () => {
                 fromVersion,
                 toVersion
             } as TagDataDTO;
-            
-            setLoading(true);
-            gitService.deployVersion(tagData).then(() => {
-                let message = `Deployed ${row.version} to ${env}`;
-                if (addSnackBar) {
-                    addSnackBar({ message, type: 'success', duration: 5000 });
+
+            console.log(tagData);
+
+            setChangeList(prevState => {
+                const directory = tagData.directory;
+                const currentList = prevState[directory] || [];
+
+                // Find and remove existing tag from list (if any)
+                const existingTagIndex = currentList.findIndex(
+                    item => item.environment === tagData.environment
+                );
+                if (existingTagIndex !== -1) {
+                    currentList.splice(existingTagIndex, 1);
                 }
 
-                // update the state by calling the loadDataForTab function
-                loadDataForTab(directory);
-            }).catch((error) => {
-                let message = `${error.response?.data?.detail || error.message}`;
-                if (addAlertDialog) {
-                    addAlertDialog({ message, title: 'Error' });
-                }
-            }).finally(() => {
-                setLoading(false);
+                // Add new tag to the list
+                currentList.push(tagData);
+
+                return { ...prevState, [directory]: currentList };
             });
+            
+            // setLoading(true);
+            // gitService.deployVersion(tagData).then(() => {
+            //     let message = `Deployed ${row.version} to ${env}`;
+            //     if (addSnackBar) {
+            //         addSnackBar({ message, type: 'success', duration: 5000 });
+            //     }
+
+            //     // update the state by calling the loadDataForTab function
+            //     loadDataForTab(directory);
+            // }).catch((error) => {
+            //     let message = `${error.response?.data?.detail || error.message}`;
+            //     if (addAlertDialog) {
+            //         addAlertDialog({ message, title: 'Error' });
+            //     }
+            // }).finally(() => {
+            //     setLoading(false);
+            // });
         };
     
-        return <DeployButton 
+        return <DeployButton
+            excludeEnvs={row.assigned_to.split(', ')} 
             possibleVersion={row.version} 
             currentVersions={dashboardState.selectedEnv} 
             onSelection={handleOnSelection} />;
+    };
+
+    const enableCommitButton = () => {
+        const directory = dashboardState.config[selectedTab]?.directory_name;
+        return changeList[directory]?.length > 0;
+    };
+
+    const commitChanges = () => {
+        setLoading(true);
+        const directory = dashboardState.config[selectedTab]?.directory_name;
+        const changes = changeList[directory] || [];
+
+        if (changes.length === 0) {
+            return;
+        }
+
+        gitService.commitChanges(changes).then(() => {
+            let message = 'Changes committed successfully';
+            if (addSnackBar) {
+                addSnackBar({ message, type: 'success', duration: 5000 });
+            }
+        }).catch((error) => {
+            let message = `${error.response?.data?.detail || error.message}`;
+            if (addAlertDialog) {
+                addAlertDialog({ message, title: 'Error' });
+            }
+        }).finally(() => {
+            setLoading(false);
+            // clear the change list
+            setChangeList(prevState => ({ ...prevState, [directory]: [] }));
+            loadDataForTab(directory);
+        });
     };
 
     const renderTabContent = (tabIndex: number) => {
@@ -268,6 +426,24 @@ const Dashboard = () => {
         const columns = currentConfig.application_type === 'k8s' ? k8sTableColumns : e2TableColumns;
     
         return <BasicTableWithActions keyColumn='version' columns={columns} rows={rows} actionColumn={k8sActionsColumn} />;
+    };
+
+    const renderChangeListDialog = () => {
+        const directory = dashboardState.config[selectedTab]?.directory_name;
+        const changes = changeList[directory] || [];
+
+        return (
+            <ChangeListDialog
+                open={openChangeListDialog}
+                title='Change List'
+                changeList={changes}
+                onConfirm={() => {
+                    setOpenChangeListDialog(false);
+                    commitChanges();
+                }}
+                onCancel={() => setOpenChangeListDialog(false)}
+            />
+        );
     };
 
     return (
@@ -300,10 +476,18 @@ const Dashboard = () => {
                                         <Chip key={index} label={`${env.info} (${env.name}): ${env.version}`} sx={{ m: 1 }} />
                                     ))}
                                 </Paper>
+                                <Box display='flex' justifyContent='flex-end' sx={{ mb: 3 }}>
+                                    <Button 
+                                        disabled={!enableCommitButton()}
+                                        color='success'
+                                        variant="contained" 
+                                        onClick={() => {setOpenChangeListDialog((prev) => !prev)}}><CommitIcon />&nbsp;commit changes</Button>
+                                </Box>
                                 {renderTabContent(selectedTab)}
                             </>
                         )}
                 </Box>
+                {renderChangeListDialog()}
             </Container>
         </MainLayout>
     );

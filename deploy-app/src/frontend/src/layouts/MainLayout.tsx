@@ -77,7 +77,14 @@ const MainLayout = ({ children }: MainLayoutProps) => {
     return (
       <>
         {alertDialogs.map((alert) => (
-          <AlertDialog state={alert.state} handleClose={handleClose} key={alert.id} id={alert.id} title={alert.title} message={alert.message} />
+          <AlertDialog 
+            state={alert.state} 
+            handleClose={handleClose} 
+            key={alert.id} 
+            id={alert.id} 
+            title={alert.title} 
+            message={alert.message} 
+            bullets={alert.bullets} />
         ))}
       </>
     );

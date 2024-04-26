@@ -36,7 +36,7 @@ const BasicTableWithActions = ({ columns, rows, keyColumn, actionColumn }: Basic
                         <TableRow key={row[keyColumn]}>
                             {columns.map((column) => (
                                 <TableCell key={column.field} style={column.style}>
-                                    {column.renderer ? column.renderer(getNestedValue(row, column.field)) : getNestedValue(row, column.field)}
+                                    {column.renderer ? column.renderer(getNestedValue(row, column.field)) : <div dangerouslySetInnerHTML={{ __html: getNestedValue(row, column.field) }} />}
                                 </TableCell>
                             ))}
                             {actionColumn && (

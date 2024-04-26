@@ -13,6 +13,9 @@ export class BaseService {
             response => response,
             error => {
                 if (error.response && error.response.status === 401) {
+                    // Clear the token
+                    this.setToken(null);
+                    localStorage.removeItem("token");
                     // Redirect to the login page
                     window.location.href = '/login';
                 }

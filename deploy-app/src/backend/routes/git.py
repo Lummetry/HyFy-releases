@@ -1,3 +1,4 @@
+from typing import List
 from fastapi import APIRouter, Depends, HTTPException
 from backend.models import User, TagData
 from .auth import get_current_user
@@ -9,6 +10,39 @@ from backend.exceptions.git_operation_exception import GitOperationException
 router = APIRouter(prefix="/git")
 logger = logging.getLogger(__name__)
 
+@router.post('/check-precedence')
+def check_precedence(tag_data: List[TagData], current_user: User = Depends(get_current_user)):
+    if not tag_data:
+        return {'success': False, 'message': 'No tags provided'}
+
+    config_file_path = f"{tag_data[0].directory}/{RELEASE_FILE_NAME}"
+    try:
+        git_operations_service = GitOperationsService(GITHUB_REPOSITORY_NAME, None, config_file_path)
+        git_operations_service.prepare_repository()
+        succes, error = git_operations_service.check_tag_list_precedence(tag_data)
+        print(f"Success: {succes}, Error: {error}")
+        if error:
+            return {'success': False, 'message': error}
+        return {'success': True, 'message': 'Precedence check passed'}
+    except Exception as e:
+        logger.error(f"Error updating version: {e}")
+        raise HTTPException(status_code=500, detail=f"{e}")
+
+@router.post('/commit-changes')
+def commit_changes(change_list: List[TagData], current_user: User = Depends(get_current_user)):
+    config_file_path = f"{change_list[0].directory}/{RELEASE_FILE_NAME}"
+    try:
+        git_operations_service = GitOperationsService(GITHUB_REPOSITORY_NAME, None, config_file_path)
+        git_operations_service.update_and_push_changes(change_list, user=current_user)
+        return {"success": True}
+    except GitOperationException as e:
+        logger.error(f"Git operation failed: {e}")
+        raise HTTPException(status_code=500, detail=f"Git operation failed {e}")
+    except Exception as e:
+        logger.error(f"Error updating version: {e}")
+        raise HTTPException(status_code=500, detail=f"{e}")
+
+# should be deprecated
 @router.post('/update-version')
 def mark_tag(tag_data: TagData, current_user: User = Depends(get_current_user)):
     config_file_path = f"{tag_data.directory}/{RELEASE_FILE_NAME}"

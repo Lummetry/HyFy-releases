@@ -1,3 +1,4 @@
+import { TagDataDTO } from "../pages/Dashboard";
 import { BaseService } from "./base.service";
 
 export class GitService extends BaseService {
@@ -19,6 +20,14 @@ export class GitService extends BaseService {
 
     public async getVersions(dir: string): Promise<any> {
         return await this.get<any>(`/git/config/${dir}/versions`);
+    }
+
+    public async checkPrecedenceForChangeList(changeList: TagDataDTO[]): Promise<any> {
+        return await this.post<any>("/git/check-precedence", changeList);
+    }
+
+    public async commitChanges(changeList: TagDataDTO[]): Promise<any> {
+        return await this.post<any>("/git/commit-changes", changeList);
     }
 
     public async deployVersion(tagData: object): Promise<any> {

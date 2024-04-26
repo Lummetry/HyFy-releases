@@ -1,3 +1,4 @@
+from typing import List
 import yaml
 import os
 import logging
@@ -25,15 +26,30 @@ class GitOperationsService:
             self.local_repo_path = local_repo_path
         self.config_file_path = config_file_path
 
-    def update_and_push_changes(self, tag_data: TagData, user=None):
+    def update_and_push_changes(self, tag_data_list: List[TagData], user=None):
       try:
           self.prepare_repository()
-          precedence_check, violation_info = self.check_tag_precedence(tag_data)
-          if not precedence_check:
-              raise ValueError(f"Evironment precedence violation: Attempting to set version '{tag_data.tag}' for '{tag_data.environment}' exceeds version '{violation_info['current_version']}' set in '{violation_info['env']}' environment.")
-          self.update_configuration_file(tag_data)
+          # precedence_check, violation_info = self.check_tag_precedence(tag_data)
+          # if not precedence_check:
+          #     raise ValueError(f"Evironment precedence violation: Attempting to set version '{tag_data.tag}' for '{tag_data.environment}' exceeds version '{violation_info['current_version']}' set in '{violation_info['env']}' environment.")
+          # self.update_configuration_file(tag_data)
+          # committing_user = user['name'] if user else 'Unknown User'
+          # commit_message = f'chore: {tag_data.fromVersion} to {tag_data.toVersion} {committing_user} for {tag_data.directory} {tag_data.environment}'
+          # self.git_service.git_commit(repo_path=self.local_repo_path, message=commit_message)
+          # self.git_service.git_push(self.local_repo_path)
+
+          # get a list of all environment from the tag_data_list
+          environments = list(set([tag.environment for tag in tag_data_list]))
+          print(f"Environments: {environments}")
+
           committing_user = user['name'] if user else 'Unknown User'
-          commit_message = f'chore: {tag_data.fromVersion} to {tag_data.toVersion} {committing_user} for {tag_data.directory} {tag_data.environment}'
+          commit_message = f"auto: {committing_user} updating versions for {', '.join(environments)} environments\n\n"
+
+          for tag_data in tag_data_list:
+              self.update_configuration_file(tag_data)
+              # append to commit message
+              commit_message += f"Promoting {tag_data.fromVersion} to {tag_data.toVersion} for {tag_data.directory}/{tag_data.environment}\n"
+
           self.git_service.git_commit(repo_path=self.local_repo_path, message=commit_message)
           self.git_service.git_push(self.local_repo_path)
       except GitOperationException as e:
@@ -70,6 +86,50 @@ class GitOperationsService:
         except Exception as e:
             logger.error(f"Failed to update configuration file {config_file}: {e}")
             raise
+    
+    def check_tag_list_precedence(self, tag_data_list):
+      # Load configuration and precedence rules
+      config_file = os.path.join(self.local_repo_path, self.config_file_path)
+      with open(config_file, 'r') as file:
+          config = yaml.safe_load(file)
+
+      versions_file = os.path.join(self.local_repo_path, tag_data_list[0].directory, VERSIONS_FILE_NAME)
+      with open(versions_file, 'r') as file:
+          versions = yaml.safe_load(file)
+          precedence = versions['application'].get('envs', [])
+
+      # Dictionary to maintain current versions for easy access and modification
+      current_versions = {env['name']: env['version'] for env in config['application']['envs']}
+      violations = []
+
+      for tag_data in tag_data_list:
+          proposed_version = StrictVersion(tag_data.toVersion)
+          # Get the index for the current environment's precedence
+          env_index = precedence.index(tag_data.environment)
+          # Check against all higher precedence environments
+          for env in precedence[:env_index]:  # Only check environments before the current one in the list
+              higher_version_str = current_versions.get(env)
+              if higher_version_str and StrictVersion(higher_version_str) < proposed_version:
+                  violations.append({
+                      'higher_env': env,
+                      'higher_version': higher_version_str,
+                      'proposed_env': tag_data.environment,
+                      'proposed_version': tag_data.toVersion,
+                      'error': f"Proposed version {proposed_version} for {tag_data.environment} exceeds {env}'s version {higher_version_str}"
+                  })
+                  break  # Stop further checks for this tag as a violation is found
+
+          # Update in-memory state only if no violations were found for this tag
+          if not any(vio['proposed_env'] == tag_data.environment for vio in violations):
+              current_versions[tag_data.environment] = tag_data.toVersion
+
+      if violations:
+          return False, violations
+      else:
+          return True, "All tags updated successfully according to precedence"
+
+
+
 
     def check_tag_precedence(self, tag_data):
       print(f"Checking tag precedence for {tag_data.tag} in {tag_data.environment}, {self.config_file_path}")
