@@ -7,6 +7,7 @@ import DeployButton from '../components/DeployButton';
 import GlobalContext from '../contexts/GlobalContext';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import CommitIcon from '@mui/icons-material/Commit';
+import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 import ChangeListDialog from '../components/ChangeListDialog';
 
 export interface TagDataDTO {
@@ -90,11 +91,11 @@ const gitService = new GitService();
 // };
 
 
-const environmentsForVersions = (version: string, envs: EnvInfo[]): string => {
+const environmentsForVersions = (version: string, envs: EnvInfo[]): string[] => {
     return envs
         .filter(env => env.version === version)
-        .map(env => env.name)
-        .join(', ');
+        .map(env => env.name);
+        // .join(', ');
 };
 
 const Dashboard = () => {
@@ -144,7 +145,7 @@ const Dashboard = () => {
     
         return Object.keys(versions).map(versionKey => {
             const versionData = versions[versionKey];
-            const assignedEnvironments = environmentsForVersions(versionKey, envs).split(', ');
+            const assignedEnvironments = environmentsForVersions(versionKey, envs);
             const directory = dashboardState.config[selectedTab]?.directory_name;
     
             // Retrieve changes for the current directory
@@ -157,6 +158,7 @@ const Dashboard = () => {
                 .map(change => `<span style="color: green;">${change.environment}</span>`);
     
             const assignedToFormatted = [...assignedEnvironments, ...changeEnvironments].join(', ');
+            console.log('Assigned to formatted', assignedEnvironments, changeEnvironments);
     
             if (type === 'k8s') {
                 return {
@@ -245,6 +247,10 @@ const Dashboard = () => {
 
             const directory = dashboardState.config[selectedTab]?.directory_name;
             if (changeList[directory]?.length === 0) {
+                setDashboardState((prevState) => ({
+                    ...prevState,
+                    tableRows: getRowsForApp(prevState.versionData, prevState.selectedEnv, changeList),
+                }));
                 return;
             }
 
@@ -445,6 +451,11 @@ const Dashboard = () => {
         );
     };
 
+    const clearChangeList = () => {
+        const directory = dashboardState.config[selectedTab]?.directory_name;
+        setChangeList(prevState => ({ ...prevState, [directory]: [] }));
+    };
+
     return (
         <MainLayout>
             <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
@@ -476,6 +487,12 @@ const Dashboard = () => {
                                     ))}
                                 </Paper>
                                 <Box display='flex' justifyContent='flex-end' sx={{ mb: 3 }}>
+                                    <Button
+                                        disabled={!enableCommitButton()}
+                                        color='primary' 
+                                        variant="contained" 
+                                        onClick={() => {clearChangeList()}} 
+                                        sx={{ mr: 3 }}><DeleteSweepIcon />&nbsp;Clear change list</Button>
                                     <Button 
                                         disabled={!enableCommitButton()}
                                         color='success'
