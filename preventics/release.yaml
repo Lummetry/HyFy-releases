@@ -2,15 +2,15 @@ application:
   envs:
   - info: staging environment
     name: staging
-    version: 1.0.11
+    version: 1.1.1
   - info: qa environment
     name: qa
-    version: 0.0.0
+    version: 1.1.1
   - info: preprod environment
     name: preprod
-    version: 0.0.0
+    version: 1.1.1
   - info: prod environment
     name: prod
-    version: 0.0.0
+    version: 1.1.1
   name: Preventics
   type: k8s
