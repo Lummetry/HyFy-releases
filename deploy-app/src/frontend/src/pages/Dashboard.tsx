@@ -492,7 +492,7 @@ const Dashboard = () => {
                                         color='primary' 
                                         variant="contained" 
                                         onClick={() => {clearChangeList()}} 
-                                        sx={{ mr: 3 }}><DeleteSweepIcon />&nbsp;Clear change list</Button>
+                                        sx={{ mr: 3 }}><DeleteSweepIcon />&nbsp;Clear changes</Button>
                                     <Button 
                                         disabled={!enableCommitButton()}
                                         color='success'
