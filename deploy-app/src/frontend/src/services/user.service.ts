@@ -1,6 +1,6 @@
-import { TokenModel } from "../models/Token";
+import { TokenModel, TokenValidation } from "../models/Token";
 import { UserModel } from "../models/User";
-import {BaseService} from "./base.service";
+import { BaseService } from "./base.service";
 
 export class UserService extends BaseService {
     public async login(username: string, password: string): Promise<TokenModel> {
@@ -9,6 +9,14 @@ export class UserService extends BaseService {
         data.append("password", password);
 
         return await this.post<TokenModel>("/token", data);
+    }
+
+    public async validateToken(token: string): Promise<TokenValidation> {
+        return await this.post<TokenValidation>("/token/validate", { token });
+    }
+
+    public async getProfile(): Promise<UserModel> {
+        return await this.get<UserModel>("/users/me");
     }
 
     public async getUsers(): Promise<any> {

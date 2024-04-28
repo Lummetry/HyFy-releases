@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Body, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jose import JWTError, jwt
 from datetime import datetime, timedelta
@@ -57,6 +57,41 @@ async def get_current_active_admin(current_user: User = Depends(get_current_user
     raise HTTPException(status_code=403, detail="Insufficient permissions")
   return current_user
 
+@router.post("/token/validate")
+async def validate_token(token: dict = Body(..., media_type="application/json")):
+  try:
+    payload = jwt.decode(token['token'], SECRET_KEY, algorithms=[ALGORITHM])
+    username: str = payload.get("sub")
+    if username is None:
+      raise HTTPException(
+        status_code=401,
+        detail="Invalid token",
+        headers={"WWW-Authenticate": "Bearer"}
+      )
+    token_data = TokenData(username=username)
+    current_user = storage_proxy.read_user(username=token_data.username)
+    if current_user is None:
+      raise HTTPException(
+        status_code=401,
+        detail="Invalid token",
+        headers={"WWW-Authenticate": "Bearer"}
+      )
+    return {"success": True, "profile": current_user}
+
+  except jwt.ExpiredSignatureError:
+    raise HTTPException(
+      status_code=401,
+      detail="Token has expired",
+      headers={"WWW-Authenticate": "Bearer"}
+    )
+  except jwt.InvalidTokenError:
+    raise HTTPException(
+      status_code=401,
+      detail="Invalid token",
+      headers={"WWW-Authenticate": "Bearer"}
+    )
+  return {"success": True}
+
 
 @router.post("/token", response_model=Token)
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
@@ -76,6 +111,12 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
   access_token = create_access_token(
     data={"sub": user['username']}, expires_delta=access_token_expires
   )
-  return {"access_token": access_token, "token_type": "bearer", "role": user['role'], "expires_in": access_token_expires}
+  return {
+    "access_token": access_token, 
+    "token_type": "Bearer", 
+    "role": user['role'], 
+    "name": user['name'],
+    "expires_in": access_token_expires.total_seconds()
+  }
 
 # Add more routes as needed for authentication and user management

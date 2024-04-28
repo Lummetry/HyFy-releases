@@ -8,22 +8,20 @@ import { APP_NAME } from "../Constants";
 
 const Login = () => {
   const [username, setUsername] = useState("");
-  const [usernameError, setUsernameError] = useState(false);
   const [password, setPassword] = useState("");
+  const [usernameError, setUsernameError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
 
-  const { updateUser, addSnackBar } = useContext(GlobalContext);
+  const { updateUser, addSnackBar, isLoggedIn } = useContext(GlobalContext);
   const navigate = useNavigate();
 
   const userService = new UserService();
   // obtain the token from local storage
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      userService.setToken(token);
-      navigate("/dashboard");
-    }
-  }, []);
+      if (isLoggedIn) {
+          navigate('/dashboard');
+      }
+  }, [isLoggedIn, navigate]);
 
   // validate username
   useEffect(() => {
@@ -57,7 +55,7 @@ const Login = () => {
         username: username,
         token: token.access_token,
         role: token.role,
-        name: '',
+        name: token.name || '',
       };
 
       updateUser(user);

@@ -52,16 +52,12 @@ class CsvStorage(StorageInterface):
           writer.writerow(user)
 
   def authenticate_user(self, username: str, password: str):
-    print(f"Authenticating user: {username}, {password}")
     users = self.read_users()
     encoded_username = base64.b64encode(username.encode()).decode()
     encoded_password = self._encode_password(password)
 
-    print(f"Hashed password: {encoded_password}")
     for user in users:
-      print(f"User iteration: {user}")
       if user['username'] == encoded_username:
-        print(f"User: {user}")
         if not self._match_password(password, user['password']):
           raise ValueError('Invalid username/password combination')
         # remove the password from the user data

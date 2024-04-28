@@ -163,3 +163,4 @@ debug.sh
 secrets.yml
 
 .DS_Store
+.vscode/

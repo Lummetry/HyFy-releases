@@ -3,7 +3,7 @@ import base64
 from fastapi import APIRouter, Depends, HTTPException
 
 from backend.constants import ADMIN_ROLE
-from .auth import get_current_active_admin
+from .auth import get_current_active_admin, get_current_user
 from backend.storage_engines import CsvStorage, StorageProxy
 from backend.models import UpdateUser, User
 
