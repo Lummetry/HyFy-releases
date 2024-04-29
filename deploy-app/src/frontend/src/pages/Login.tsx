@@ -56,6 +56,7 @@ const Login = () => {
         token: token.access_token,
         role: token.role,
         name: token.name || '',
+        uuid: token.uuid || '',
       };
 
       updateUser(user);

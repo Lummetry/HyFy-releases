@@ -31,16 +31,17 @@ async def create_user(user: User, current_user: User = Depends(get_current_activ
   return user
 
 @router.get("/{uuid}", response_model=User)
-async def get_user(uuid: str, current_user: User = Depends(get_current_active_admin)):
-  if current_user['role'] != ADMIN_ROLE:
-    raise HTTPException(status_code=403, detail="Insufficient permissions")
-
+async def get_user(uuid: str, current_user: User = Depends(get_current_user)):
+  if current_user['role'] != ADMIN_ROLE and current_user['uuid'] != uuid:
+      raise HTTPException(status_code=403, detail="Insufficient permissions")
   user = storage_proxy.find_user(uuid)
+  if not user:
+    raise HTTPException(status_code=404, detail="User not found")
   return user
 
 @router.put("/{uuid}", response_model=UpdateUser)
-async def update_user(uuid: str, user: UpdateUser, current_user: User = Depends(get_current_active_admin)):
-  if current_user['role'] != ADMIN_ROLE:
+async def update_user(uuid: str, user: UpdateUser, current_user: User = Depends(get_current_user)):
+  if current_user['role'] != ADMIN_ROLE and current_user['uuid'] != uuid:
     raise HTTPException(status_code=403, detail="Insufficient permissions")
 
   # encode username to base64 string

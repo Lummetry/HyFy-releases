@@ -6,6 +6,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Users from './pages/Users';
 import UsersCreate from './pages/UsersCreate';
 import UsersEdit from './pages/UsersEdit';
+import Profile from './pages/Profile';
 
 
 function App() {
@@ -26,6 +27,9 @@ function App() {
         </Route>
         <Route path="/users/update/:uuid" element={<ProtectedRoute />}>
           <Route path="" element={<UsersEdit />} />
+        </Route>
+        <Route path="/users/me" element={<ProtectedRoute />}>
+          <Route path="" element={<Profile />} />
         </Route>
       </Routes>
     </>

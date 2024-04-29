@@ -128,7 +128,7 @@ const UsersEdit = () => {
                 </Box>
 
                 <Grid container spacing={3}>
-                    <Grid item xs={5}>
+                    <Grid item xs={12} md={6}>
                         <Paper sx={{ p: 2 }}>
 
                             <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleSubmit}>
@@ -182,7 +182,7 @@ const UsersEdit = () => {
                         </Paper>
                     </Grid>
 
-                    <Grid item xs={5}>
+                    <Grid item xs={12} md={6}>
                         <Paper sx={{ p: 2 }}>
                             <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleChangePasswordSubmit}>
                                 <Grid container spacing={2}>

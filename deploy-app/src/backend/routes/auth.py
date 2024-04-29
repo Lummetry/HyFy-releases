@@ -1,3 +1,4 @@
+import base64
 from fastapi import APIRouter, Body, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jose import JWTError, jwt
@@ -70,6 +71,8 @@ async def validate_token(token: dict = Body(..., media_type="application/json"))
       )
     token_data = TokenData(username=username)
     current_user = storage_proxy.read_user(username=token_data.username)
+    current_user['username'] = base64.b64decode(current_user['username']).decode('utf-8')
+    print(f"Current user: {current_user}")
     if current_user is None:
       raise HTTPException(
         status_code=401,
@@ -113,7 +116,8 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
   )
   return {
     "access_token": access_token, 
-    "token_type": "Bearer", 
+    "token_type": "Bearer",
+    "uuid": user['uuid'],
     "role": user['role'], 
     "name": user['name'],
     "expires_in": access_token_expires.total_seconds()

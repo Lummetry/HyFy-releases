@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -23,8 +23,15 @@ interface MainLayoutProps {
 
 const MainLayout = ({ children }: MainLayoutProps) => {
   const [open, setOpen] = useState(true);
-  const { logout, getSnackBars, removeSnackBar, getAlertDialogs, removeAlertDialog } = useContext(GlobalContext);
+  const { logout, getSnackBars, removeSnackBar, getAlertDialogs, removeAlertDialog, getUserPreferences } = useContext(GlobalContext);
   const drawerWidth = 240;
+
+  useEffect(() => {
+    if (getUserPreferences) {
+      const preferences = getUserPreferences();
+      setOpen(!preferences.hideMenuDrawer);
+    }
+  }, []);
 
   const toggleDrawer = () => {
     setOpen(!open);

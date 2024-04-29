@@ -7,13 +7,15 @@ export class TokenModel {
     public expires_in: number;
     public token?: string;
     public name?: string;
+    public uuid?: string;
 
-    constructor(accessToken: string, tokenType: string, role: string, expiresIn: number, name?: string) {
+    constructor(accessToken: string, tokenType: string, role: string, expiresIn: number, name?: string, uuid?: string) {
         this.access_token = accessToken;
         this.token_type = tokenType;
         this.role = role;
         this.expires_in = expiresIn;
         this.name = name;
+        this.uuid = uuid;
     }
 }
 

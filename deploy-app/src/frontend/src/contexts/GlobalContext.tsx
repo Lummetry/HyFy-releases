@@ -2,7 +2,11 @@ import { createContext, ReactNode, useEffect, useState } from "react";
 import { UserModel } from "../models/User";
 import { AlertDialogProps } from "../components/AlertDialog";
 import { UserService } from "../services/user.service";
-import { LOCAL_STORAGE_LAST_KNOWN_TAB, LOCAL_STORAGE_TOKEN_KEY, LOCAL_STORAGE_USER_KEY } from "../Constants";
+import { LOCAL_STORAGE_LAST_KNOWN_TAB, LOCAL_STORAGE_TOKEN_KEY, LOCAL_STORAGE_USER_KEY, LOCAL_STORAGE_USER_PREFERENCES } from "../Constants";
+
+export interface UserPreferences {
+  hideMenuDrawer: boolean;
+}
 
 interface GlobalContextType {
   user: UserModel | null;
@@ -18,6 +22,8 @@ interface GlobalContextType {
   removeAlertDialog?: (id: number) => void;
   getLastKnownSelectedTab?: () => number;
   updateLastKnownSelectedTab?: (tab: number) => void;
+  getUserPreferences?: () => UserPreferences;
+  setUserPreferences?: (preferences: UserPreferences) => void;
 }
 
 interface GlobalProviderProps {
@@ -46,6 +52,8 @@ const globalContextDefaultValues: GlobalContextType = {
   removeAlertDialog: () => {},
   getLastKnownSelectedTab: () => 0,
   updateLastKnownSelectedTab: () => {},
+  getUserPreferences: () => ({ hideMenuDrawer: false }),
+  setUserPreferences: () => {},
 };
 
 const GlobalContext = createContext<GlobalContextType>(
@@ -58,6 +66,7 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [snackBars, setSnackBars] = useState<SnackbarType[]>([]);
   const [alertDialogs, setAlertDialogs] = useState<AlertDialogProps[]>([]);
+  const [userPreferences, setUserPreferences] = useState<UserPreferences>({} as UserPreferences);
 
   useEffect(() => {
     const initAuth = async () => {
@@ -81,7 +90,16 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
         }
       }
     };
+
+    const userPreferences = () => {
+      const preferences = localStorage.getItem(LOCAL_STORAGE_USER_PREFERENCES);
+      if (preferences) {
+        setUserPreferences(JSON.parse(preferences));
+      }
+    };
+
     initAuth();
+    userPreferences();
   }, []);
 
   useEffect(() => {
@@ -93,6 +111,10 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
       localStorage.removeItem(LOCAL_STORAGE_USER_KEY);
     }
   }, [user, isLoggedIn]);
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_USER_PREFERENCES, JSON.stringify(userPreferences));
+  }, [userPreferences]);
 
   // update user and isLoggedIn state
   const updateUser = (user: UserModel | null) => {
@@ -176,6 +198,8 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
         getAlertDialogs,
         getLastKnownSelectedTab,
         updateLastKnownSelectedTab,
+        getUserPreferences: () => userPreferences,
+        setUserPreferences: (preferences: UserPreferences) => setUserPreferences(preferences),
       }}
     >
       {children}

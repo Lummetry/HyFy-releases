@@ -99,11 +99,22 @@ const UsersCreate = () => {
                 </Box>
 
                 <Grid container spacing={3}>
-                    <Grid item xs={5}>
+                    <Grid item xs={12} md={4}>
                         <Paper sx={{ p: 2 }}>
 
                             <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleSubmit}>
                                 <Grid container spacing={2}>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            label="Full Name"
+                                            value={fullName}
+                                            onChange={(e) => setFullName(e.target.value)}
+                                            error={fullNameError}
+                                            helperText={fullNameError && "Please enter a full name"}
+                                            fullWidth
+                                            autoComplete="off"
+                                        />
+                                    </Grid>
                                     <Grid item xs={12}>
                                         <TextField
                                             label="Username"
@@ -126,17 +137,6 @@ const UsersCreate = () => {
                                             helperText={passwordError && passwordErrorMessage}
                                             fullWidth
                                             required
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <TextField
-                                            label="Full Name"
-                                            value={fullName}
-                                            onChange={(e) => setFullName(e.target.value)}
-                                            error={fullNameError}
-                                            helperText={fullNameError && "Please enter a full name"}
-                                            fullWidth
-                                            autoComplete="off"
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
