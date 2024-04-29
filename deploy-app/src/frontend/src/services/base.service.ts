@@ -15,8 +15,8 @@ export class BaseService {
   protected token: string | null;
 
   constructor() {
-    // this.baseUrl = "__REACT_APP_API_URL__"; // Set the base URL to a React environment variable
-    this.baseUrl = "http://localhost:8000/api"; // Alternatively, use a local development API URL
+    this.baseUrl = "__REACT_APP_API_URL__"; // Set the base URL to a React environment variable
+    // this.baseUrl = "http://localhost:8000/api"; // Alternatively, use a local development API URL
     this.token = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY) || null; // Get the token from local storage (or null if not set)
 
     axios.interceptors.response.use(
