@@ -9,6 +9,12 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    1.1.4:
+      backend:
+        image: aixpand/backend:release-1.96.3
+      frontend:
+        image: aixpand/investigator:optizone-0.54.6
+      summary: "fixes: location DTO timezone; partition transition from Manual Disarm to Disarm \n UI fixes"
     1.1.3:
       backend:
         image: aixpand/backend:release-1.96.1
