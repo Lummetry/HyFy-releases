@@ -88,3 +88,9 @@ application:
       frontend:
         image: aixpand/investigator:optizone-0.51.1
       summary: This is the first release of Optizone
+    1.0.0:
+      backend:
+        image: aixpand/backend:release-1.87.6
+      frontend:
+        image: aixpand/investigator:optizone-0.51.1
+      summary: Syntenic release
