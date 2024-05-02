@@ -545,7 +545,9 @@ const Dashboard = () => {
         <Tabs
           value={selectedTab}
           onChange={handleTabChange}
-          aria-label="dashboard tabs"
+          variant="scrollable"
+          scrollButtons="auto"
+          aria-label="dashboard scrollable auto tabs"
         >
           {dashboardState.config.map((item, index) => (
             <Tab key={index} label={item.application_name} />
