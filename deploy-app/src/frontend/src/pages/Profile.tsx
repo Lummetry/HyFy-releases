@@ -7,13 +7,15 @@ import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const [drawerOpenPreference, setDrawerOpenPreference] = useState(false);
-  const { user, setUserPreferences, getUserPreferences } = useContext(GlobalContext);
+  const [darkModePreference, setDarkModePreference] = useState(false);
+  const { user, updateUserPreferences, getUserPreferences } = useContext(GlobalContext);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (getUserPreferences) {
       const preferences = getUserPreferences();
       setDrawerOpenPreference(preferences.hideMenuDrawer || false);
+      setDarkModePreference(preferences.darkMode || false);
     }
   }, []);
 
@@ -25,10 +27,13 @@ const Profile = () => {
   };
 
   const handleHideMenuDrawerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (setUserPreferences) { 
-      setUserPreferences({ hideMenuDrawer: event.target.checked });
-      setDrawerOpenPreference(event.target.checked);
-    }
+    updateUserPreferences({ hideMenuDrawer: event.target.checked });
+    setDrawerOpenPreference(event.target.checked);
+  };
+
+  const handleDarkModeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    updateUserPreferences({ darkMode: event.target.checked });
+    setDarkModePreference(event.target.checked);
   };
 
   return (
@@ -74,6 +79,14 @@ const Profile = () => {
                   <Switch 
                     checked={drawerOpenPreference} 
                     onChange={handleHideMenuDrawerChange} 
+                    inputProps={{ 'aria-label': 'controlled' }} />
+                </Box>
+
+                <Box sx={{ mb: 2}} display='flex' justifyContent='space-between'>
+                  <Typography variant="body1">Use dark mode (default light)</Typography>
+                  <Switch 
+                    checked={darkModePreference} 
+                    onChange={handleDarkModeChange} 
                     inputProps={{ 'aria-label': 'controlled' }} />
                 </Box>
               </Paper>

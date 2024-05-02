@@ -1,4 +1,4 @@
-import { Box, Button, Container, TextField, Typography } from "@mui/material";
+import { Box, Button, Container, CssBaseline, TextField, Typography } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { UserService } from "../services/user.service";
 import GlobalContext from "../contexts/GlobalContext";
@@ -71,6 +71,7 @@ const Login = () => {
 
   return (
     <Container maxWidth="sm">
+      <CssBaseline />
       <Box
         sx={{
           display: "flex",

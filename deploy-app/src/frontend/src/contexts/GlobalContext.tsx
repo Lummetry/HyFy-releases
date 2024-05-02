@@ -6,6 +6,7 @@ import { LOCAL_STORAGE_LAST_KNOWN_TAB, LOCAL_STORAGE_TOKEN_KEY, LOCAL_STORAGE_US
 
 export interface UserPreferences {
   hideMenuDrawer: boolean;
+  darkMode: boolean;
 }
 
 interface GlobalContextType {
@@ -22,8 +23,8 @@ interface GlobalContextType {
   removeAlertDialog?: (id: number) => void;
   getLastKnownSelectedTab?: () => number;
   updateLastKnownSelectedTab?: (tab: number) => void;
-  getUserPreferences?: () => UserPreferences;
-  setUserPreferences?: (preferences: UserPreferences) => void;
+  getUserPreferences: () => UserPreferences;
+  updateUserPreferences: (preferences: Partial<UserPreferences>) => void;
 }
 
 interface GlobalProviderProps {
@@ -37,6 +38,8 @@ interface SnackbarType {
   duration: number;
   state?: boolean;
 }
+
+const defaultUserPreferences: UserPreferences = { hideMenuDrawer: false, darkMode: false };
 
 const globalContextDefaultValues: GlobalContextType = {
   user: null,
@@ -52,8 +55,8 @@ const globalContextDefaultValues: GlobalContextType = {
   removeAlertDialog: () => {},
   getLastKnownSelectedTab: () => 0,
   updateLastKnownSelectedTab: () => {},
-  getUserPreferences: () => ({ hideMenuDrawer: false }),
-  setUserPreferences: () => {},
+  getUserPreferences: () => defaultUserPreferences,
+  updateUserPreferences: () => {},
 };
 
 const GlobalContext = createContext<GlobalContextType>(
@@ -66,7 +69,10 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [snackBars, setSnackBars] = useState<SnackbarType[]>([]);
   const [alertDialogs, setAlertDialogs] = useState<AlertDialogProps[]>([]);
-  const [userPreferences, setUserPreferences] = useState<UserPreferences>({} as UserPreferences);
+  const [userPreferences, setUserPreferences] = useState<UserPreferences>(() => {
+    const preferences = localStorage.getItem(LOCAL_STORAGE_USER_PREFERENCES);
+    return preferences ? JSON.parse(preferences) : defaultUserPreferences;
+  });
 
   useEffect(() => {
     const initAuth = async () => {
@@ -98,8 +104,7 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
       }
     };
 
-    initAuth();
-    userPreferences();
+    initAuth().then(() => { userPreferences() });
   }, []);
 
   useEffect(() => {
@@ -183,6 +188,11 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
     localStorage.setItem(LOCAL_STORAGE_LAST_KNOWN_TAB, tab.toString());
   };
 
+  const updateUserPreferences = (preferences: Partial<UserPreferences>) => {
+    setUserPreferences((prev) => ({ ...prev, ...preferences }));
+    localStorage.setItem(LOCAL_STORAGE_USER_PREFERENCES, JSON.stringify(preferences));
+  };
+
   return (
     <GlobalContext.Provider
       value={{
@@ -199,7 +209,7 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
         getLastKnownSelectedTab,
         updateLastKnownSelectedTab,
         getUserPreferences: () => userPreferences,
-        setUserPreferences: (preferences: UserPreferences) => setUserPreferences(preferences),
+        updateUserPreferences,
       }}
     >
       {children}

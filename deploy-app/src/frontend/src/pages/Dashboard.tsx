@@ -193,11 +193,6 @@ const Dashboard = () => {
         ...assignedEnvironments,
         ...changeEnvironments,
       ].join(", ");
-      console.log(
-        "Assigned to formatted",
-        assignedEnvironments,
-        changeEnvironments
-      );
 
       if (type === "k8s") {
         return {
