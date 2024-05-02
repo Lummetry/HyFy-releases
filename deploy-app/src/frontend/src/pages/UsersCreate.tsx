@@ -1,10 +1,11 @@
-import { Container, Box, Typography, Grid, Paper, TextField, FormControl, InputLabel, Select, MenuItem, Button } from "@mui/material";
+import { Container, Box, Typography, Grid, Paper, TextField, FormControl, InputLabel, Select, MenuItem, Button, Link } from "@mui/material";
 import MainLayout from "../layouts/MainLayout";
 import { useContext, useEffect, useState } from "react";
 import { UserModel } from "../models/User";
 import { UserService } from "../services/user.service";
 import GlobalContext from "../contexts/GlobalContext";
 import { useNavigate } from "react-router-dom";
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 const UsersCreate = () => {
     const [username, setUsername] = useState('');
@@ -89,10 +90,15 @@ const UsersCreate = () => {
         }
     };
 
+    const handleHistoryBack = () => {
+        navigate(-1);
+    };
+
     return (
         <MainLayout>
             <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-                <Box >
+                <Box display='flex' justifyContent='flex-start' alignItems='center'>
+                    <Link sx={{ mr: 1 }} onClick={() => handleHistoryBack()} href="#" color="inherit"><ArrowBackIosIcon /></Link>
                     <Typography variant="h4" component="h1" gutterBottom>
                         Create User
                     </Typography>
