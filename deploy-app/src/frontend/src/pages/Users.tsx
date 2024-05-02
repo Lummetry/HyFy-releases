@@ -85,10 +85,26 @@ const Users = () => {
      */
     const tableActions = (row: any) => {
         return (
-            <>
-                <Button variant="contained" color="primary" sx={{ mr: 2 }} onClick={() => handleEditButtonClick(row.uuid)}>Edit</Button>
-                <Button variant="contained" color="error" onClick={() => handleDeleteButtonClick(row.uuid)}>Delete</Button>
-            </>
+            <Grid container spacing={1}>
+                <Grid item xs={12} md='auto'>
+                    <Button 
+                        fullWidth 
+                        variant="contained" 
+                        color="primary" 
+                        onClick={() => handleEditButtonClick(row.uuid)}>
+                        Edit
+                    </Button>
+                </Grid>
+                <Grid item xs={12} md="auto">
+                    <Button 
+                        fullWidth 
+                        variant="contained" 
+                        color="error" 
+                        onClick={() => handleDeleteButtonClick(row.uuid)}>
+                        Delete
+                    </Button>
+                </Grid>
+            </Grid>
         );
     };
 
