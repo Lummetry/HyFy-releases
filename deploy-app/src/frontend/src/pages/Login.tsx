@@ -5,9 +5,8 @@ import GlobalContext from "../contexts/GlobalContext";
 import { useNavigate } from "react-router-dom";
 
 import { APP_NAME } from "../Constants";
-import { Image } from "@mui/icons-material";
 
-const StyledGridItem = styled(Grid)(({ theme }) => ({
+const StyledGridItem = styled(Grid)(() => ({
   height: '100vh', // Ensures the panel takes full viewport height
   display: 'flex',
   flexDirection: 'column',
