@@ -94,7 +94,7 @@ const Login = () => {
     <Grid container component="main" sx={{ height: '100vh', margin: 0, padding: 0 }}>
       <CssBaseline />
       <StyledGridItem item xs={false} sm={4} md={7} sx={{
-        backgroundImage: 'url(hero-bg-276c1fbb.jpg)',
+        backgroundImage: 'url(assets/hero-bg-276c1fbb.jpg)',
         backgroundRepeat: 'no-repeat',
         backgroundColor: (t) =>
           t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
