@@ -138,7 +138,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
         component="main"
         sx={{
           flexGrow: 1,
-          p: 3,
+          p: 0.5,
           transition: (theme) => theme.transitions.create('margin', {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
@@ -148,7 +148,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
         }}
       >
         {/* <Toolbar /> */}
-        <Box sx={{ marginTop: `60px`}}>
+        <Box sx={{ marginTop: `70px`}}>
           {children}
         </Box>
 
