@@ -9,6 +9,12 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    1.1.6:
+      backend:
+        image: aixpand/backend:release-1.96.5
+      frontend:
+        image: aixpand/investigator:optizone-0.59.0
+      summary: "BE fixes: translations for importing cameras & timezone field; fix for update edgedevice equipment"
     1.1.5:
       backend:
         image: aixpand/backend:release-1.96.3
