@@ -9,6 +9,12 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    1.1.5:
+      backend:
+        image: aixpand/backend:release-1.96.3
+      frontend:
+        image: aixpand/investigator:optizone-0.59.0
+      summary: "UI fixes: location timezone dropdown; devices actions; copy stream URL to clipboard; bug fixing"
     1.1.4:
       backend:
         image: aixpand/backend:release-1.96.3
