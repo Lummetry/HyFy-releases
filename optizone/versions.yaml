@@ -9,6 +9,12 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    1.1.8:
+      backend:
+        image: aixpand/backend:release-1.96.7
+      frontend:
+        image: aixpand/investigator:optizone-0.59.3
+      summary: "Updated SDK packages."
     1.1.7:
       backend:
         image: aixpand/backend:release-1.96.6
