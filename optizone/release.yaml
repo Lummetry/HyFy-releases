@@ -2,7 +2,7 @@ application:
   envs:
   - info: Staging
     name: staging
-    version: 1.1.7
+    version: 1.1.9
   - info: QA
     name: qa
     version: 1.1.4
