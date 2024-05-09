@@ -8,6 +8,9 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    3.30.280:
+      summary: Username password in config for VideoStream, auto update fix
+
     3.30.260:
       summary: Synthetic version for testing
 
