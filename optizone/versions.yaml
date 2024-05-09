@@ -9,6 +9,12 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    1.1.10:
+      backend:
+        image: aixpand/backend:release-1.96.8
+      frontend:
+        image: aixpand/investigator:optizone-0.59.4
+      summary: "UI fixed: AI plugin bug fixes"
     1.1.9:
       backend:
         image: aixpand/backend:release-1.96.8
