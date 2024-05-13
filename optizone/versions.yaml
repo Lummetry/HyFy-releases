@@ -9,6 +9,12 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    2.0.3:
+      backend:
+        image: aixpand/backend:release-2.0.2
+      frontend:
+        image: aixpand/investigator:optizone-0.59.5
+      summary: "UI fixes: schedule edit"
     2.0.2:
       backend:
         image: aixpand/backend:release-2.0.2
