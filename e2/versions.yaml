@@ -8,6 +8,9 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    3.30.320:
+      summary: More features for BT deploy
+  
     3.30.310:
       summary: Added default config_app.json for BT deploy and feature for people counting
 
