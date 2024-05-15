@@ -9,6 +9,12 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    2.1.1:
+      backend:
+        image: aixpand/backend:release-2.1.0
+      frontend:
+        image: aixpand/investigator:optizone-0.59.8
+      summary: "fix: using local canvaskit dependencies (Braking changes)"
     1.1.3:
       backend:
         image: aixpand/backend:release-1.96.1
