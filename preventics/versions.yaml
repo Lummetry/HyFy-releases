@@ -9,7 +9,7 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
-   2.2.3:
+    2.2.3:
       backend:
         image: aixpand/backend:release-2.2.1
       frontend:
