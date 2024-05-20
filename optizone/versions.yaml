@@ -9,9 +9,9 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
-    3.0.1:
+    3.0.2:
       backend:
-        image: aixpand/backend:release-3.0.1
+        image: aixpand/backend:release-3.0.2
       frontend:
         image: aixpand/investigator:optizone-0.59.10
       summary: "feat!: multi-threaded, stateless, backend"
