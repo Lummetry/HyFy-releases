@@ -13,49 +13,43 @@ application:
       backend:
         image: aixpand/backend:release-3.0.2
       frontend:
-        image: aixpand/investigator:optizone-0.63.0
+        image: aixpand/investigator:banksight-0.63.0
       summary: "updates: bug fixes, payload icon in alerts/events, password reset"
     3.0.2:
       backend:
         image: aixpand/backend:release-3.0.2
       frontend:
-        image: aixpand/investigator:optizone-0.59.10
+        image: aixpand/investigator:banksight-0.59.10
       summary: "feat!: multi-threaded, stateless, backend"
     2.3.0:
       backend:
         image: aixpand/backend:release-2.3.0
       frontend:
-        image: aixpand/investigator:optizone-0.59.10
+        image: aixpand/investigator:banksight-0.59.10
       summary: "feat: backend restart endpoint"
-    2.2.3:
+    2.2.2:
       backend:
         image: aixpand/backend:release-2.2.1
       frontend:
         image: aixpand/investigator:banksight-0.59.10
       summary: "UI fixes: fonts for air-gapped build"
-    2.2.2:
-      backend:
-        image: aixpand/backend:release-2.2.1
-      frontend:
-        image: aixpand/investigator:optizone-0.59.10
-      summary: "UI fixes: fonts for air-gapped build"
     2.2.1:
       backend:
         image: aixpand/backend:release-2.2.1
       frontend:
-        image: aixpand/investigator:optizone-0.59.8
+        image: aixpand/investigator:banksight-0.59.8
       summary: "fix: filtered non-alerts from supervisor."
     2.2.0:
       backend:
         image: aixpand/backend:release-2.2.0
       frontend:
-        image: aixpand/investigator:optizone-0.59.8
+        image: aixpand/investigator:banksight-0.59.8
       summary: "feat: publish all supervisor alert messages as optizone alerts."
     2.1.1:
       backend:
         image: aixpand/backend:release-2.1.0
       frontend:
-        image: aixpand/investigator:optizone-0.59.8
+        image: aixpand/investigator:banksight-0.59.8
       summary: "fix: using local canvaskit dependencies (Braking changes)"
     1.1.3:
       backend:
