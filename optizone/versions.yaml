@@ -9,6 +9,12 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.0.3:
+      backend:
+        image: aixpand/backend:release-3.0.2
+      frontend:
+        image: aixpand/investigator:optizone-0.63.0
+      summary: "updates: bug fixes, payload icon in alerts/events, password reset"
     3.0.2:
       backend:
         image: aixpand/backend:release-3.0.2
