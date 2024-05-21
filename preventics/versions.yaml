@@ -9,6 +9,12 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.0.4:
+      backend:
+        image: aixpand/backend:release-3.0.2
+      frontend:
+        image: aixpand/investigator:banksight-0.63.1
+      summary: "fix: flutter version upgrade"
     3.0.3:
       backend:
         image: aixpand/backend:release-3.0.2
