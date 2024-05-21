@@ -9,6 +9,24 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.0.3:
+      backend:
+        image: aixpand/backend:release-3.0.2
+      frontend:
+        image: aixpand/investigator:optizone-0.63.0
+      summary: "updates: bug fixes, payload icon in alerts/events, password reset"
+    3.0.2:
+      backend:
+        image: aixpand/backend:release-3.0.2
+      frontend:
+        image: aixpand/investigator:optizone-0.59.10
+      summary: "feat!: multi-threaded, stateless, backend"
+    2.3.0:
+      backend:
+        image: aixpand/backend:release-2.3.0
+      frontend:
+        image: aixpand/investigator:optizone-0.59.10
+      summary: "feat: backend restart endpoint"
     2.2.3:
       backend:
         image: aixpand/backend:release-2.2.1
