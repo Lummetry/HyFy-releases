@@ -5,10 +5,10 @@ application:
     version: 3.0.5
   - info: QA
     name: qa
-    version: 1.1.4
+    version: 2.1.1
   - info: Preprod
     name: preprod
-    version: 1.1.4
+    version: 2.1.0
   - info: Prod
     name: prod
     version: 1.0.0
