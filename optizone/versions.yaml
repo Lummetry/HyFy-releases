@@ -9,6 +9,12 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.1.1:
+      backend:
+        image: aixpand/backend:release-3.1.1
+      frontend:
+        image: aixpand/investigator:optizone-0.67.2
+      summary: "feat: db diagnostics, updated translations, merge with Oracle support branch."
     3.0.9:
       backend:
         image: aixpand/backend:release-3.1.0
