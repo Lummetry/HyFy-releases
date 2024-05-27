@@ -9,6 +9,12 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.0.9:
+      backend:
+        image: aixpand/backend:release-3.1.0
+      frontend:
+        image: aixpand/investigator:optizone-0.67.2
+      summary: "feat: stream status dashboard"
     3.0.8:
       backend:
         image: aixpand/backend:release-3.1.0
