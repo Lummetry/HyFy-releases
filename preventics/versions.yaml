@@ -9,6 +9,12 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.2.1:
+      backend:
+        image: aixpand/backend:release-3.2.1
+      frontend:
+        image: aixpand/investigator:banksight-0.67.2
+      summary: "fix: plugin grouping."
     3.1.2:
       backend:
         image: aixpand/backend:release-3.1.3
