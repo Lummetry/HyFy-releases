@@ -8,7 +8,7 @@ application:
     version: 3.2.2
   - info: preprod environment
     name: preprod
-    version: 3.2.2
+    version: 1.0.11
   - info: prod environment
     name: prod
     version: 1.0.11
