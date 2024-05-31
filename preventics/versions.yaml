@@ -6,7 +6,7 @@
 application:
   name: Preventics
   type: k8s
-  envs: [staging, qa, preprod, prod]
+  envs: [staging, qa, preprod]
 
   versions:
     3.2.2:
