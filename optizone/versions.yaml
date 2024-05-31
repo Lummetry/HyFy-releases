@@ -9,6 +9,12 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.2.2:
+      backend:
+        image: aixpand/backend:release-3.2.1
+      frontend:
+        image: aixpand/investigator:optizone-0.68.0
+      summary: "fix: UI bug fixes"
     3.2.1:
       backend:
         image: aixpand/backend:release-3.2.1
