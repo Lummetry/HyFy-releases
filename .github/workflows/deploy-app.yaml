@@ -18,12 +18,22 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build, tag and push image
+      - name: Build, tag and push latest image
         run: |
           # change to the directory where the Dockerfile is located
           cd deploy-app && \
            docker build -t aixpand/deploy-app:latest . && \
            docker push aixpand/deploy-app:latest
+        shell: bash
+      
+      - name: Build, tag and push versioned image
+        run: |
+          # change to the directory where the Dockerfile is located
+          VERSION=$(cat deploy-app/ver.txt)
+          cd deploy-app && \
+           docker pull aixpand/deploy-app:latest && \
+           docker tag aixpand/deploy-app:latest aixpand/deploy-app:$VERSION && \
+           docker push aixpand/deploy-app:$VERSION
         shell: bash
 
       - name: Logout from Docker Hub
