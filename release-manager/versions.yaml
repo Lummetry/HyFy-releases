@@ -10,7 +10,7 @@ application:
 
   versions:
     0.7.3:
-      deploy-app:
+      backend:
         image: aixpand/deploy-app:0.7.3
       summary: "feat: enable versioned images in docker hub"
 
