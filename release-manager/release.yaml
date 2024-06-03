@@ -1,0 +1,7 @@
+application:
+  envs:
+  - info: relase manager
+    name: staging
+    version: 0.7.3
+  name: Release Manager
+  type: k8s
