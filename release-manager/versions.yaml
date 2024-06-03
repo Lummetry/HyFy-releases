@@ -9,7 +9,7 @@ application:
   envs: [staging]
 
   versions:
-    0.7.3:
+    0.7.4:
       backend:
         image: aixpand/deploy-app:0.7.4
       summary: "chore: version bumped for testing"
