@@ -13,6 +13,12 @@ application:
       backend:
         image: aixpand/backend:release-3.4.0
       frontend:
+        image: aixpand/investigator:optizone-0.69.0
+      summary: "fix: read-only properties in forms"
+    3.4.0:
+      backend:
+        image: aixpand/backend:release-3.4.0
+      frontend:
         image: aixpand/investigator:optizone-0.68.0
       summary: "feat: backward comp for env-vars, reporting on nested structures."
     3.2.2:
