@@ -9,6 +9,12 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.5.1:
+      backend:
+        image: aixpand/backend:release-3.4.1
+      frontend:
+        image: aixpand/investigator:optizone-0.69.1
+      summary: "fix: schedule edit"
     3.5.0:
       backend:
         image: aixpand/backend:release-3.4.0
