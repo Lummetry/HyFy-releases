@@ -1,5 +1,6 @@
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException
+from jsonschema import ValidationError
 from backend.models import User, TagData
 from .auth import get_current_user
 import logging
@@ -25,8 +26,9 @@ def check_precedence(tag_data: List[TagData], current_user: User = Depends(get_c
             return {'success': False, 'message': error}
         return {'success': True, 'message': 'Precedence check passed'}
     except Exception as e:
-        logger.error(f"Error updating version: {e}")
-        raise HTTPException(status_code=500, detail=f"{e}")
+        error_message = f"An error occurred while checking precedence: {e}"
+        logger.error(f"[git::check_precedence] {error_message}")
+        raise HTTPException(status_code=500, detail=error_message)
 
 @router.post('/commit-changes')
 def commit_changes(change_list: List[TagData], current_user: User = Depends(get_current_user)):
@@ -62,6 +64,9 @@ def get_config(current_user: User = Depends(get_current_user)):
     try:
         git_operations_service = GitOperationsService(GITHUB_REPOSITORY_NAME)
         return git_operations_service.find_version_files()
+    except ValidationError as e:
+        logger.error(f"Error validating schema: {e}")
+        raise HTTPException(status_code=400, detail=f"Schema validation failed: {e}")
     except Exception as e:
         logger.error(f"Error retrieving configuration: {e}")
         raise HTTPException(status_code=500, detail="An error occurred while retrieving the configuration")
@@ -83,7 +88,7 @@ def get_config_from_directory(directory: str, current_user: User = Depends(get_c
         return git_operations_service.get_release_file_contents(directory)
     except Exception as e:
         logger.error(f"Error retrieving directory configuration: {e}")
-        raise HTTPException(status_code=500, detail="An error occurred while retrieving the directory configuration")
+        raise HTTPException(status_code=500, detail=f"An error occurred while retrieving the directory configuration {e}")
 
 @router.get('/config/{directory}/releases')
 def get_releases_from_directory(directory: str, current_user: User = Depends(get_current_user)):

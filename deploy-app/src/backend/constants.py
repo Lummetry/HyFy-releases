@@ -23,4 +23,4 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 60
 # Path constants
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))                 # Get the directory where constants.py is located
 STORAGE_DIR = os.path.join(BASE_DIR, '..', 'storage')                 # Define the storage directory path
-TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')             # Define the templates directory path
+TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')                   # Define the templates directory path

@@ -62,10 +62,6 @@ interface ConfigApplicationVersionsDto {
   [key: string]: ConfigApplicationVersionDto;
 }
 
-// interface ConfigApplicationEnvsDto {
-//     [key: string]: string;
-// }
-
 interface EnvInfo {
   info: string;
   name: string;
@@ -81,31 +77,11 @@ interface ConfigApplicationDto {
 
 const gitService = new GitService();
 
-// const getRowsForApp = (appData: ConfigApplicationDto, envs: ConfigApplicationEnvsDto) => {
-//     const { versions, type } = appData;
-
-//     if (type === 'k8s') {
-//         return Object.keys(versions).map(version => ({
-//             version,
-//             images: `${versions[version].backend?.image || 'N/A'}\n${versions[version].frontend?.image || 'N/A'}`,
-//             summary: versions[version].summary || 'No summary available',
-//             assigned_to: environmentsForVersions(version, envs) || '',
-//         }));
-//     } else {
-//         return Object.keys(versions).map(version => ({
-//             version,
-//             summary: versions[version].summary || 'No summary available',
-//             assigned_to: environmentsForVersions(version, envs) || '',
-//         }));
-//     }
-// };
-
 const environmentsForVersions = (
   version: string,
   envs: EnvInfo[]
 ): string[] => {
   return envs.filter((env) => env.version === version).map((env) => env.name);
-  // .join(', ');
 };
 
 const Dashboard = () => {
@@ -234,9 +210,10 @@ const Dashboard = () => {
       }));
     } catch (error: Error | any) {
       let message = `Error: ${error.response?.data?.detail || error.message}`;
-      if (addSnackBar) {
-        addSnackBar({ message, type: "error", duration: 10000 });
-      }
+      // if (addSnackBar) {
+      //   addSnackBar({ message, type: "error", duration: 10000 });
+      // }
+      addAlertDialog({ message, title: "Error" });
     } finally {
       setLoading(false);
     }
@@ -252,9 +229,10 @@ const Dashboard = () => {
       }));
     } catch (error: Error | any) {
       let message = `Error: ${error.response?.data?.detail || error.message}`;
-      if (addSnackBar) {
-        addSnackBar({ message, type: "error", duration: 10000 });
-      }
+      // if (addSnackBar) {
+      //   addSnackBar({ message, type: "error", duration: 10000 });
+      // }
+      addAlertDialog && addAlertDialog({ message, title: "Error" });
     } finally {
       setLoading(false);
     }
@@ -272,6 +250,11 @@ const Dashboard = () => {
 
       if (data.length > 0) {
         loadDataForTab(data[lastKnonwSelectedTab].directory_name);
+      }
+    }).catch((error) => {
+      let error_message = `${error.response?.data?.detail || error.message}`;
+      if (addAlertDialog) {
+        addAlertDialog({ message: error_message, title: "Error" });
       }
     });
   }, []);
@@ -305,31 +288,6 @@ const Dashboard = () => {
       gitService
         .checkPrecedenceForChangeList(changeList[directory])
         .then((response) => {
-          console.log("Check precedence response", response);
-
-          /**
-                 * Example response:
-                 * {
-                        "success": false,
-                        "message": [
-                            {
-                                "higher_env": "qa",
-                                "current_version": "1.0.10",
-                                "proposed_env": "preprod",
-                                "proposed_version": "1.0.11",
-                                "error": "Proposed version 1.0.11 for preprod is higher than qa's version 1.0.10"
-                            },
-                            {
-                                "higher_env": "qa",
-                                "current_version": "1.0.10",
-                                "proposed_env": "prod",
-                                "proposed_version": "1.0.11",
-                                "error": "Proposed version 1.0.11 for prod is higher than qa's version 1.0.10"
-                            }
-                        ]
-                    }
-                }
-                 */
 
           if (response.success == false) {
             const title = "Precedence Check Failed";
@@ -339,8 +297,6 @@ const Dashboard = () => {
             response.message.forEach((item: any) => {
               bullets.push(`${item.error}`);
             });
-
-            console.log("Precedence check failed", bullets);
 
             if (addAlertDialog) {
               addAlertDialog({ message, title, bullets });
@@ -361,6 +317,10 @@ const Dashboard = () => {
         })
         .catch((error) => {
           console.error("Check precedence error", error);
+          let error_message = `${error.response?.data?.detail || error.message}`;
+          if (addAlertDialog) {
+            addAlertDialog({ message: error_message, title: "Error" });
+          }
         });
 
       // Update the table rows with the new change list
@@ -400,8 +360,6 @@ const Dashboard = () => {
         toVersion,
       } as TagDataDTO;
 
-      console.log(tagData);
-
       setChangeList((prevState) => {
         const directory = tagData.directory;
         const currentList = prevState[directory] || [];
@@ -419,24 +377,6 @@ const Dashboard = () => {
 
         return { ...prevState, [directory]: currentList };
       });
-
-      // setLoading(true);
-      // gitService.deployVersion(tagData).then(() => {
-      //     let message = `Deployed ${row.version} to ${env}`;
-      //     if (addSnackBar) {
-      //         addSnackBar({ message, type: 'success', duration: 5000 });
-      //     }
-
-      //     // update the state by calling the loadDataForTab function
-      //     loadDataForTab(directory);
-      // }).catch((error) => {
-      //     let message = `${error.response?.data?.detail || error.message}`;
-      //     if (addAlertDialog) {
-      //         addAlertDialog({ message, title: 'Error' });
-      //     }
-      // }).finally(() => {
-      //     setLoading(false);
-      // });
     };
 
     return (

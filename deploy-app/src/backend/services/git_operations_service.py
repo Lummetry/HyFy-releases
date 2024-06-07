@@ -1,4 +1,5 @@
 from typing import List
+from jsonschema import ValidationError
 import yaml
 import os
 import logging
@@ -215,8 +216,10 @@ class GitOperationsService:
                 self._create_default_release_file(directory_name)
         except FileNotFoundError as e:
             print(f"Error: {e}")
+            raise e
         except yaml.YAMLError as e:
             print(f"Error parsing YAML file: {e}")
+            raise e
 
         # Return an empty dictionary if the file does not exist or an error occurs
         return {}
@@ -255,8 +258,10 @@ class GitOperationsService:
                 raise FileNotFoundError(f"The file {release_file_path} does not exist.")
         except FileNotFoundError as e:
             print(f"Error: {e}")
+            raise e
         except yaml.YAMLError as e:
             print(f"Error parsing YAML file: {e}")
+            raise e
 
         # Return an empty dictionary if the file does not exist or an error occurs
         return {}

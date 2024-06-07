@@ -12,17 +12,17 @@ export interface UserPreferences {
 interface GlobalContextType {
   user: UserModel | null;
   isLoggedIn: boolean;
-  snackBars?: any[];
+  snackBars?: SnackbarType[];
   updateUser: (user: UserModel | null) => void;
-  logout?: () => void;
-  addSnackBar?: ({ message, type, duration }: SnackbarType) => void;
-  getSnackBars?: () => SnackbarType[];
-  removeSnackBar?: (id: number) => void;
-  addAlertDialog?: ({ title, message, bullets }: AlertDialogProps) => void;
-  getAlertDialogs?: () => AlertDialogProps[];
-  removeAlertDialog?: (id: number) => void;
-  getLastKnownSelectedTab?: () => number;
-  updateLastKnownSelectedTab?: (tab: number) => void;
+  logout: () => void;
+  addSnackBar: (snackbar: SnackbarType) => void;
+  getSnackBars: () => SnackbarType[];
+  removeSnackBar: (id: number) => void;
+  addAlertDialog: (dialog: AlertDialogProps) => void;
+  getAlertDialogs: () => AlertDialogProps[];
+  removeAlertDialog: (id: number) => void;
+  getLastKnownSelectedTab: () => number;
+  updateLastKnownSelectedTab: (tab: number) => void;
   getUserPreferences: () => UserPreferences;
   updateUserPreferences: (preferences: Partial<UserPreferences>) => void;
 }
@@ -59,9 +59,7 @@ const globalContextDefaultValues: GlobalContextType = {
   updateUserPreferences: () => {},
 };
 
-const GlobalContext = createContext<GlobalContextType>(
-  globalContextDefaultValues
-);
+const GlobalContext = createContext<GlobalContextType>(globalContextDefaultValues);
 const userService = new UserService();
 
 export const GlobalProvider = ({ children }: GlobalProviderProps) => {
@@ -80,36 +78,25 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
       if (token) {
         const isValid = await userService.validateToken(token);
         if (isValid.success) {
-          const user = localStorage.getItem(LOCAL_STORAGE_USER_KEY);
-          if (user) {
-            setUser({ ...JSON.parse(user), token });
+          const storedUser = localStorage.getItem(LOCAL_STORAGE_USER_KEY);
+          if (storedUser) {
+            setUser({ ...JSON.parse(storedUser), token });
             setIsLoggedIn(true);
-          } else {
-            if (isValid.profile) {
-              setUser({ ...isValid.profile, token });
-              setIsLoggedIn(true);
-            }
+          } else if (isValid.profile) {
+            setUser({ ...isValid.profile, token });
+            setIsLoggedIn(true);
           }
         } else {
-          logout(); // Clear the user and token if not valid
-          return;
+          logout();
         }
       }
     };
-
-    const userPreferences = () => {
-      const preferences = localStorage.getItem(LOCAL_STORAGE_USER_PREFERENCES);
-      if (preferences) {
-        setUserPreferences(JSON.parse(preferences));
-      }
-    };
-
-    initAuth().then(() => { userPreferences() });
+    initAuth();
   }, []);
 
   useEffect(() => {
     if (user) {
-      localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, user?.token || "");
+      localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, user.token || "");
       localStorage.setItem(LOCAL_STORAGE_USER_KEY, JSON.stringify(user));
     } else {
       localStorage.removeItem(LOCAL_STORAGE_TOKEN_KEY);
@@ -121,67 +108,48 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
     localStorage.setItem(LOCAL_STORAGE_USER_PREFERENCES, JSON.stringify(userPreferences));
   }, [userPreferences]);
 
-  // update user and isLoggedIn state
   const updateUser = (user: UserModel | null) => {
     setUser(user);
     setIsLoggedIn(!!user);
   };
 
-  // logout user, clear user and isLoggedIn state
   const logout = () => {
     setUser(null);
     setIsLoggedIn(false);
-
-    // clear local storage
     localStorage.removeItem(LOCAL_STORAGE_TOKEN_KEY);
     localStorage.removeItem(LOCAL_STORAGE_USER_KEY);
   };
 
-  const addSnackBar = ({ message, type, duration }: SnackbarType) => {
+  const addSnackBar = (snackBar: SnackbarType) => {
     const id = Math.floor(Math.random() * 10000);
-    const snackBar = { id, message, type, duration, state: true };
-    setSnackBars([...snackBars, snackBar]);
+    setSnackBars([...snackBars, { ...snackBar, id, state: true }]);
   };
 
   const removeSnackBar = (id: number) => {
-    // get current snack bar and update state to false
-    const snack = snackBars.find((snack: SnackbarType) => snack.id === id);
-    if (snack) {
-      snack.state = false;
-      setSnackBars([...snackBars]);
-    }
-
-    const updatedSnackBars = snackBars.filter((snack) => snack.id !== id);
-    setSnackBars(updatedSnackBars);
+    setSnackBars(prevSnackBars => prevSnackBars.map(snack =>
+      snack.id === id ? { ...snack, state: false } : snack
+    ));
+    setSnackBars(prevSnackBars => prevSnackBars.filter(snack => snack.id !== id));
   };
 
-  const getSnackBars = () => {
-    return snackBars;
-  };
+  const getSnackBars = () => snackBars;
 
-  const addAlertDialog = ({ title, message, bullets }: AlertDialogProps) => {
+  const addAlertDialog = (dialog: AlertDialogProps) => {
     const id = Math.floor(Math.random() * 10000);
-    const alertDialog = { id, title, message, bullets, state: true };
-    setAlertDialogs([...alertDialogs, alertDialog]);
+    setAlertDialogs([...alertDialogs, { ...dialog, id, state: true }]);
   };
 
   const removeAlertDialog = (id: number) => {
-    const updatedDialogs = alertDialogs.map((dialog) => {
-      if (dialog.id === id) {
-        return { ...dialog, state: false }; // Modify state to false to hide the dialog
-      }
-      return dialog;
-    });
-    setAlertDialogs(updatedDialogs);
+    setAlertDialogs(prevDialogs => prevDialogs.map(dialog =>
+      dialog.id === id ? { ...dialog, state: false } : dialog
+    ));
   };
 
-  const getAlertDialogs = () => {
-    return alertDialogs;
-  };
+  const getAlertDialogs = () => alertDialogs;
 
   const getLastKnownSelectedTab = () => {
     const lastKnownTab = localStorage.getItem(LOCAL_STORAGE_LAST_KNOWN_TAB);
-    return parseInt(lastKnownTab || "0");
+    return parseInt(lastKnownTab || "0", 10);
   };
 
   const updateLastKnownSelectedTab = (tab: number) => {
@@ -189,8 +157,7 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
   };
 
   const updateUserPreferences = (preferences: Partial<UserPreferences>) => {
-    setUserPreferences((prev) => ({ ...prev, ...preferences }));
-    localStorage.setItem(LOCAL_STORAGE_USER_PREFERENCES, JSON.stringify(preferences));
+    setUserPreferences(prev => ({ ...prev, ...preferences }));
   };
 
   return (
