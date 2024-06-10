@@ -9,6 +9,12 @@ application:
   envs: [staging, qa, preprod]
 
   versions:
+    3.5.2:
+      backend:
+        image: aixpand/backend:release-3.5.3
+      frontend:
+        image: aixpand/investigator:banksight-0.69.1
+      summary: "feat: MediaServer Cameras; fix: MAX_RESULTS in pagination."
     3.5.1:
       backend:
         image: aixpand/backend:release-3.4.1
