@@ -9,6 +9,12 @@ application:
   envs: [staging, qa, preprod]
 
   versions:
+    3.5.4:
+      backend:
+        image: aixpand/backend:release-3.5.5
+      frontend:
+        image: aixpand/investigator:banksight-0.69.1
+      summary: "fix: MEDIA_SERVER_CAMERA as video device."
     3.5.3:
       backend:
         image: aixpand/backend:release-3.5.4
