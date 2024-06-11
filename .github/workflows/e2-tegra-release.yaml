@@ -1,9 +1,11 @@
 name: Jetson/Tegra Execution Engine releases
 
 on:
-  push:
-    paths:
-      - 'e2/release.yaml'
+  workflow_run:
+    workflows: ["PC/amd64 Execution Engine releases"]
+    types:
+      - completed
+
 
 concurrency:
   group: e2-release-process

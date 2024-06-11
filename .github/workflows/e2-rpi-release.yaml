@@ -1,9 +1,10 @@
 name: RPi/arm64 Execution Engine releases
 
 on:
-  push:
-    paths:
-      - 'e2/release.yaml'
+  workflow_run:
+    workflows: ["Jetson/Tegra Execution Engine releases"]
+    types:
+      - completed
 
 concurrency:
   group: e2-release-process
