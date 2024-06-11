@@ -6,14 +6,19 @@ on:
     types:
       - completed
 
-
 concurrency:
   group: e2-release-process
   cancel-in-progress: false
 
 jobs:
-  handle-edge-device-tegra-releases:
+  on-failure:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+      - run: echo 'The triggering workflow failed'  
+  handle-edge-device-rpi-releases:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
