@@ -8,6 +8,11 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    3.31.40: 
+      summary: |
+        Support for TLS and other various fixes to core framework 
+        Improvements to main features such as IQA, MZPP, LPR, LMS
+
     3.30.340:
       summary: More features for BT deploy
   
