@@ -6,7 +6,7 @@ on:
       - 'e2/release.yaml'
 
 concurrency:
-  group: e2-tegra-release-process
+  group: e2-release-process
   cancel-in-progress: false
 
 jobs:
