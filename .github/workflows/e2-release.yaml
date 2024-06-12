@@ -40,7 +40,7 @@ jobs:
             echo "Environment: $env <- Version: $version"
             echo "##################################################"
 
-            du -h
+            df -h
             
             # Purge and prune Docker system before each iteration
             echo "Pruning Docker system to free up space..."
@@ -60,7 +60,7 @@ jobs:
             echo "Pushing $NEW_TAG..."
             docker push $NEW_TAG
 
-            du -h
+            df -h
 
             # Clean up the local Docker images to free up space
             echo "Removing local Docker images..."
