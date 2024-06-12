@@ -63,6 +63,12 @@ jobs:
 
             echo "Pushing $NEW_TAG..."
             docker push $NEW_TAG
+
+            # Clean up the local Docker images to free up space
+            echo "Removing local Docker images..."
+            docker rmi $IMAGE
+            docker rmi $NEW_TAG
+            
           done
         shell: bash
 
