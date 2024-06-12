@@ -9,6 +9,12 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.5.5:
+      backend:
+        image: aixpand/backend:release-3.5.5
+      frontend:
+        image: aixpand/investigator:optizone-0.69.4
+      summary: "fix: pagination issue"
     3.5.4:
       backend:
         image: aixpand/backend:release-3.5.5
