@@ -39,6 +39,8 @@ jobs:
             echo "##################################################"
             echo "Environment: $env <- Version: $version"
             echo "##################################################"
+
+            du -h
             
             # Purge and prune Docker system before each iteration
             echo "Pruning Docker system to free up space..."
@@ -57,7 +59,14 @@ jobs:
 
             echo "Pushing $NEW_TAG..."
             docker push $NEW_TAG
-          done
+
+            du -h
+
+            # Clean up the local Docker images to free up space
+            echo "Removing local Docker images..."
+            docker rmi $IMAGE
+            docker rmi $NEW_TAG
+            done
         shell: bash
 
       - name: Logout from Docker Hub
