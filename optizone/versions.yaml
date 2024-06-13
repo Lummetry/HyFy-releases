@@ -9,6 +9,12 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.5.6:
+      backend:
+        image: aixpand/backend:release-3.5.5
+      frontend:
+        image: aixpand/investigator:optizone-0.70.0
+      summary: "fix: image carrousel"
     3.5.5:
       backend:
         image: aixpand/backend:release-3.5.5
