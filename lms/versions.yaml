@@ -1,0 +1,12 @@
+# this file is used to extract the versions of the application that are to be released
+# the addition of new versions is done only by dev team
+# this versions definition file also defines the target environments for the application
+# as well as the environment precedence
+
+application:
+  name: Hyperfy Light Media Server
+  type: edge
+  envs: [staging, qa, preprod, prod]
+  versions:
+    1.0:
+      summary: Initial release

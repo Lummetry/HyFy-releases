@@ -1,0 +1,16 @@
+application:
+  envs:
+  - info: staging
+    name: staging
+    version: 1.0
+  - info: qa
+    name: qa
+    version: 1.0
+  - info: preprod
+    name: preprod
+    version: 1.0
+  - info: prod
+    name: prod
+    version: 1.0
+  name: Light Media Server
+  type: edge

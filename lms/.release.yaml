@@ -1,0 +1,32 @@
+application:
+  docker_repo: 
+
+  type: edge
+
+  envs:
+  - name: staging
+    info: staging environment
+    version:
+
+  - name: qa
+    info: qa environment
+    version:
+
+  - name: preprod
+    info: preprod environment
+    version:
+
+  - name: prod
+    info: prod environment
+    version:
+
+  - name: prod-secondary-fleet
+    info: prod-secondary-fleet environment
+    version:
+
+  - name: prod-trial
+    info: prod-trial environment - env used for live production monitoring
+    version:
+
+  git_repo: 
+  name: Execution Engine
