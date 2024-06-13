@@ -33,8 +33,8 @@ jobs:
           echo "Processing steps..."
           echo "$ENVS" | while IFS=: read -r env version; do
             version=${version//[[:space:]]/}  # Trim whitespace from version
-            IMAGE="TODO/change_me:$version"
-            NEW_TAG="TODO/change_me:$env"
+            IMAGE="aixpand/hyfy_lms:$version"
+            NEW_TAG="aixpand/hyfy_lms:$env"
 
             echo "##################################################"
             echo "Environment: $env <- Version: $version"
