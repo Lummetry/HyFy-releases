@@ -9,6 +9,12 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.5.7:
+      backend:
+        image: aixpand/backend:release-3.5.6
+      frontend:
+        image: aixpand/investigator:optizone-0.70.0
+      summary: "fix: invalid image content received in payload;"
     3.5.6:
       backend:
         image: aixpand/backend:release-3.5.5
