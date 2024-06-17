@@ -8,6 +8,9 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    3.31.70:
+      summary: Increase IQA angle alert quality
+
     3.31.60:
       summary: Fix IQA angle
 
