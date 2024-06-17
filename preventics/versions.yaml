@@ -9,6 +9,12 @@ application:
   envs: [staging, qa, preprod]
 
   versions:
+    3.5.8:
+      backend:
+        image: aixpand/backend:release-3.5.6
+      frontend:
+        image: aixpand/investigator:banksight-0.70.1
+      summary: "feat: witness in partition zone manager; \n tests: witness image in partition zone manager"
     3.5.7:
       backend:
         image: aixpand/backend:release-3.5.6
@@ -20,7 +26,7 @@ application:
         image: aixpand/backend:release-3.5.5
       frontend:
         image: aixpand/investigator:banksight-0.70.0
-      summary: "fix: image carrousel"
+      summary: "fix: image carrousel; tests: image carrousel for MZPP plugin"
     3.5.5:
       backend:
         image: aixpand/backend:release-3.5.5
@@ -50,7 +56,7 @@ application:
         image: aixpand/backend:release-3.4.1
       frontend:
         image: aixpand/investigator:banksight-0.69.1
-      summary: "fix: schedule edit"
+      summary: "fix: schedule edit; \ntests: schedule editing"
     3.5.0:
       backend:
         image: aixpand/backend:release-3.4.0
@@ -92,7 +98,7 @@ application:
         image: aixpand/backend:release-3.1.0
       frontend:
         image: aixpand/investigator:banksight-0.67.1
-      summary: "feat: reset user password fix"
+      summary: "feat: reset user password fix; \ntests: reset password"
     3.0.7:
       backend:
         image: aixpand/backend:release-3.1.0
@@ -104,7 +110,7 @@ application:
         image: aixpand/backend:release-3.1.0
       frontend:
         image: aixpand/investigator:banksight-0.66.0
-      summary: "feat: schedule column partition"
+      summary: "feat: schedule column partition; \ntests: schedule column partition"
     3.0.5:
       backend:
         image: aixpand/backend:release-3.1.0
@@ -122,7 +128,7 @@ application:
         image: aixpand/backend:release-3.0.2
       frontend:
         image: aixpand/investigator:banksight-0.63.0
-      summary: "updates: bug fixes, payload icon in alerts/events, password reset"
+      summary: "updates: bug fixes, payload icon in alerts/events, password reset; \ntests: reset password"
     3.0.2:
       backend:
         image: aixpand/backend:release-3.0.2
