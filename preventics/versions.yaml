@@ -9,6 +9,13 @@ application:
   envs: [staging, qa, preprod]
 
   versions:
+    3.5.9:
+      backend:
+        image: aixpand/backend:release-3.5.7
+      frontend:
+        image: aixpand/investigator:banksight-0.70.1
+      summary: |
+        fix: delete service fails when interpreting results from edge node;
     3.5.8:
       backend:
         image: aixpand/backend:release-3.5.6
