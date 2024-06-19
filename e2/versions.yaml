@@ -8,6 +8,12 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    3.31.100:
+      summary: Minor fixes
+
+    3.31.90:
+      summary: Node history integration (broken)
+
     3.31.80:
       summary: Node temperature history 
 
