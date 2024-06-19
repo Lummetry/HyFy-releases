@@ -5,7 +5,7 @@ application:
     version: 3.5.9
   - info: QA
     name: qa
-    version: 3.5.2
+    version: 3.5.3
   - info: Preprod
     name: preprod
     version: 2.3.0
