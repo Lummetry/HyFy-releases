@@ -66,6 +66,7 @@ application:
       frontend:
         image: aixpand/investigator:optizone-0.69.1
       summary: |
+        WARNING: Broken build, do not deploy!
         feat: MediaServer Cameras; 
         fix: MAX_RESULTS in pagination;
     3.5.1:
