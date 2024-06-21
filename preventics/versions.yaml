@@ -9,6 +9,13 @@ application:
   envs: [staging, qa, preprod]
 
   versions:
+    3.6.2:
+      backend:
+        image: aixpand/backend:release-3.6.0
+      frontend:
+        image: aixpand/investigator:banksight-0.72.0
+      summary: |
+        feat: AI plugin search;
     3.6.1:
       backend:
         image: aixpand/backend:release-3.6.0
