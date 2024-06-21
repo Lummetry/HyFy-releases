@@ -8,6 +8,9 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    3.31.140:
+      summary: Fix IQA angle anchor save
+
     3.31.130:
       summary: whitelist some commands to be executed if emitted by an unauthorized address
 
