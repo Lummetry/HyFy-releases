@@ -13,7 +13,7 @@ application:
       backend:
         image: aixpand/backend:release-3.7.0
       frontend:
-        image: aixpand/investigator:optizone-0.72.1
+        image: aixpand/investigator:banksight-0.72.1
       summary: |
         fix: camera in filter for AI plugin search;
     3.6.3:
