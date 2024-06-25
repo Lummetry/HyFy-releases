@@ -9,6 +9,13 @@ application:
   envs: [staging, qa, preprod]
 
   versions:
+    3.6.5:
+      backend:
+        image: aixpand/backend:release-3.7.1
+      frontend:
+        image: aixpand/investigator:banksight-0.72.1
+      summary: |
+        fix: Oracle DB migration failing;
     3.6.4:
       backend:
         image: aixpand/backend:release-3.7.0
@@ -203,6 +210,14 @@ application:
         image: aixpand/investigator:banksight-0.59.10
       summary: |
         feat: multi-threaded, stateless, backend;
+    2.5.1:
+      backend:
+        image: aixpand/backend:release-2.5.1
+      frontend:
+        image: aixpand/investigator:banksight-0.72.1
+      summary: |
+        BT Special release;
+        fix: Oracle DB migration fails;
     2.5.0:
       backend:
         image: aixpand/backend:release-2.5.0
