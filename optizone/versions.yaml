@@ -9,6 +9,13 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+      3.6.4:
+      backend:
+        image: aixpand/backend:release-3.7.0
+      frontend:
+        image: aixpand/investigator:optizone-0.72.1
+      summary: |
+        fix: camera in filter for AI plugin search;
     3.6.3:
       backend:
         image: aixpand/backend:release-3.7.0
