@@ -203,6 +203,14 @@ application:
         image: aixpand/investigator:banksight-0.59.10
       summary: |
         feat: multi-threaded, stateless, backend;
+    2.5.0:
+      backend:
+        image: aixpand/backend:release-2.5.0
+      frontend:
+        image: aixpand/investigator:banksight-0.72.1
+      summary: |
+        BT Special release;
+        feat: new alerting system;
     2.3.0:
       backend:
         image: aixpand/backend:release-2.3.0
