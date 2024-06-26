@@ -9,6 +9,13 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.8.0:
+      backend:
+        image: aixpand/backend:release-3.9.0
+      frontend:
+        image: aixpand/investigator:optizone-0.72.1
+      summary: |
+        feat: filter updates & connection pool variables;
     3.7.0:
       backend:
         image: aixpand/backend:release-3.8.0
