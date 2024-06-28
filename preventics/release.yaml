@@ -8,6 +8,6 @@ application:
     version: 2.5.1
   - info: preprod environment
     name: preprod
-    version: 3.6.4
+    version: 2.5.1
   name: Preventics
   type: k8s
