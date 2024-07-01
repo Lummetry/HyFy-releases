@@ -9,13 +9,23 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.8.2:
+      backend:
+        image: aixpand/backend:release-3.10.0
+      frontend:
+        image: aixpand/investigator:optizone-0.74.0
+      summary: |
+        fix: image carrousel, node & comms dashboard;
+        feat: bulk update with csv in back end; 
+        tests: image carrousel for MZPP;
     3.8.1:
       backend:
         image: aixpand/backend:release-3.9.1
       frontend:
         image: aixpand/investigator:optizone-0.72.3
       summary: |
-        fix: remove unused keys in alerts/events payloads;
+        fix: remove unused keys in alerts/events payloads; 
+        tests: alerts/events page functional;
     3.8.0:
       backend:
         image: aixpand/backend:release-3.9.0
@@ -43,7 +53,8 @@ application:
       frontend:
         image: aixpand/investigator:optizone-0.72.1
       summary: |
-        fix: camera in filter for AI plugin search;
+        fix: camera in filter for AI plugin search; 
+        tests: filter + search in AI plugins;
     3.6.3:
       backend:
         image: aixpand/backend:release-3.7.0
