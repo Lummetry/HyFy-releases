@@ -9,6 +9,15 @@ application:
   envs: [staging, qa, preprod]
 
   versions:
+    3.8.2:
+      backend:
+        image: aixpand/backend:release-3.10.0
+      frontend:
+        image: aixpand/investigator:banksight-0.74.0
+      summary: |
+        fix: image carrousel, node & comms dashboard;
+        feat: bulk update with csv in back end; 
+        tests: image carrousel for MZPP;
     3.8.1:
       backend:
         image: aixpand/backend:release-3.9.1
