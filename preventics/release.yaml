@@ -2,7 +2,7 @@ application:
   envs:
   - info: staging environment
     name: staging
-    version: 3.8.2
+    version: 3.8.3
   - info: qa environment
     name: qa
     version: 2.5.1
