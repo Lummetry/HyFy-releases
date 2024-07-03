@@ -9,6 +9,13 @@ application:
   envs: [staging, qa, preprod]
 
   versions:
+    3.8.4:
+      backend:
+        image: aixpand/backend:release-3.10.1
+      frontend:
+        image: aixpand/investigator:banksight-0.74.1
+      summary: |
+        fix: send parameters upon AI plugin save;
     3.8.3:
       backend:
         image: aixpand/backend:release-3.10.1
