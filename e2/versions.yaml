@@ -8,8 +8,11 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    3.31.170:
+      summary: Fix supervisor no gpu
+
     3.31.160:
-      summary: Small improvements in IQA basic & angle; net_mon uses less memory & disk
+      summary: (Broken) Small improvements in IQA basic & angle; net_mon uses less memory & disk
 
     3.31.150:
       summary: Fix unsafe plugins for BT deploy
