@@ -9,6 +9,14 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.8.6:
+      backend:
+        image: aixpand/backend:release-3.10.2
+      frontend:
+        image: aixpand/investigator:optizone-0.74.2
+      summary: |
+        fix: null check on plugin group dissolve;
+        fix: alert not saved in OracleDB due to incorrect null fields;
     3.8.5:
       backend:
         image: aixpand/backend:release-3.10.1
