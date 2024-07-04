@@ -13,7 +13,7 @@ application:
       backend:
         image: aixpand/backend:release-3.10.1
       frontend:
-        image: aixpand/investigator:optizone-0.74.1
+        image: aixpand/investigator:optizone-0.74.2
       summary: |
         fix: witness images in alerts/events;
     3.8.4:
