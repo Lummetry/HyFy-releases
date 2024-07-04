@@ -9,6 +9,13 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.8.5:
+      backend:
+        image: aixpand/backend:release-3.10.1
+      frontend:
+        image: aixpand/investigator:optizone-0.74.1
+      summary: |
+        fix: witness images in alerts/events;
     3.8.4:
       backend:
         image: aixpand/backend:release-3.10.1
