@@ -8,6 +8,9 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    3.31.180:
+      summary: Better ffmpeg acquisition
+
     3.31.170:
       summary: Fix supervisor no gpu
 
