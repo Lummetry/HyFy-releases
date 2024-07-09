@@ -9,6 +9,14 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.9.0:
+      backend:
+        image: aixpand/backend:release-3.10.2
+      frontend:
+        image: aixpand/investigator:optizone-0.75.0
+      summary: |
+        feat: bulk update ai plugin with csv;
+        fix: mapping of images in events and removed slider arrow for single image;
     3.8.6:
       backend:
         image: aixpand/backend:release-3.10.2
