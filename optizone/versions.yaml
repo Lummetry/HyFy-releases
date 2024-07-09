@@ -9,6 +9,13 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.9.4:
+      backend:
+        image: aixpand/backend:release-3.11.2
+      frontend:
+        image: aixpand/investigator:optizone-0.75.2
+      summary: |
+        fix: handle error when node manager cannot be instantiated;
     3.9.3:
       backend:
         image: aixpand/backend:release-3.11.1
