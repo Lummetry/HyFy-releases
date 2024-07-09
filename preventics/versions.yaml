@@ -9,6 +9,13 @@ application:
   envs: [staging, qa, preprod]
 
   versions:
+    3.9.1:
+      backend:
+        image: aixpand/backend:release-3.10.3
+      frontend:
+        image: aixpand/investigator:banksight-0.75.0
+      summary: |
+        fix: correctly confirm plugin deployment;
     3.9.0:
       backend:
         image: aixpand/backend:release-3.10.2
