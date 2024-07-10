@@ -9,6 +9,18 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.10.0:
+      backend:
+        image: aixpand/backend:release-3.11.3
+      frontend:
+        image: aixpand/investigator:optizone-0.76.4
+      summary: |
+        feat: added a bulk update template download feature;
+        fix: remove inkwell-clickable logo;
+        fix: toast image bg correction;
+        fix: toast rail no longer appear;
+        fix: fix multiple widgets with same globalkey issue on toastrail;
+        chore: translation updates;
     3.9.4:
       backend:
         image: aixpand/backend:release-3.11.2
