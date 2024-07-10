@@ -5,9 +5,9 @@ application:
     version: 3.10.0
   - info: qa environment
     name: qa
-    version: 3.8.6
+    version: 3.10.0
   - info: preprod environment
     name: preprod
-    version: 3.8.6
+    version: 3.10.0
   name: Preventics
   type: k8s
