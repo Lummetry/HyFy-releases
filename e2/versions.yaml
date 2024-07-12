@@ -8,6 +8,9 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    3.31.220:
+      summary: Fix Alert spam IQA
+
     3.31.210:
       summary: Hotfix for supervisor
 
