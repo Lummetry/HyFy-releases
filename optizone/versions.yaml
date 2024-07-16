@@ -9,6 +9,14 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.10.2:
+      backend:
+        image: aixpand/backend:release-3.12.1
+      frontend:
+        image: aixpand/investigator:optizone-0.76.13
+      summary: |
+        fix: skip nodes that are offline when attempting to fetch pipeline info;
+        feat: Alerts & Events cleanup cron;
     3.10.1:
       backend:
         image: aixpand/backend:release-3.11.3
