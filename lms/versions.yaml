@@ -8,5 +8,5 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
-    1.0:
+    1.0.0:
       summary: Initial release
