@@ -9,6 +9,14 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.12.0:
+      backend:
+        image: aixpand/backend:release-3.14.0
+      frontend:
+        image: aixpand/investigator:optizone-0.77.2
+      summary: |
+        feat: edge device in maintenance event;
+        feat: allow CAP_RESOLUTION and DCTType change in bulk;
     3.11.0:
       backend:
         image: aixpand/backend:release-3.13.0
