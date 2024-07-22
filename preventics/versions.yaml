@@ -9,6 +9,16 @@ application:
   envs: [staging, qa, preprod]
 
   versions:
+    3.11.0:
+      backend:
+        image: aixpand/backend:release-3.13.0
+      frontend:
+        image: aixpand/investigator:banksight-0.77.2
+      summary: |
+        fix: high app loading time;
+        fix: error handling;
+        fix: comms dashboard layout;
+        fix: theme fixes;
     3.10.3:
       backend:
         image: aixpand/backend:release-3.12.2
