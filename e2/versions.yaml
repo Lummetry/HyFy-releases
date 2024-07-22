@@ -9,7 +9,11 @@ application:
   envs: [staging, qa, preprod, prod]
   versions:
     3.31.240:
-      summary: Fix iqa fast & slow, plano, video loss thresholds adjusted, unified video stream (cv2, ffmpeg, lms)
+      summary: |
+        Fix iqa fast & slow,
+        Fix plano,
+        Video loss thresholds adjusted,
+        Unified video stream (cv2, ffmpeg, lms)
 
     3.31.230:
       summary: More commands in whitelist
