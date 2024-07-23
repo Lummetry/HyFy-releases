@@ -8,10 +8,15 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    3.31.280:
+      summary: |
+        Fix iqa fast & slow,
+        Fix plano,
+        Prepared LMS for test & deploy
+
     3.31.270:
       summary: |
-        Fix iqa fast & slow (lowres detector + plugin startup),
-        Fix plano (plugin startup),
+        Fix iqa fast & slow (lowres detector),
         Fix ffmpeg (removed lock on subprocess creation, can be toggled from config),
 
     3.31.260:
@@ -21,8 +26,6 @@ application:
 
     3.31.240:
       summary: |
-        Fix iqa fast & slow,
-        Fix plano,
         Video loss thresholds adjusted,
         Unified video stream (cv2, ffmpeg, lms)
 
