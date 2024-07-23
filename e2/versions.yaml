@@ -8,6 +8,12 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    3.31.270:
+      summary: |
+        Fix iqa fast & slow (lowres detector + plugin startup),
+        Fix plano (plugin startup),
+        Fix ffmpeg (removed lock on subprocess creation, can be toggled from config),
+
     3.31.260:
       summary: |
         Fix LOST STATUS (last seen time is computed with the time received),
