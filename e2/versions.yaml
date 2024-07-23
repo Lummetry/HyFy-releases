@@ -8,6 +8,11 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    3.31.260:
+      summary: |
+        Fix LOST STATUS (last seen time is computed with the time received),
+        Fix ffmpeg acquisition (revert to old pipeline config)
+
     3.31.240:
       summary: |
         Fix iqa fast & slow,
