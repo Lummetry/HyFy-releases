@@ -8,8 +8,11 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
-    3.31.300:
+    3.31.310:
       summary: Ffmpeg version rollback to version from 3.30.340
+
+    3.31.300:
+      summary: BROKEN
 
     3.31.290:
       summary: |
