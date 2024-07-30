@@ -9,6 +9,13 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.12.3:
+      backend:
+        image: aixpand/backend:release-3.14.3
+      frontend:
+        image: aixpand/investigator:optizone-0.78.14
+      summary: |
+        fix: stream status pagination;
     3.12.2:
       backend:
         image: aixpand/backend:release-3.14.3
