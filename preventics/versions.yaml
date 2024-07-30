@@ -9,6 +9,14 @@ application:
   envs: [staging, qa, preprod]
 
   versions:
+    3.12.2:
+      backend:
+        image: aixpand/backend:release-3.14.3
+      frontend:
+        image: aixpand/investigator:banksight-0.78.12
+      summary: |
+        fix: UI theme;
+        fix: node dashboard table;
     3.12.1:
       backend:
         image: aixpand/backend:release-3.14.3
