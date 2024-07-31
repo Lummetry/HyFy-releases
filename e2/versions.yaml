@@ -8,6 +8,9 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    3.31.320:
+      summary: Force shutdown serving process if unresponsive
+
     3.31.310:
       summary: Ffmpeg version rollback to version from 3.30.340
 
