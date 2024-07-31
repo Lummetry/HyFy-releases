@@ -9,6 +9,13 @@ application:
   envs: [staging, qa, preprod]
 
   versions:
+    3.12.4:
+      backend:
+        image: aixpand/backend:release-3.14.4
+      frontend:
+        image: aixpand/investigator:banksight-0.78.14
+      summary: |
+        fix: configurable batch size on sys cleanup; env var SYSTEM_CLEANUP_BATCH_SIZE;
     3.12.3:
       backend:
         image: aixpand/backend:release-3.14.3
