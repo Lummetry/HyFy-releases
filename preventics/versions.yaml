@@ -9,6 +9,13 @@ application:
   envs: [staging, qa, preprod]
 
   versions:
+    3.12.5:
+      backend:
+        image: aixpand/backend:release-3.14.4
+      frontend:
+        image: aixpand/investigator:banksight-0.78.17
+      summary: |
+        fix: default value reset for AI plugins;
     3.12.4:
       backend:
         image: aixpand/backend:release-3.14.4
