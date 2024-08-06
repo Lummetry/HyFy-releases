@@ -9,6 +9,14 @@ application:
   envs: [staging, qa, preprod]
 
   versions:
+    3.12.6:
+      backend:
+        image: aixpand/backend:release-3.15.0
+      frontend:
+        image: aixpand/investigator:banksight-0.78.17
+      summary: |
+        feat: node IP on nodes status endpoint;
+        fix: node registration in multi-worker scenario;
     3.12.5:
       backend:
         image: aixpand/backend:release-3.14.4
