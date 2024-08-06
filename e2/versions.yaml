@@ -8,6 +8,11 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    3.31.340:
+      summary: |
+        Feat: Self check gpu crash (& restart on crash),
+        Feat: K8s command delete pods,
+
     3.31.330:
       summary: Fix typo
 
