@@ -13,10 +13,9 @@ application:
       backend:
         image: aixpand/backend:release-3.15.0
       frontend:
-        image: aixpand/investigator:optizone-0.78.17
+        image: aixpand/investigator:optizone-0.80.0
       summary: |
-        feat: node IP on nodes status endpoint;
-        fix: node registration in multi-worker scenario;
+        feat: node dashboard resources + ip columns;
     3.12.5:
       backend:
         image: aixpand/backend:release-3.14.4
