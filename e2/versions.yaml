@@ -8,6 +8,11 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    3.31.360:
+      summary: |
+        Chore: perimeter intrusion uses lowres object detector,
+        Fix: ffmpeg acquisition threads close pipe on exit
+
     3.31.350:
       summary: |
         Fix: LMS deadlock,
