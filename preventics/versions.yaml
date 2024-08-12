@@ -9,12 +9,13 @@ application:
   envs: [staging, qa, preprod]
 
   versions:
-    3.13.3:
+    3.13.4:
       backend:
-        image: aixpand/backend:release-3.16.0
+        image: aixpand/backend:release-3.16.1
       frontend:
         image: aixpand/investigator:banksight-0.81.2
       summary: |
+        fix: unsafe string operation;
         feat!: K8s Pods in API response;
     3.13.2:
       backend:
