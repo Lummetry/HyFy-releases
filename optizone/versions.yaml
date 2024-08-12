@@ -9,6 +9,13 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.13.3:
+      backend:
+        image: aixpand/backend:release-3.16.0
+      frontend:
+        image: aixpand/investigator:optizone-0.81.2
+      summary: |
+        feat!: K8s Pods in API response;
     3.13.2:
       backend:
         image: aixpand/backend:release-3.15.1
