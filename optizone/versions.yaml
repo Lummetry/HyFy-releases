@@ -9,6 +9,13 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.14.2:
+      backend:
+        image: aixpand/backend:release-3.18.0
+      frontend:
+        image: aixpand/investigator:optizone-0.81.11
+      summary: |
+        feat: live stream from DEMO_MODE plugins on websocket;
     3.14.1:
       backend:
         image: aixpand/backend:release-3.17.1
