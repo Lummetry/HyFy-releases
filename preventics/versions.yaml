@@ -9,6 +9,13 @@ application:
   envs: [staging, qa, preprod]
 
   versions:
+    3.14.3:
+      backend:
+        image: aixpand/backend:release-3.18.0
+      frontend:
+        image: aixpand/investigator:banksight-0.82.0
+      summary: |
+        fix: cluster monitoring;
     3.14.2:
       backend:
         image: aixpand/backend:release-3.18.0
