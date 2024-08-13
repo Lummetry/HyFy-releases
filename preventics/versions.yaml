@@ -9,6 +9,14 @@ application:
   envs: [staging, BT, qa, preprod]
 
   versions:
+    3.15.0:
+      backend:
+        image: aixpand/backend:release-3.19.0
+      frontend:
+        image: aixpand/investigator:banksight-0.82.0
+      summary: |
+        feat: sortable lists throughout the API;
+        feat: sort cluster monitoring cards based on status;
     3.14.3:
       backend:
         image: aixpand/backend:release-3.18.0
