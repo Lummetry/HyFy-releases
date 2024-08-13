@@ -8,6 +8,12 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    3.31.370: |
+      summary: |
+        Fix: small ffmpeg fix
+        Fix: serving section in timers again
+        Fix: Tegra docker image fix
+
     3.31.360:
       summary: |
         Chore: perimeter intrusion uses lowres object detector,
