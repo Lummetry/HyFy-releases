@@ -16,3 +16,12 @@ def log_with_color(message, color):
   end_color = "\033[0m"
   print(f"{start_color}{message}{end_color}", flush=True)
   return
+
+
+def get_version():
+  """
+    Get the version of the application.
+    :return: Version of the application
+  """
+  with open("ver.txt") as version_file:
+    return version_file.read().strip()
