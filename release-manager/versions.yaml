@@ -16,7 +16,7 @@ application:
     0.8.3:
       backend:
         image: aixpand/deploy-app:0.8.3
-      summary: "logging & requirements"
+      summary: "(BROKEN) logging & requirements"
     0.8.2:
       backend:
         image: aixpand/deploy-app:0.8.2
