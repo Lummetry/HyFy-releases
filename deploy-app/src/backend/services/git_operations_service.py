@@ -11,6 +11,8 @@ from backend.services.git_service import GitService  # Adjust the import path as
 from backend.constants import RELEASE_FILE_NAME, RELEASE_TEMPLATE_FILE_NAME, VERSIONS_FILE_NAME
 from backend.exceptions.git_operation_exception import GitOperationException
 
+from backend.utils import log_with_color
+
 def represent_ordereddict(dumper, data):
     return dumper.represent_dict(data.items())
 
@@ -41,7 +43,7 @@ class GitOperationsService:
 
           # get a list of all environment from the tag_data_list
           environments = list(set([tag.environment for tag in tag_data_list]))
-          print(f"Environments: {environments}")
+          log_with_color(f"Environments: {environments}")
 
           committing_user = user['name'] if user else 'Unknown User'
           commit_message = f"auto: {committing_user} updating versions for {', '.join(environments)} environments\n\n"
@@ -49,10 +51,13 @@ class GitOperationsService:
           for tag_data in tag_data_list:
               self.update_configuration_file(tag_data)
               # append to commit message
-              commit_message += f"Promoting {tag_data.fromVersion} to {tag_data.toVersion} for {tag_data.directory}/{tag_data.environment}\n"
+              msg = f"Promoting {tag_data.fromVersion} to {tag_data.toVersion} for {tag_data.directory}/{tag_data.environment}\n"
+              log_with_color(msg, "yellow")
+              commit_message += msg
 
           self.git_service.git_commit(repo_path=self.local_repo_path, message=commit_message)
           self.git_service.git_push(self.local_repo_path)
+          log_with_color("Changes committed and pushed successfully", "green")
       except GitOperationException as e:
           logger.error(f"Git operation failed: {e}")
           raise
@@ -96,9 +101,9 @@ class GitOperationsService:
 
       versions_file = os.path.join(self.local_repo_path, tag_data_list[0].directory, VERSIONS_FILE_NAME)
       with open(versions_file, 'r') as file:
-          versions = yaml.safe_load(file)
-          precedence = versions['application'].get('envs', [])
-
+        versions = yaml.safe_load(file)
+        precedence = versions['application'].get('envs', [])
+      log_with_color(f"Precedence: {precedence}", color='yellow')
       # Dictionary to maintain current versions for easy access and modification
       current_versions = {env['name']: env['version'] for env in config['application']['envs']}
       violations = []
@@ -133,7 +138,7 @@ class GitOperationsService:
 
 
     def check_tag_precedence(self, tag_data):
-      print(f"Checking tag precedence for {tag_data.tag} in {tag_data.environment}, {self.config_file_path}")
+      log_with_color(f"Checking tag precedence for {tag_data.tag} in {tag_data.environment}, {self.config_file_path}", color='yellow')
       config_file = os.path.join(self.local_repo_path, self.config_file_path)
       with open(config_file, 'r') as file:
           config = yaml.safe_load(file)
