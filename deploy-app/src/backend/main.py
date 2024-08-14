@@ -13,12 +13,14 @@ from .routes import users, auth, git
 from .utils import get_version, log_with_color
 
 
+version = get_version()
+log_with_color(f"Starting the Deploy-App FastAPI server v{version}...", "green")
+
+
 # Seed the configuration repository
 git_operations_service = GitOperationsService(GITHUB_REPOSITORY_NAME)
 git_operations_service.prepare_repository() # Bootstrap the repository
 
-version = get_version()
-log_with_color(f"Starting the Deploy-App FastAPI server v{version}...", "green")
 
 app = FastAPI()
 

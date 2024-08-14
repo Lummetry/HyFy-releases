@@ -9,18 +9,22 @@ application:
   envs: [staging]
 
   versions:
+    0.8.3:
+      backend:
+        image: aixpand/deploy-app:0.8.3
+      summary: "logging & requirements"
     0.8.2:
       backend:
         image: aixpand/deploy-app:0.8.2
-      summary: "added more logging"
+      summary: "(BROKEN) added more logging"
     0.8.1:
       backend:
         image: aixpand/deploy-app:0.8.1
-      summary: "added more logging"
+      summary: "(BROKEN) added more logging"
     0.8.0:
       backend:
         image: aixpand/deploy-app:0.8.0
-      summary: "feat: show errors in modal window"
+      summary: "(BROKEN) feat: show errors in modal window"
     0.7.4:
       backend:
         image: aixpand/deploy-app:0.7.4
