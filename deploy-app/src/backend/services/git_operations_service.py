@@ -43,7 +43,7 @@ class GitOperationsService:
 
           # get a list of all environment from the tag_data_list
           environments = list(set([tag.environment for tag in tag_data_list]))
-          log_with_color(f"Environments: {environments}")
+          log_with_color(f"Environments: {environments}", color='yellow')
 
           committing_user = user['name'] if user else 'Unknown User'
           commit_message = f"auto: {committing_user} updating versions for {', '.join(environments)} environments\n\n"
@@ -100,10 +100,12 @@ class GitOperationsService:
           config = yaml.safe_load(file)
 
       versions_file = os.path.join(self.local_repo_path, tag_data_list[0].directory, VERSIONS_FILE_NAME)
+      app_name, precedence, versions = None, [], None
       with open(versions_file, 'r') as file:
         versions = yaml.safe_load(file)
         precedence = versions['application'].get('envs', [])
-      log_with_color(f"Precedence: {precedence}", color='yellow')
+        app_name = versions['application'].get('name', '')
+      log_with_color(f"Precedence for {app_name}: {precedence}", color='yellow')
       # Dictionary to maintain current versions for easy access and modification
       current_versions = {env['name']: env['version'] for env in config['application']['envs']}
       violations = []

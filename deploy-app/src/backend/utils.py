@@ -1,5 +1,5 @@
 
-def log_with_color(message, color):
+def log_with_color(message, color="gray"):
   """
     Log message with color in the terminal.
     :param message: Message to log
