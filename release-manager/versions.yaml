@@ -9,6 +9,10 @@ application:
   envs: [staging]
 
   versions:
+    0.8.1:
+      backend:
+        image: aixpand/deploy-app:0.8.1
+      summary: "added more logging"
     0.8.0:
       backend:
         image: aixpand/deploy-app:0.8.0
