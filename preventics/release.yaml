@@ -2,7 +2,7 @@ application:
   envs:
   - info: staging environment
     name: staging
-    version: 3.15.1
+    version: 3.15.2
   - info: BT environment
     name: BT
     version: 3.14.3
