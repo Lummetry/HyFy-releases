@@ -9,6 +9,13 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.17.0:
+      backend:
+        image: aixpand/backend:release-3.22.0
+      frontend:
+        image: aixpand/investigator:optizone-0.83.4
+      summary: |
+        feat: Usage stats cron & display;
     3.16.0:
       backend:
         image: aixpand/backend:release-3.21.1
