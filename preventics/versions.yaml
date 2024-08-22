@@ -9,6 +9,14 @@ application:
   envs: [staging, BT, qa, preprod]
 
   versions:
+    3.17.2:
+      backend:
+        image: aixpand/backend:release-3.22.3
+      frontend:
+        image: aixpand/investigator:banksight-0.83.4
+      summary: |
+        fix: Oracle DB connection properties;
+        fix: usage stats card position & labels;
     3.17.1:
       backend:
         image: aixpand/backend:release-3.22.1
