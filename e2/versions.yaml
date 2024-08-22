@@ -8,6 +8,10 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    3.31.380: |
+      summary: |
+        Feat: minio monitor update
+
     3.31.370: |
       summary: |
         Fix: small ffmpeg fix
