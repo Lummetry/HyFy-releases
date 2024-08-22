@@ -9,6 +9,14 @@ application:
   envs: [staging, BT, qa, preprod]
 
   versions:
+    3.17.3:
+      backend:
+        image: aixpand/backend:release-3.22.5
+      frontend:
+        image: aixpand/investigator:banksight-0.83.4
+      summary: |
+        fix: bad API data format on k8s cluster status output;
+        chore: package updates & vulnerabilities fixes;
     3.17.2:
       backend:
         image: aixpand/backend:release-3.22.3
