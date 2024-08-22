@@ -9,6 +9,14 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.17.1:
+      backend:
+        image: aixpand/backend:release-3.22.1
+      frontend:
+        image: aixpand/investigator:optizone-0.83.4
+      summary: |
+        fix: K8s cluster labels;
+        fix: add parent on equipment listing;
     3.17.0:
       backend:
         image: aixpand/backend:release-3.22.0
