@@ -9,6 +9,16 @@ application:
   envs: [staging, BT, qa, preprod]
 
   versions:
+    3.18.0:
+      backend:
+        image: aixpand/backend:release-3.23.0
+      frontend:
+        image: aixpand/investigator:banksight-0.84.1
+      summary: |
+        feat: cloud connection string if stream URL has user/pass;
+        feat: sort by stream idle status;
+        fix: websocket message multiplication;
+        fix: added missing total DB size;
     3.17.5:
       backend:
         image: aixpand/backend:release-3.22.6
