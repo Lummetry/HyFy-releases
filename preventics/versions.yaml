@@ -9,11 +9,18 @@ application:
   envs: [staging, BT, qa, preprod]
 
   versions:
+    3.17.5:
+      backend:
+        image: aixpand/backend:release-3.22.5
+      frontend:
+        image: aixpand/investigator:banksight-0.84.1
+      summary: |
+        fix: cluster monitoring design;
     3.17.4:
       backend:
         image: aixpand/backend:release-3.22.5
       frontend:
-        image: aixpand/investigator:optizone-0.84.1
+        image: aixpand/investigator:banksight-0.84.1
       summary: |
         fix: cluster monitoring design;
     3.17.3:
