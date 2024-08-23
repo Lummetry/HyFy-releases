@@ -3,14 +3,14 @@ application:
   - info: staging environment
     name: staging
     version: 3.18.0
-  - info: BT environment
-    name: BT
-    version: 3.18.0
   - info: qa environment
     name: qa
-    version: 3.12.4
+    version: 3.18.0
   - info: preprod environment
     name: preprod
-    version: 3.12.4
+    version: 3.18.0
+  - info: Production environment
+    name: prod
+    version: 3.18.0
   name: Preventics
   type: k8s
