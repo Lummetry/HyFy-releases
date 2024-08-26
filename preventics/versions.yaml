@@ -9,6 +9,13 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.18.1:
+      backend:
+        image: aixpand/backend:release-3.24.0
+      frontend:
+        image: aixpand/investigator:banksight-0.84.1
+      summary: |
+        feat: S3 stats in resource usage card;
     3.18.0:
       backend:
         image: aixpand/backend:release-3.23.0
