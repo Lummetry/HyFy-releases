@@ -9,6 +9,13 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.18.4:
+      backend:
+        image: aixpand/backend:release-3.24.2
+      frontend:
+        image: aixpand/investigator:optizone-0.84.3
+      summary: |
+        fix: added human readable label for usage log;
     3.18.3:
       backend:
         image: aixpand/backend:release-3.24.1
