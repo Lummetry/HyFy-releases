@@ -8,6 +8,12 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    3.31.420:
+      summary: |
+        Feat: Camera Tampering - People cooldown counter (discard X frames for anchor after frame with person)
+        Feat: Camera Tampering - Discard anchors with low entropy
+        Fix: Camera Tampering - add witness original image in payload
+
     3.31.410:
       summary: |
         Fix: iqa & plano: add 0 instead of middle value if person in frame
