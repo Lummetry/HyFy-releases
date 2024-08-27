@@ -9,6 +9,13 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.18.2:
+      backend:
+        image: aixpand/backend:release-3.24.0
+      frontend:
+        image: aixpand/investigator:banksight-0.84.3
+      summary: |
+        feat: add live button;
     3.18.1:
       backend:
         image: aixpand/backend:release-3.24.0
