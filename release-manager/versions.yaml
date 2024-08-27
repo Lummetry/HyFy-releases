@@ -9,9 +9,13 @@ application:
   envs: [staging]
 
   versions:
+    0.8.6:
+      backend:
+        image: aixpand/deploy-app:0.8.6
+      summary: "fix typo inn variable name"
     0.8.5:
       backend:
-        image: aixpand/deploy-app:0.8.4
+        image: aixpand/deploy-app:0.8.5
       summary: "fix UI error I.message.forEach"
     0.8.4:
       backend:
