@@ -8,15 +8,21 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
-    3.31.390: |
+    3.31.410:
+      summary: |
+        Fix: iqa & plano: add 0 instead of middle value if person in frame
+        Fix: force lower sets lower flag True (for CAVI)
+        Fix: minio plugin
+
+    3.31.390:
       summary: |
         Feat: minio monitor update
 
-    3.31.380: |
+    3.31.380:
       summary: |
         Feat: minio monitor update
 
-    3.31.370: |
+    3.31.370:
       summary: |
         Fix: small ffmpeg fix
         Fix: serving section in timers again
