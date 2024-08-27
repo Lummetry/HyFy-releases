@@ -20,8 +20,8 @@ def check_precedence(tag_data: List[TagData], current_user: User = Depends(get_c
     try:
         git_operations_service = GitOperationsService(GITHUB_REPOSITORY_NAME, None, config_file_path)
         git_operations_service.prepare_repository()
-        succes, error = git_operations_service.check_tag_list_precedence(tag_data)
-        print(f"Success: {succes}, Error: {error}")
+        success, error = git_operations_service.check_tag_list_precedence(tag_data)
+        print(f"Success: {success}, Error: {error}")
         if not success:
             return {'success': False, 'message': error}
         return {'success': True, 'message': 'Precedence check passed'}
