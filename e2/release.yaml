@@ -8,7 +8,7 @@ application:
     version: 3.31.390
   - info: preprod environment
     name: preprod
-    version: 3.31.370
+    version: 3.31.390
   - info: prod environment
     name: prod
     version: 3.31.370
