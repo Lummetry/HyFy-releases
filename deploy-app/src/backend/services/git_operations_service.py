@@ -31,39 +31,43 @@ class GitOperationsService:
 
     def update_and_push_changes(self, tag_data_list: List[TagData], user=None):
       try:
-          self.prepare_repository()
-          # precedence_check, violation_info = self.check_tag_precedence(tag_data)
-          # if not precedence_check:
-          #     raise ValueError(f"Evironment precedence violation: Attempting to set version '{tag_data.tag}' for '{tag_data.environment}' exceeds version '{violation_info['current_version']}' set in '{violation_info['env']}' environment.")
-          # self.update_configuration_file(tag_data)
-          # committing_user = user['name'] if user else 'Unknown User'
-          # commit_message = f'chore: {tag_data.fromVersion} to {tag_data.toVersion} {committing_user} for {tag_data.directory} {tag_data.environment}'
-          # self.git_service.git_commit(repo_path=self.local_repo_path, message=commit_message)
-          # self.git_service.git_push(self.local_repo_path)
+        # first step check if any action is running and raise error
+        if self.git_service.check_github_actions_running():
+          raise GitOperationException("Cannot commit changes while GitHub Actions are running")
+        self.prepare_repository()
+        # precedence_check, violation_info = self.check_tag_precedence(tag_data)
+        # if not precedence_check:
+        #     raise ValueError(f"Evironment precedence violation: Attempting to set version '{tag_data.tag}' for '{tag_data.environment}' exceeds version '{violation_info['current_version']}' set in '{violation_info['env']}' environment.")
+        # self.update_configuration_file(tag_data)
+        # committing_user = user['name'] if user else 'Unknown User'
+        # commit_message = f'chore: {tag_data.fromVersion} to {tag_data.toVersion} {committing_user} for {tag_data.directory} {tag_data.environment}'
+        # self.git_service.git_commit(repo_path=self.local_repo_path, message=commit_message)
+        # self.git_service.git_push(self.local_repo_path)
 
-          # get a list of all environment from the tag_data_list
-          environments = list(set([tag.environment for tag in tag_data_list]))
-          log_with_color(f"Environments: {environments}", color='yellow')
+        # get a list of all environment from the tag_data_list
+        environments = list(set([tag.environment for tag in tag_data_list]))
+        log_with_color(f"Environments: {environments}", color='yellow')
 
-          committing_user = user['name'] if user else 'Unknown User'
-          commit_message = f"auto: {committing_user} updating versions for {', '.join(environments)} environments\n\n"
+        committing_user = user['name'] if user else 'Unknown User'
+        commit_message = f"auto: {committing_user} updating versions for {', '.join(environments)} environments\n\n"
 
-          for tag_data in tag_data_list:
-              self.update_configuration_file(tag_data)
-              # append to commit message
-              msg = f"Promoting {tag_data.fromVersion} to {tag_data.toVersion} for {tag_data.directory}/{tag_data.environment}\n"
-              log_with_color(msg, "yellow")
-              commit_message += msg
+        for tag_data in tag_data_list:
+            self.update_configuration_file(tag_data)
+            # append to commit message
+            msg = f"Promoting {tag_data.fromVersion} to {tag_data.toVersion} for {tag_data.directory}/{tag_data.environment}\n"
+            log_with_color(msg, "yellow")
+            commit_message += msg
 
-          self.git_service.git_commit(repo_path=self.local_repo_path, message=commit_message)
-          self.git_service.git_push(self.local_repo_path)
-          log_with_color("Changes committed and pushed successfully", "green")
+        self.git_service.git_commit(repo_path=self.local_repo_path, message=commit_message)
+        self.git_service.git_push(self.local_repo_path)
+        log_with_color("Changes committed and pushed successfully", "green")
       except GitOperationException as e:
-          logger.error(f"Git operation failed: {e}")
-          raise
+        log_with_color(f"ERROR: Git operation failed: {e}", color='red')
+        logger.error(f"Git operation failed: {e}")
+        raise
       except Exception as e:
-          logger.error(f"Failed to update and push changes: {str(e)}")
-          raise
+        logger.error(f"Failed to update and push changes: {str(e)}")
+        raise
 
 
     def prepare_repository(self):
@@ -94,6 +98,8 @@ class GitOperationsService:
             raise
     
     def check_tag_list_precedence(self, tag_data_list):
+      log_with_color(f"Checking tag precedence for {tag_data_list}", color='yellow')
+      
       # Load configuration and precedence rules
       config_file = os.path.join(self.local_repo_path, self.config_file_path)
       with open(config_file, 'r') as file:

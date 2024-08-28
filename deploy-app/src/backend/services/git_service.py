@@ -1,5 +1,6 @@
 import os
 import logging
+import requests
 import subprocess
 from backend.constants import (
   GITHUB_USER, GITHUB_API_TOKEN, STORAGE_DIR, 
@@ -8,8 +9,16 @@ from backend.constants import (
 
 from backend.exceptions.git_operation_exception import GitOperationException
 
+from backend.utils import log_with_color
+
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
+
+import requests
+
+
+
+
 
 class GitService:
   """
@@ -22,10 +31,13 @@ class GitService:
 
     :param repo_name: The name of the repository to be managed.
     """
+    log_with_color(f"Initializing GitService for repository {repo_name}", "yellow")
     self.base_url = 'github.com'
     self.repo_name = repo_name
     self.repo_url = self._build_repo_url()
+    log_with_color(f"  Repository URL: {self.repo_url}", "yellow")    
     self.default_repo_path = self._get_default_repo_path()
+    return
 
   def _build_repo_url(self):
     """
@@ -34,6 +46,43 @@ class GitService:
     :return: The full HTTPS URL for the repository.
     """
     return f'https://{GITHUB_USER}:{GITHUB_API_TOKEN}@{self.base_url}/{self.repo_name}'
+  
+  def __check_github_actions_running(self, repo_name: str) -> bool:
+    """
+    Checks if there are any running GitHub Actions in the specified public repository.
+
+    Parameters
+    ----------
+    repo_name : str
+        The repository name in the format "owner/repo".
+
+    Returns
+    -------
+    bool
+        True if any GitHub Actions are currently running, False otherwise.
+    """
+    url = f"https://api.github.com/repos/{repo_name}/actions/runs"
+    
+    log_with_color(f"Checking for running GitHub Actions in {url}", "yellow")
+    
+    response = requests.get(url)
+    
+    if response.status_code != 200:
+      raise Exception(f"Failed to fetch data from GitHub API: {response.status_code}")
+    
+    runs = response.json().get("workflow_runs", [])
+    
+    result = False  
+    for run in runs:
+      if run['status'] == 'in_progress':
+        result = True  
+    
+    if result:
+      log_with_color("  GitHub Actions are currently running", "red")
+    else:
+      log_with_color("  No GitHub Actions are currently running", "green")
+    return result
+
 
   def _ensure_storage_dir(self, path):
     """
@@ -65,7 +114,7 @@ class GitService:
       subprocess.run(['git', 'config', 'user.name', GIT_COMMITER_NAME], cwd=clone_path, check=True)
       subprocess.run(['git', 'config', 'user.email', GIT_COMMITER_EMAIL], cwd=clone_path, check=True)
     else:
-      print("Committer identity not set. GIT_COMMITER_NAME and GIT_COMMITER_EMAIL must be defined.")
+      print("Committer identity not set. GIT_COMMITER_NAME and GIT_COMMITER_EMAIL must be defined.")        
 
   def git_clone(self, clone_path=None):
     """
@@ -122,3 +171,6 @@ class GitService:
     except subprocess.CalledProcessError as e:
         logger.error(f"Error pushing changes: {e.stderr.decode()}")
         raise GitOperationException('push', e.stderr.decode(), e)
+
+  def check_github_actions_running(self) -> bool:
+    return self.__check_github_actions_running(self.repo_name)

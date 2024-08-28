@@ -4,6 +4,7 @@ import os
 import json
 from copy import deepcopy
 
+__VER__ = '0.2.1'
 
 
 CONFIG_FILE = 'config.yaml' # Configuration file path
@@ -280,11 +281,15 @@ def build_output(config, local_versions):
 
 
 if __name__ == "__main__":
+  print_with_color(f"Deploy Version Loader v{__VER__}", "cyan")    
+  
   # Load last saved versions
   local_versions = load_local_versions(LOCAL_VERSION_FILE)
   
   # Build the output
   output = build_output(CONFIG, local_versions)
   
+  needs_update = any([v["requires_update"] for v in output.values()])
+  
   # Print or use the output dictionary as needed
-  print(json.dumps(output, indent=2))
+  print_with_color(json.dumps(output, indent=2), color='yellow' if needs_update else 'green')

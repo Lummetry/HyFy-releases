@@ -8,6 +8,8 @@ from backend.services.git_operations_service import GitOperationsService
 from backend.constants import GITHUB_REPOSITORY_NAME, RELEASE_FILE_NAME
 from backend.exceptions.git_operation_exception import GitOperationException
 
+from backend.utils import log_with_color
+
 router = APIRouter(prefix="/git")
 logger = logging.getLogger(__name__)
 
@@ -32,17 +34,18 @@ def check_precedence(tag_data: List[TagData], current_user: User = Depends(get_c
 
 @router.post('/commit-changes')
 def commit_changes(change_list: List[TagData], current_user: User = Depends(get_current_user)):
-    config_file_path = f"{change_list[0].directory}/{RELEASE_FILE_NAME}"
-    try:
-        git_operations_service = GitOperationsService(GITHUB_REPOSITORY_NAME, None, config_file_path)
-        git_operations_service.update_and_push_changes(change_list, user=current_user)
-        return {"success": True}
-    except GitOperationException as e:
-        logger.error(f"Git operation failed: {e}")
-        raise HTTPException(status_code=500, detail=f"Git operation failed {e}")
-    except Exception as e:
-        logger.error(f"Error updating version: {e}")
-        raise HTTPException(status_code=500, detail=f"{e}")
+  config_file_path = f"{change_list[0].directory}/{RELEASE_FILE_NAME}"
+  try:
+    log_with_color(f"Committing user {current_user} changes for {change_list} using '{config_file_path}'", "yellow")
+    git_operations_service = GitOperationsService(GITHUB_REPOSITORY_NAME, None, config_file_path)
+    git_operations_service.update_and_push_changes(change_list, user=current_user)
+    return {"success": True}
+  except GitOperationException as e:
+    logger.error(f"Git operation failed: {e}")
+    raise HTTPException(status_code=500, detail=f"Git operation failed {e}")
+  except Exception as e:
+    logger.error(f"Error updating version: {e}")
+    raise HTTPException(status_code=500, detail=f"{e}")
 
 # should be deprecated
 @router.post('/update-version')
