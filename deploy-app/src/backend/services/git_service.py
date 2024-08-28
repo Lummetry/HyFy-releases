@@ -172,5 +172,8 @@ class GitService:
         logger.error(f"Error pushing changes: {e.stderr.decode()}")
         raise GitOperationException('push', e.stderr.decode(), e)
 
-  def check_github_actions_running(self) -> bool:
-    return self.__check_github_actions_running(self.repo_name)
+  def check_github_actions_running(self, raise_if_running=True) -> bool:
+    running = self.__check_github_actions_running(self.repo_name)
+    if running and raise_if_running:
+      raise GitOperationException('push', "GitHub Actions are currently running. Please wait until they complete before proceeding.")
+    return running

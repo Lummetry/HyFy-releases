@@ -1,3 +1,4 @@
+import datetime
 
 def log_with_color(message, color="gray"):
   """
@@ -12,9 +13,10 @@ def log_with_color(message, color="gray"):
     "light": "\033[97m",
     "green": "\033[92m"
   }
+  timestamp = datetime.datetime.now().strftime("[%Y-%m-%d %H:%M:%S]")
   start_color = color_codes.get(color, "\033[90m")
   end_color = "\033[0m"
-  print(f"{start_color}{message}{end_color}", flush=True)
+  print(f"{start_color}{timestamp} {message}{end_color}", flush=True)
   return
 
 

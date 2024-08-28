@@ -3,6 +3,7 @@ from jsonschema import ValidationError
 import yaml
 import os
 import logging
+import traceback
 from distutils.version import StrictVersion
 from collections import OrderedDict
 
@@ -32,8 +33,7 @@ class GitOperationsService:
     def update_and_push_changes(self, tag_data_list: List[TagData], user=None):
       try:
         # first step check if any action is running and raise error
-        if self.git_service.check_github_actions_running():
-          raise GitOperationException("Cannot commit changes while GitHub Actions are running")
+        self.git_service.check_github_actions_running(raise_if_running=True)          
         self.prepare_repository()
         # precedence_check, violation_info = self.check_tag_precedence(tag_data)
         # if not precedence_check:
@@ -52,11 +52,11 @@ class GitOperationsService:
         commit_message = f"auto: {committing_user} updating versions for {', '.join(environments)} environments\n\n"
 
         for tag_data in tag_data_list:
-            self.update_configuration_file(tag_data)
-            # append to commit message
-            msg = f"Promoting {tag_data.fromVersion} to {tag_data.toVersion} for {tag_data.directory}/{tag_data.environment}\n"
-            log_with_color(msg, "yellow")
-            commit_message += msg
+          self.update_configuration_file(tag_data)
+          # append to commit message
+          msg = f"Promoting {tag_data.fromVersion} to {tag_data.toVersion} for {tag_data.directory}/{tag_data.environment}\n"
+          log_with_color(msg, "yellow")
+          commit_message += msg
 
         self.git_service.git_commit(repo_path=self.local_repo_path, message=commit_message)
         self.git_service.git_push(self.local_repo_path)
@@ -66,6 +66,7 @@ class GitOperationsService:
         logger.error(f"Git operation failed: {e}")
         raise
       except Exception as e:
+        log_with_color(f"ERROR: Failed to update and push changes: {str(e)}\n{traceback.format_exc()}", color='red')
         logger.error(f"Failed to update and push changes: {str(e)}")
         raise
 

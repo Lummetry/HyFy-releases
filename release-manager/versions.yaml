@@ -9,6 +9,14 @@ application:
   envs: [staging]
 
   versions:
+    0.8.8:
+      backend:
+        image: aixpand/deploy-app:0.8.8
+      summary: "fix gitaction watch & logs"
+    0.8.7:
+      backend:
+        image: aixpand/deploy-app:0.8.7
+      summary: "added gitaction watch & logs"
     0.8.6:
       backend:
         image: aixpand/deploy-app:0.8.6
