@@ -1,6 +1,5 @@
 import os
 import logging
-import requests
 import subprocess
 from backend.constants import (
   GITHUB_USER, GITHUB_API_TOKEN, STORAGE_DIR, 
@@ -9,7 +8,7 @@ from backend.constants import (
 
 from backend.exceptions.git_operation_exception import GitOperationException
 
-from backend.utils import log_with_color
+from backend.utils import log_with_color, get_github_actions
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
@@ -47,41 +46,6 @@ class GitService:
     """
     return f'https://{GITHUB_USER}:{GITHUB_API_TOKEN}@{self.base_url}/{self.repo_name}'
   
-  def __check_github_actions_running(self, repo_name: str) -> bool:
-    """
-    Checks if there are any running GitHub Actions in the specified public repository.
-
-    Parameters
-    ----------
-    repo_name : str
-        The repository name in the format "owner/repo".
-
-    Returns
-    -------
-    bool
-        True if any GitHub Actions are currently running, False otherwise.
-    """
-    url = f"https://api.github.com/repos/{repo_name}/actions/runs"
-    
-    log_with_color(f"Checking for running GitHub Actions in {url}", "yellow")
-    
-    response = requests.get(url)
-    
-    if response.status_code != 200:
-      raise Exception(f"Failed to fetch data from GitHub API: {response.status_code}")
-    
-    runs = response.json().get("workflow_runs", [])
-    
-    result = False  
-    for run in runs:
-      if run['status'] == 'in_progress':
-        result = True  
-    
-    if result:
-      log_with_color("  GitHub Actions are currently running", "red")
-    else:
-      log_with_color("  No GitHub Actions are currently running", "green")
-    return result
 
 
   def _ensure_storage_dir(self, path):
@@ -173,7 +137,15 @@ class GitService:
         raise GitOperationException('push', e.stderr.decode(), e)
 
   def check_github_actions_running(self, raise_if_running=True) -> bool:
-    running = self.__check_github_actions_running(self.repo_name)
-    if running and raise_if_running:
-      raise GitOperationException('push', "GitHub Actions are currently running. Please wait until they complete before proceeding.")
+    running_list = get_github_actions(
+      repo_name=self.repo_name,
+      include_filter=[],
+      exclude_filter=['completed'],
+    )
+    running = len(running_list) > 0
+    if running > 0 and raise_if_running:
+      raise GitOperationException(
+        operation='push', 
+        message=f"GitHub Actions running: {running_list}. Please wait until they complete before proceeding."
+      )
     return running
