@@ -30,11 +30,11 @@ class GitService:
 
     :param repo_name: The name of the repository to be managed.
     """
-    log_with_color(f"Initializing GitService for repository {repo_name}", "yellow")
+    log_with_color(f"Initializing GitService for repository {repo_name}", "gray")
     self.base_url = 'github.com'
     self.repo_name = repo_name
     self.repo_url = self._build_repo_url()
-    log_with_color(f"  Repository URL: {self.repo_url}", "yellow")    
+    log_with_color(f"  Repository URL: {self.repo_url}", "gray")    
     self.default_repo_path = self._get_default_repo_path()
     return
 

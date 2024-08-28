@@ -12,7 +12,9 @@ def log_with_color(message, color="gray"):
     "red": "\033[91m",
     "gray": "\033[90m",
     "light": "\033[97m",
-    "green": "\033[92m"
+    "green": "\033[92m",
+    "blue" : "\033[94m",
+    "cyan" : "\033[96m",
   }
   timestamp = datetime.datetime.now().strftime("[%Y-%m-%d %H:%M:%S]")
   start_color = color_codes.get(color, "\033[90m")
@@ -42,7 +44,7 @@ def get_github_actions(repo_name: str, include_filter: str = ['in_progress'], ex
   """
   url = f"https://api.github.com/repos/{repo_name}/actions/runs"
   
-  log_with_color(f"Checking for running GitHub Actions in {url} with include_filter:{include_filter}, exclude_filter: {exclude_filter}", "yellow")
+  log_with_color(f"Checking for running GitHub Actions in {url} with include_filter:{include_filter}, exclude_filter: {exclude_filter}", "cyan")
   
   response = requests.get(url)
   
@@ -66,7 +68,7 @@ def get_github_actions(repo_name: str, include_filter: str = ['in_progress'], ex
         any_running = True
       
   if any_running:
-    log_with_color(f"  GitHub Actions are currently running: {running_workflows}", "red")
+    log_with_color("  GitHub Actions are currently running:\n{}".format('\n'.join(["  - "+str(x) for x in running_workflows])), "red")
   else:
     log_with_color("  No GitHub Actions are currently running", "green")
   return running_workflows
