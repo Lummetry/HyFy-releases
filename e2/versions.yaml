@@ -8,6 +8,11 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    3.31.430:
+      summary: |
+        Fix: LMS - add frame metadata in witness image
+        Fix: Alerts - reduced number of false positives
+
     3.31.420:
       summary: |
         Feat: Camera Tampering - People cooldown counter (discard X frames for anchor after frame with person)
