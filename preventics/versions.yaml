@@ -9,6 +9,13 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.19.2:
+      backend:
+        image: aixpand/backend:release-3.25.0
+      frontend:
+        image: aixpand/investigator:banksight-0.85.4
+      summary: |
+        feat: alphabetical order in dropdowns;
     3.19.1:
       backend:
         image: aixpand/backend:release-3.25.0
