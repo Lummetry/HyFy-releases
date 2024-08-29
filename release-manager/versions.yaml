@@ -4,7 +4,7 @@
 # as well as the environment precedence
 
 application:
-  name: Rlease Manager
+  name: Release Manager
   type: k8s
   envs: [staging]
 
