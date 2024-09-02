@@ -8,6 +8,10 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    3.31.440:
+      summary: |
+        Fix: Alerts - when alert in confirmation, add data regardless of alerter state
+
     3.31.430:
       summary: |
         Fix: LMS - add frame metadata in witness image
