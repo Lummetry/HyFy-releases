@@ -9,6 +9,13 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.20.1:
+      backend:
+        image: aixpand/backend:release-3.26.0
+      frontend:
+        image: aixpand/investigator:optizone-0.85.6
+      summary: |
+        fix: AI plugin zone edit save;
     3.20.0:
       backend:
         image: aixpand/backend:release-3.26.0
