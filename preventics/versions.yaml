@@ -9,6 +9,13 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.19.4:
+      backend:
+        image: aixpand/backend:release-3.25.1
+      frontend:
+        image: aixpand/investigator:banksight-0.85.5
+      summary: |
+        fix: redis restart;
     3.19.3:
       backend:
         image: aixpand/backend:release-3.25.1
