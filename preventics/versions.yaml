@@ -9,6 +9,16 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.20.0:
+      backend:
+        image: aixpand/backend:release-3.26.0
+      frontend:
+        image: aixpand/investigator:banksight-0.85.5
+      summary: |
+        feat: sort node dashboard by: mem avail, cpu load, disk avail;
+        fix: remove location duplicates on equipment; 
+        fix: sort locations for dropdown;
+        chore: package updates for vulnerabilities fixes;
     3.19.4:
       backend:
         image: aixpand/backend:release-3.25.1
