@@ -10,3 +10,5 @@ application:
   versions:
     1.0.0:
       summary: Initial release
+    1.1.0:
+      summary: Cycle through h264 decoders
