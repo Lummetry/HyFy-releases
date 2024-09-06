@@ -9,6 +9,13 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.20.2:
+      backend:
+        image: aixpand/backend:release-3.26.1
+      frontend:
+        image: aixpand/investigator:optizone-0.85.6
+      summary: |
+        fix: added INCREASED_PROCESS_DELAY on live stream sessions;
     3.20.1:
       backend:
         image: aixpand/backend:release-3.26.0
