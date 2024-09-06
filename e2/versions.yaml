@@ -8,7 +8,7 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
-    3.31.470:
+    3.31.480:
       summary: |
         Chore: ignore the images wih entropy check fail and save those images for debug
 
