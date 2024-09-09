@@ -9,6 +9,13 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.21.0:
+      backend:
+        image: aixpand/backend:release-3.27.0
+      frontend:
+        image: aixpand/investigator:optizone-0.85.10
+      summary: |
+        feat: Sidebar Log;
     3.20.2:
       backend:
         image: aixpand/backend:release-3.26.1
