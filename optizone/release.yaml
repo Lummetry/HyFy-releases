@@ -11,6 +11,6 @@ application:
     version: 3.20.2
   - info: Prod
     name: prod
-    version: 3.12.3
+    version: 3.20.2
   name: Optizone
   type: k8s
