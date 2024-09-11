@@ -8,6 +8,13 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    3.31.500:
+      summary: |
+        Fix: mzpp crowded SEND_IMAGES true
+        Fix: atm increase timeout for closing session
+        Feat: Monitor GPU fan
+        Feat: Command for default plugin config (to integrate with BE)
+
     3.31.490:
       summary: |
         Fix: entropy computed on None 
