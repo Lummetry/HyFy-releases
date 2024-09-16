@@ -12,3 +12,5 @@ application:
       summary: Initial release
     1.1.0:
       summary: Cycle through h264 decoders
+    1.1.1:
+      summary: Add version in logs
