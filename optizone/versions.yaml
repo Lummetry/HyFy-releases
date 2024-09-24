@@ -9,6 +9,14 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.21.7:
+      backend:
+        image: aixpand/backend:release-3.29.3
+      frontend:
+        image: aixpand/investigator:optizone-0.86.6
+      summary: |
+        fix: UI url rewrite;
+        chore: verbosity updates;
     3.21.6:
       backend:
         image: aixpand/backend:release-3.29.2
