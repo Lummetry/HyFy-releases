@@ -8,6 +8,13 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    3.31.520:
+      summary: |
+        Fix: GPU fail check
+        Fix: IQA anchors
+        Fix: Yellow alert no alert if yellow
+        Feat: Cam temp - IS_ATM flag
+
     3.31.500:
       summary: |
         Fix: mzpp crowded SEND_IMAGES true
