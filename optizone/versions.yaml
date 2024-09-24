@@ -9,6 +9,14 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.21.3:
+      backend:
+        image: aixpand/backend:release-3.29.0
+      frontend:
+        image: aixpand/investigator:optizone-0.86.5
+      summary: |
+        feat: Location dashboard data caching;
+        fixes: UI fixes;
     3.21.2:
       backend:
         image: aixpand/backend:release-3.28.0
