@@ -9,6 +9,14 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.23.0:
+      backend:
+        image: aixpand/backend:release-3.32.1
+      frontend:
+        image: aixpand/investigator:banksight-0.87.2
+      summary: |
+        fix: node config refresh on AI Plugins save;
+        fixes: UI updates;
     3.22.0:
       backend:
         image: aixpand/backend:release-3.32.0
