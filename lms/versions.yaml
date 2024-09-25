@@ -8,9 +8,11 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
-    1.0.0:
-      summary: Initial release
-    1.1.0:
-      summary: Cycle through h264 decoders
+    1.2.0:
+      summary: fix faulty video stream selection and rollback 1.1.0
     1.1.1:
       summary: Add version in logs
+    1.1.0:
+      summary: Cycle through h264 decoders
+    1.0.0:
+      summary: Initial release
