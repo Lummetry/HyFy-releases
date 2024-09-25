@@ -8,6 +8,10 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    3.31.540:
+      summary: |
+        Fix: core sync
+
     3.31.530:
       summary: |
         Fix: GPU fail check
