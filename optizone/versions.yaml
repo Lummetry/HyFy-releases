@@ -9,6 +9,15 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.22.0:
+      backend:
+        image: aixpand/backend:release-3.32.0
+      frontend:
+        image: aixpand/investigator:optizone-0.86.6
+      summary: |
+        feat: extra info on node dashboard;
+        feat: restart host API endpoint;
+        feat: compressed logging for heartbeat witnessing;
     3.21.7:
       backend:
         image: aixpand/backend:release-3.29.3
