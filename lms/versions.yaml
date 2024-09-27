@@ -8,6 +8,8 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    1.2.1:
+      summary: add restart feature for auto update
     1.2.0:
       summary: fix faulty video stream selection and rollback 1.1.0
     1.1.1:
