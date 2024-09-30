@@ -9,6 +9,16 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.23.3:
+      backend:
+        image: aixpand/backend:release-3.33.1
+      frontend:
+        image: aixpand/investigator:optizone-0.87.4
+      summary: |
+        feat: log resource usage;
+        fix: location dashboard OOM error;
+        fix: vulnerabilities updates;
+        fix: timestamp on internal events;
     3.23.2:
       backend:
         image: aixpand/backend:release-3.32.2
