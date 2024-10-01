@@ -9,6 +9,14 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.23.6:
+      backend:
+        image: aixpand/backend:release-3.34.0
+      frontend:
+        image: aixpand/investigator:banksight-0.88.0
+      summary: |
+        feat: sidebar API timeout;
+        fix: UI fonts;
     3.23.5:
       backend:
         image: aixpand/backend:release-3.33.3
