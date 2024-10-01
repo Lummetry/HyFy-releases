@@ -9,6 +9,15 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.23.7:
+      backend:
+        image: aixpand/backend:release-3.34.0
+      frontend:
+        image: aixpand/investigator:optizone-0.88.1
+      summary: |
+        feat: move show actions & resources functionalities;
+        feat: supervisor icon;
+        fix: columns width;
     3.23.6:
       backend:
         image: aixpand/backend:release-3.34.0
