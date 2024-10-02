@@ -8,6 +8,11 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    3.31.560:
+      summary: |
+        Fix: IQA removed debugging log
+        Feat: Camera tampering improved alerter logic
+
     3.31.550:
       summary: |
         Feat: Netmon - new fields in network node status
