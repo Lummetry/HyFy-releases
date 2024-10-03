@@ -8,6 +8,10 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    3.31.570:
+      summary: |
+        Fix: Netmon handle bad input node status
+
     3.31.560:
       summary: |
         Fix: IQA removed debugging log
