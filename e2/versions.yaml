@@ -8,9 +8,13 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    3.31.580:
+      summary: |
+        Fix: Supervisor - handle no GPU case
+
     3.31.570:
       summary: |
-        Fix: Netmon handle bad input node status
+        (BROKEN) Fix: Netmon handle bad input node status
 
     3.31.560:
       summary: |
