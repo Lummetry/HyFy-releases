@@ -8,6 +8,10 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    3.31.590:
+      summary: |
+        Feat: New IQA model and plugin logic
+
     3.31.580:
       summary: |
         Fix: Supervisor - handle no GPU case
