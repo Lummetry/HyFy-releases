@@ -9,6 +9,13 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.23.10:
+      backend:
+        image: aixpand/backend:release-3.34.4
+      frontend:
+        image: aixpand/investigator:optizone-0.88.2
+      summary: |
+        fix: explicit check for null and empty string values in environment variables;
     3.23.9:
       backend:
         image: aixpand/backend:release-3.34.2
