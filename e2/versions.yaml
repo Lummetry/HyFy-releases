@@ -8,6 +8,10 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    4.0.10:
+      summary: |
+        Fix: Camera tampering - atm object detector model
+
     3.31.590:
       summary: |
         Feat: New IQA model and plugin logic
