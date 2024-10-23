@@ -8,6 +8,10 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    4.0.30:
+      summary: |
+        Feat: Camera tampering - print log Angle is disabled
+
     4.0.20:
       summary: |
         Feat: Camera tampering - disable Angle on ATM cameras
