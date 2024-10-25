@@ -8,7 +8,11 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
-    4.0.30:
+    4.0.60:
+      summary: |
+        Feat: Camera tampering basic - Add obstruction threshold `MIN_FOREGROUND_MASK_AREA`
+
+    4.0.31:
       summary: |
         Feat: Camera tampering - print log Angle is disabled
 
