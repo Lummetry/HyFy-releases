@@ -9,6 +9,14 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.23.11:
+      backend:
+        image: aixpand/backend:release-3.34.10
+      frontend:
+        image: aixpand/investigator:optizone-0.88.5
+      summary: |
+        feat: more control over camera tampering via min_foreground_mask_area 
+        fix: UI improvements
     3.23.10:
       backend:
         image: aixpand/backend:release-3.34.4
