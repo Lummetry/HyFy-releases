@@ -9,6 +9,13 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.23.13:
+      backend:
+        image: aixpand/backend:release-3.34.12
+      frontend:
+        image: aixpand/investigator:optizone-0.88.5
+      summary: |        
+        fix: color logging
     3.23.12:
       backend:
         image: aixpand/backend:release-3.34.11
