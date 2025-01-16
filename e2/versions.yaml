@@ -8,6 +8,11 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    4.1.0:
+      summary: |
+        Feat: Faster plugin loading, GPU monitoring
+        Fix: Minio SSL issues, system health check issues, Docker fixes
+
     4.0.60:
       summary: |
         Feat: Camera tampering basic - Add obstruction threshold `MIN_FOREGROUND_MASK_AREA`
