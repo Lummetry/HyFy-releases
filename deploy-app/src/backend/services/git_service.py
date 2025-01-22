@@ -88,6 +88,7 @@ class GitService:
     """
     clone_path = clone_path or self._get_default_repo_path()
     self._ensure_storage_dir(clone_path)
+    log_with_color(f"Cloning repository '{self.repo_url}' to {clone_path}...", "yellow")
     try:
         subprocess.run(['git', 'clone', self.repo_url, clone_path], check=True, capture_output=True)
         self._set_commiter_identity(clone_path)
@@ -116,6 +117,7 @@ class GitService:
     :param repo_path: The path of the local repository where the commit will be made.
     """
     repo_path = repo_path or self._get_default_repo_path()
+    log_with_color(f"Committing '{self.repo_url}' changes in {repo_path}...", "yellow")
     try:
         subprocess.run(['git', 'add', '.'], cwd=repo_path, check=True)
         subprocess.run(['git', 'commit', '-m', message], cwd=repo_path, check=True, capture_output=True)
@@ -130,6 +132,7 @@ class GitService:
     :param repo_path: The path of the local repository from which changes will be pushed.
     """
     repo_path = repo_path or self._get_default_repo_path()
+    log_with_color(f"Pushing '{self.repo_url}' changes from {repo_path}...", "yellow")
     try:
         subprocess.run(['git', 'push'], cwd=repo_path, check=True, capture_output=True)
     except subprocess.CalledProcessError as e:

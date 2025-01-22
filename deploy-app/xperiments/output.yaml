@@ -1,0 +1,38 @@
+application:
+  name: Optizone
+  type: k8s
+  envs: [staging, qa, preprod, prod]
+  versions:
+    10.10.10:
+      backend:
+        image: test1
+      frontend:
+        image: test2
+      summary: "some feature \n second line multiline\n"
+    3.24.1:
+      backend:
+        image: aixpand/backend:release-3.35.4
+      frontend:
+        image: aixpand/investigator:optizone-0.88.5
+      summary: "fix: logging & other small fixes \nfeat: test\n"
+    3.23.12:
+      backend:
+        image: aixpand/backend:release-3.34.11
+      frontend:
+        image: aixpand/investigator:optizone-0.88.5
+      summary: |
+        fix: small logging modification
+    3.23.11:
+      backend:
+        image: aixpand/backend:release-3.34.10
+      frontend:
+        image: aixpand/investigator:optizone-0.88.5
+      summary: "feat: more control over camera tampering via min_foreground_mask_area\
+        \ \nfix: UI improvements\n"
+    3.23.10:
+      backend:
+        image: aixpand/backend:release-3.34.4
+      frontend:
+        image: aixpand/investigator:optizone-0.88.2
+      summary: 'fix: explicit check for null and empty string values in environment
+        variables;'
