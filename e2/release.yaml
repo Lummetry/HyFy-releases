@@ -2,13 +2,13 @@ application:
   envs:
   - info: staging environment
     name: staging
-    version: 4.1.20
+    version: 4.1.30
   - info: qa environment
     name: qa
-    version: 4.1.20
+    version: 4.1.30
   - info: preprod environment
     name: preprod
-    version: 4.1.20
+    version: 4.1.30
   - info: prod environment
     name: prod
     version: 4.0.60

@@ -8,18 +8,22 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
-    4.1.20:
+    4.1.30:
       summary: |
         Feat: Faster plugin loading, GPU monitoring, preloaded dAuth system, security update
-        Fix: Minio SSL issues, system health check issues, Docker fixes
+        Fix: Minio SSL issues, system health check issues, Docker fixes, netmon address prefixing
+
+    4.1.20:
+      summary: |
+        Please use 4.1.30+
 
     4.1.10:
       summary: |
-        BROKEN VERSION - PLEASE USE 4.1.20
+        Please use 4.1.30+
 
     4.1.0:
       summary: |
-        BROKEN VERSION - PLEASE USE 4.1.20
+        Please use 4.1.30+
 
     4.0.60:
       summary: |
