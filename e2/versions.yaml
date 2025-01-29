@@ -8,6 +8,10 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    4.1.60:
+      summary: |
+        Fix: Fleet monitoring issues
+
     4.1.50:
       summary: |
         Fix: View scene logging, k8s logging
