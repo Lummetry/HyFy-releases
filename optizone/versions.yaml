@@ -9,6 +9,13 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.24.2:
+      backend:
+        image: aixpand/backend:release-3.35.5
+      frontend:
+        image: aixpand/investigator:optizone-0.88.5
+      summary: |
+        fix: AHP-28 - comenzi triplate dinspre CaviSM via MQTT;
     3.24.1:
       backend:
         image: aixpand/backend:release-3.35.4
