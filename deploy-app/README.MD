@@ -14,8 +14,12 @@
 │
 ├──  Dockerfile             # Dockerfile for building Docker containers for the project
 ├──  entrypoint.sh          # Script used as the Docker entrypoint
-├──  requirements.txt       # Python pip requirements file
-│
+└──  requirements.txt       # Python pip requirements file
+```
+
+> Note: The `kubernetes` is not part of the app repo anymore and was moved to `k8s` repo
+
+```
 └── kubernetes/
     ├── install.sh          # Script to install Kubernetes configurations
     └── src/

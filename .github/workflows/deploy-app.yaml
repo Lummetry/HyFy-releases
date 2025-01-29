@@ -4,7 +4,9 @@ on:
   push:
     paths:
       - 'deploy-app/**'
-
+    branches:
+      - main
+  
 jobs:
   handle-docker-hub-deployments:
     runs-on: ubuntu-latest

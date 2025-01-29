@@ -52,11 +52,11 @@ class GitOperationsService:
         commit_message = f"auto: {committing_user} updating versions for {', '.join(environments)} environments\n\n"
 
         for tag_data in tag_data_list:
-          self.update_configuration_file(tag_data)
           # append to commit message
           msg = f"Promoting {tag_data.fromVersion} to {tag_data.toVersion} for {tag_data.directory}/{tag_data.environment}\n"
           log_with_color(msg, "yellow")
           commit_message += msg
+          self.update_configuration_file(tag_data)
 
         self.git_service.git_commit(repo_path=self.local_repo_path, message=commit_message)
         self.git_service.git_push(self.local_repo_path)
@@ -279,3 +279,54 @@ class GitOperationsService:
 
         # Return an empty dictionary if the file does not exist or an error occurs
         return {}
+
+
+    # services/git_operations_service.py
+    def add_new_version_to_versions_file(self, new_version_data):
+      """
+      Loads versions.yaml, adds a new version block, commits, and pushes.
+      """
+      log_with_color(f"Performing add_new_version_to_versions_file: {new_version_data}")
+      # Optionally check for running GitHub Actions first
+      self.git_service.check_github_actions_running(raise_if_running=True)
+
+      versions_file = os.path.join(self.local_repo_path, new_version_data.directory, VERSIONS_FILE_NAME)
+
+      with open(versions_file, 'r') as file:
+        data = yaml.safe_load(file)
+
+      # e.g. data['application']['versions'] = { "3.24.1": { ... }, "3.23.12": { ... } } 
+      app_type = data['application'].get('type', 'edge')
+      if 'versions' not in data['application']:
+        data['application']['versions'] = {}
+
+      # Build the new version dict:
+      # If k8s: need 'backend', 'frontend', 'summary'
+      # If edge: only 'summary' is required
+      if app_type == 'k8s':
+        data['application']['versions'][new_version_data.version] = {
+          "backend": {
+            "image": new_version_data.backend or ""  # or default
+          },
+          "frontend": {
+            "image": new_version_data.frontend or ""
+          },
+          "summary": new_version_data.summary
+        }
+      else:
+        # edge type
+        data['application']['versions'][new_version_data.version] = {
+            "summary": new_version_data.summary
+        }
+
+      # Write the updated structure back
+      with open(versions_file, 'w') as file:
+        yaml.dump(data, file, Dumper=yaml.Dumper)
+
+
+      # Commit & push
+      commit_msg = f"feat: add new version {new_version_data.version} for {new_version_data.directory}"
+      log_with_color(f"Committing from {self.local_repo_path} with message: {commit_msg}", "yellow")
+      self.git_service.git_commit(commit_msg, repo_path=self.local_repo_path)
+      self.git_service.git_push(repo_path=self.local_repo_path)
+      return

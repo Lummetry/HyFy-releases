@@ -1,9 +1,14 @@
 name: PC/amd64 Execution Engine releases
 
+# trigger on e2/release.yaml on branch main changes
 on:
   push:
     paths:
       - 'e2/release.yaml'
+    branches:
+      - main
+
+  
 
 concurrency:
   group: e2-release-process

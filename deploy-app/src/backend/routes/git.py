@@ -1,11 +1,11 @@
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException
 from jsonschema import ValidationError
-from backend.models import User, TagData
+from backend.models import User, TagData, NewVersionData
 from .auth import get_current_user
 import logging
 from backend.services.git_operations_service import GitOperationsService
-from backend.constants import GITHUB_REPOSITORY_NAME, RELEASE_FILE_NAME
+from backend.constants import GITHUB_REPOSITORY_NAME, RELEASE_FILE_NAME, VERSIONS_FILE_NAME
 from backend.exceptions.git_operation_exception import GitOperationException
 
 from backend.utils import log_with_color
@@ -52,6 +52,7 @@ def commit_changes(change_list: List[TagData], current_user: User = Depends(get_
 def mark_tag(tag_data: TagData, current_user: User = Depends(get_current_user)):
     config_file_path = f"{tag_data.directory}/{RELEASE_FILE_NAME}"
     try:
+        log_with_color(f"Updating '{config_file_path}' with user '{current_user}' using {tag_data}", "yellow")
         git_operations_service = GitOperationsService(GITHUB_REPOSITORY_NAME, None, config_file_path)
         git_operations_service.update_and_push_changes(tag_data, user=current_user)
         return {"tag": tag_data.tag, "environment": tag_data.environment}
@@ -110,3 +111,22 @@ def get_versions_from_directory(directory: str, current_user: User = Depends(get
     except Exception as e:
         logger.error(f"Error retrieving versions: {e}")
         raise HTTPException(status_code=500, detail="An error occurred while retrieving the versions")
+      
+
+@router.post("/add-version")
+def add_new_version(new_version: NewVersionData, current_user=Depends(get_current_user)):
+  """
+  Adds a new version to versions.yaml (Edge or K8s).
+  """
+  git_service = GitOperationsService(
+    GITHUB_REPOSITORY_NAME, 
+    config_file_path=f"{new_version.directory}/{VERSIONS_FILE_NAME}"
+  )
+  try:
+    git_service.prepare_repository()
+    git_service.add_new_version_to_versions_file(new_version)
+    return {"success": True, "message": "New version added successfully"}
+  except GitOperationException as e:
+    raise HTTPException(status_code=500, detail=str(e))
+  except Exception as e:
+    raise HTTPException(status_code=500, detail=str(e))      

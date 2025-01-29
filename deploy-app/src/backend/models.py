@@ -37,3 +37,11 @@ class TagData(BaseModel):
   environment: str
   fromVersion: Optional[str] = None
   toVersion: Optional[str] = None
+
+
+class NewVersionData(BaseModel):
+    directory: str
+    version: str
+    summary: str
+    backend: Optional[str] = None
+    frontend: Optional[str] = None

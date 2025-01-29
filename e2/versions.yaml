@@ -8,6 +8,28 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    4.1.60:
+      summary: |
+        Fix: Fleet monitoring issues
+
+    4.1.50:
+      summary: |
+        Fix: View scene logging, k8s logging
+
+    4.1.40:
+      summary: |
+        Fix: Supervisor monitoring issue
+
+    4.1.30:
+      summary: |
+        Feat: Faster plugin loading, GPU monitoring, preloaded dAuth system, security update
+        Fix: Minio SSL issues, system health check issues, Docker fixes, netmon address prefixing
+
+
+    4.1.0:
+      summary: |
+        Please use 4.1.30+
+
     4.0.60:
       summary: |
         Feat: Camera tampering basic - Add obstruction threshold `MIN_FOREGROUND_MASK_AREA`

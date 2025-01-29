@@ -33,6 +33,7 @@ app.add_middleware(
 )
 
 # Include your API routers first
+# each router is defined in a separate file to keep a minimal separation of concerns
 app.include_router(users.router, prefix="/api")
 app.include_router(auth.router, prefix="/api")
 app.include_router(git.router, prefix="/api")

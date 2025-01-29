@@ -2,15 +2,15 @@ application:
   envs:
   - info: Staging
     name: staging
-    version: 3.23.12
+    version: 3.24.1
   - info: QA
     name: qa
-    version: 3.23.11
+    version: 3.24.1
   - info: Preprod
     name: preprod
-    version: 3.23.11
+    version: 3.24.1
   - info: Prod
     name: prod
-    version: 3.23.11
+    version: 3.24.1
   name: Optizone
   type: k8s
