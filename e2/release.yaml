@@ -5,12 +5,12 @@ application:
     version: 4.1.60
   - info: qa environment
     name: qa
-    version: 4.1.50
+    version: 4.1.60
   - info: preprod environment
     name: preprod
-    version: 4.1.50
+    version: 4.1.60
   - info: prod environment
     name: prod
-    version: 4.1.50
+    version: 4.1.60
   name: Execution Engine
   type: edge
