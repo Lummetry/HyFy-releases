@@ -11,6 +11,6 @@ application:
     version: 4.1.30
   - info: prod environment
     name: prod
-    version: 4.0.60
+    version: 4.1.30
   name: Execution Engine
   type: edge
