@@ -9,6 +9,13 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.24.3:
+      backend:
+        image: aixpand/backend:release-3.35.6
+      frontend:
+        image: aixpand/investigator:optizone-0.88.5
+      summary: |
+        fix: MQTT subscriptions clashing with callbacks;
     3.24.2:
       backend:
         image: aixpand/backend:release-3.35.5
