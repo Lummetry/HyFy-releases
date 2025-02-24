@@ -9,6 +9,13 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.24.0:
+      backend:
+        image: aixpand/backend:release-3.35.6
+      frontend:
+        image: aixpand/investigator:banksight-0.88.7
+      summary: |        
+        fix: BCR font bug
     3.23.12:
       backend:
         image: aixpand/backend:release-3.34.11
