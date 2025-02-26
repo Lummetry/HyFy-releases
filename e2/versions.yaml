@@ -8,6 +8,11 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    4.1.70:
+      summary: |
+        Feat: delayed actions for VAC plugins
+        Fix: IQA warmup issues, Camera Tampering restore, video stream reconnect
+
     4.1.60:
       summary: |
         Fix: Fleet monitoring issues
