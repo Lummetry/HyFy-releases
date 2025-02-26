@@ -8,6 +8,10 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    4.1.90:
+      summary: |
+        Fix: Package issues
+
     4.1.80:
       summary: |
         Fix: Per Intrusion `YELLOW_ALERTS_AS_ALERTS` parameter default value set to False
