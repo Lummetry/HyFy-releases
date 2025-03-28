@@ -8,6 +8,10 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    4.1.120:
+      summary: |
+        Feat: Distress sensitivity parameter + color tagging for detections
+
     4.1.110:
       summary: |
         Fix: IQA plugin issue
