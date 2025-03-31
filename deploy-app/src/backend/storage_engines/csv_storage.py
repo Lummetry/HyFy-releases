@@ -1,6 +1,7 @@
 import base64
 import os
 import csv
+import json
 from typing import List, Dict
 import uuid
 import bcrypt
@@ -9,10 +10,17 @@ from backend.storage_engines.storage_interface import StorageInterface
 from backend.constants import STORAGE_DIR
 from backend.models import User
 
+from backend.utils import log_with_color
 
 class CsvStorage(StorageInterface):
   def __init__(self, users_file: str = None, tags_file: str = None):
     self.users_file = os.path.join(STORAGE_DIR, users_file) if users_file else None
+    self._users_cache = self.read_users()
+    log_with_color("CSV storage initialized with users file: {}:\n{}".format(
+        self.users_file, json.dumps(self._users_cache, indent=2)
+      ), color="yellow"
+    )
+    return
 
   def _encode_password(self, password: str) -> str:
     password_bytes = password.encode('utf-8')

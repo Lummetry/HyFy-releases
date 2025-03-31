@@ -9,6 +9,8 @@ from backend.constants import ADMIN_ROLE, SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EX
 from backend.models import TokenData, User, Token
 from backend.storage_engines import StorageProxy, CsvStorage
 
+from backend.utils import log_with_color
+
 
 # Initialize OAuth2PasswordBearer
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
@@ -18,6 +20,7 @@ router = APIRouter()
 
 # Storage proxy initialization
 storage_proxy = StorageProxy(CsvStorage(users_file='users.csv'))
+log_with_color("Storage proxy initialized", "green")
 
 
 # Function to create access token
