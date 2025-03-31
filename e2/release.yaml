@@ -2,10 +2,10 @@ application:
   envs:
   - info: staging environment
     name: staging
-    version: 4.1.110
+    version: 4.1.120
   - info: qa environment
     name: qa
-    version: 4.1.110
+    version: 4.1.120
   - info: preprod environment
     name: preprod
     version: 4.1.60
