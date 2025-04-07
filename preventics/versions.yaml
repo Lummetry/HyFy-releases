@@ -9,6 +9,13 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.24.2:
+      backend:
+        image: aixpand/backend:release-3.35.8
+      frontend:
+        image: aixpand/investigator:banksight-0.88.7
+      summary: |        
+        feat: fallen sensitivity
     3.24.1:
       backend:
         image: aixpand/backend:release-3.35.7
