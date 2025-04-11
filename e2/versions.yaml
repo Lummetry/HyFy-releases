@@ -8,6 +8,10 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    4.1.140:
+      summary: |
+        Camera tampering refactor
+
     4.1.130:
       summary: |
         Feat: Fallen sensitivity parameter
