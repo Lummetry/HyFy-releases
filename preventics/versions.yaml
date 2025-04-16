@@ -9,6 +9,14 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.24.6:
+      backend:
+        image: aixpand/backend:release-3.35.12
+      frontend:
+        image: aixpand/investigator:banksight-0.88.9
+      summary: |        
+        camera tampering angle params (dev)
+
     3.24.5:
       backend:
         image: aixpand/backend:release-3.35.11
