@@ -8,9 +8,13 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
-    4.1.160:
+    4.1.170:
       summary: |
         feat new angle features to be tested
+
+    4.1.160:
+      summary: |
+        feat new angle features to be tested (MISSING BUILD)
 
     4.1.150:
       summary: |
