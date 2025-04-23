@@ -8,6 +8,10 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    4.1.180:
+      summary: |
+        fix zombie log bug
+
     4.1.170:
       summary: |
         feat new angle features to be tested
