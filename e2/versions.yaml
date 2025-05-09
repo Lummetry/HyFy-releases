@@ -8,6 +8,10 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    4.2.0:
+      summary: |
+        Feat: improvements for VAC plugins
+
     4.1.180:
       summary: |
         fix zombie log bug
