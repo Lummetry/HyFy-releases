@@ -54,21 +54,21 @@ jobs:
             echo "Pulling $IMAGE..."
             if ! docker pull --platform=linux/arm64 $IMAGE; then
               echo "Failed to pull image $IMAGE"
-              exit 1
-            fi
+            else
+              echo "Successfully pulled $IMAGE"
 
-            # Tag and push the image with the environment tag
-            echo "Tagging $IMAGE as $NEW_TAG..."
-            docker tag $IMAGE $NEW_TAG
+              # Tag and push the image with the environment tag
+              echo "Tagging $IMAGE as $NEW_TAG..."
+              docker tag $IMAGE $NEW_TAG
 
-            echo "Pushing $NEW_TAG..."
-            docker push $NEW_TAG
+              echo "Pushing $NEW_TAG..."
+              docker push $NEW_TAG
 
-            # Clean up the local Docker images to free up space
-            echo "Removing local Docker images..."
-            docker rmi $IMAGE
-            docker rmi $NEW_TAG
-            
+              # Clean up the local Docker images to free up space
+              echo "Removing local Docker images..."
+              docker rmi $IMAGE
+              docker rmi $NEW_TAG
+            fi              
           done
         shell: bash
 
