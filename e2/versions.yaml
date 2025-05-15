@@ -8,6 +8,10 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    4.2.30:
+      summary: |
+        Fix: Tegra
+
     4.2.10:
       summary: |
         Fix: defaults for VAC
