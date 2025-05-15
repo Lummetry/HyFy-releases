@@ -8,7 +8,7 @@ application:
     version: 4.2.30
   - info: preprod environment
     name: preprod
-    version: 4.2.10
+    version: 4.2.30
   - info: prod environment
     name: prod
     version: 4.1.60
