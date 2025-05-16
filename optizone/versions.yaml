@@ -9,6 +9,23 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.25.3:
+      backend:
+        image: aixpand/backend:release-3.36.3
+      frontend:
+        image: aixpand/investigator:optizone-0.88.10
+      summary: |
+        VAC improvements
+        minor FE update
+
+    3.25.2:
+      backend:
+        image: aixpand/backend:release-3.36.2
+      frontend:
+        image: aixpand/investigator:optizone-0.88.9
+      summary: |
+        VAC improvements
+
     3.25.1:
       backend:
         image: aixpand/backend:release-3.36.1
