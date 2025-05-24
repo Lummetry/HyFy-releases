@@ -8,6 +8,10 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    4.2.50:
+      summary: |
+        Feat: MOXA_PROGRAMMER plugin v.0.1.0
+
     4.2.40:
       summary: |
         Feat: VAC02 updates
