@@ -8,6 +8,10 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    4.2.80:
+      summary: |
+        Fix: sync core package
+
     4.2.70:
       summary: |
         Fix: update moxa and core packages
