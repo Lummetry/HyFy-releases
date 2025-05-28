@@ -9,6 +9,14 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.25.5:
+      backend:
+        image: aixpand/backend:release-3.36.4
+      frontend:
+        image: aixpand/investigator:banksight-0.89.0
+      summary: |        
+        fix content type
+
     3.25.4:
       backend:
         image: aixpand/backend:release-3.36.3
@@ -16,7 +24,6 @@ application:
         image: aixpand/investigator:banksight-0.89.0
       summary: |        
         update to latest
-
 
     3.24.6:
       backend:
