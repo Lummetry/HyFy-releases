@@ -8,6 +8,17 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+
+    4.2.130:
+      summary: |
+        Fix: ffmpeg stability
+
+
+    4.2.120:
+      summary: |
+        Fix: VAC and others
+
+
     4.2.100:
       summary: |
         Fix: LPDR/MOXA command issues
