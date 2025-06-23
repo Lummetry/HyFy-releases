@@ -9,6 +9,14 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.25.7:
+      backend:
+        image: aixpand/backend:release-3.36.6
+      frontend:
+        image: aixpand/investigator:optizone-0.89.0
+      summary: |
+        delayed actions
+
     3.25.6:
       backend:
         image: aixpand/backend:release-3.36.5
