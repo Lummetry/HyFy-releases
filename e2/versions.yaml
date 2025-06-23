@@ -8,6 +8,9 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    4.2.140:
+      summary: |
+        Fix: VAC direction filter
 
     4.2.130:
       summary: |
