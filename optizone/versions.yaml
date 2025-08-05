@@ -9,6 +9,15 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.26.1:
+      backend:
+        image: aixpand/backend:release-3.37.3
+      frontend:
+        image: aixpand/investigator:optizone-0.89.0
+      summary: |
+        notification without data json (FIX #1)
+
+
     3.26.0:
       backend:
         image: aixpand/backend:release-3.37.2
@@ -16,6 +25,7 @@ application:
         image: aixpand/investigator:optizone-0.89.0
       summary: |
         notification without data json
+        BROKEN BE
 
 
     3.25.9:
