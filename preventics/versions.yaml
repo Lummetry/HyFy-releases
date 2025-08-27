@@ -9,6 +9,15 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.26.2:
+      backend:
+        image: aixpand/backend:release-3.37.4
+      frontend:
+        image: aixpand/investigator:banksight-0.89.0
+      summary: |
+        final fix/separatio ora vs pgsql
+
+
     3.26.1:
       backend:
         image: aixpand/backend:release-3.37.3
