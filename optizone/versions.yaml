@@ -9,6 +9,14 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.26.3:
+      backend:
+        image: aixpand/backend:release-3.37.5
+      frontend:
+        image: aixpand/investigator:optizone-0.89.0
+      summary: |
+        LPR WL fix #1
+
     3.26.2:
       backend:
         image: aixpand/backend:release-3.37.4
