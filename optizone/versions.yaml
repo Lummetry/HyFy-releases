@@ -9,6 +9,15 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.26.4:
+      backend:
+        image: aixpand/backend:release-3.37.6
+      frontend:
+        image: aixpand/investigator:optizone-0.89.2
+      summary: |
+        Bulk in UI and BE catch
+
+
     3.26.3:
       backend:
         image: aixpand/backend:release-3.37.5
