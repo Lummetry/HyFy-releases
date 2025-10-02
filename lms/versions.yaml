@@ -8,6 +8,8 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    1.4.0:
+      summary: forcing tcp streams
     1.3.0:
       summary: fixed memory leaks
     1.2.2:
