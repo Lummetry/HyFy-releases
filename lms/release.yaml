@@ -5,10 +5,10 @@ application:
     version: 1.4.0
   - info: qa environment
     name: qa
-    version: 1.3.0
+    version: 1.4.0
   - info: preprod environment
     name: preprod
-    version: 1.3.0
+    version: 1.4.0
   - info: prod environment
     name: prod
     version: 1.2.2
