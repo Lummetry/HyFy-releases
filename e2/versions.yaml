@@ -8,6 +8,11 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    4.2.270:
+      summary: |
+        Fix: AHP-140, AHP-190, AHP-192 
+
+
     4.2.250:
       summary: |
         Fix: AHP-140
