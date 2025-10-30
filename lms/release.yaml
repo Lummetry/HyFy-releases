@@ -11,6 +11,6 @@ application:
     version: 1.4.0
   - info: prod environment
     name: prod
-    version: 1.2.2
+    version: 1.4.0
   name: Light Media Server
   type: edge
