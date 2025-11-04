@@ -8,6 +8,10 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    4.2.290:
+      summary: |
+        Fix: AHP-189 + loitering debug
+
     4.2.270:
       summary: |
         Fix: AHP-140, AHP-190, AHP-192 
