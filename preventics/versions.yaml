@@ -9,7 +9,15 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.26.8:
+      backend:
+        image: aixpand/backend:release-3.37.13
+      frontend:
+        image: aixpand/investigator:banksight-0.89.2
+      summary: |
+        Hotfix for oracle
 
+        
     3.26.7:
       backend:
         image: aixpand/backend:release-3.37.12
