@@ -5,10 +5,10 @@ application:
     version: 4.2.370
   - info: qa environment
     name: qa
-    version: 4.2.340
+    version: 4.2.370
   - info: preprod environment
     name: preprod
-    version: 4.2.340
+    version: 4.2.370
   - info: prod environment
     name: prod
     version: 4.2.340
