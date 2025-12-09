@@ -8,6 +8,10 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    4.2.380:
+      summary: |
+        Fix: VAC02 permissions issue
+
     4.2.370:
       summary: |
         Fix: VAC02 multi-zone issues and SOL9 issues
