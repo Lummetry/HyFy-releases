@@ -9,6 +9,16 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.27.1:
+      backend:
+        image: aixpand/backend:release-3.37.15
+      frontend:
+        image: aixpand/investigator:banksight-0.89.2
+      summary: |
+        VAC-02 - AHP-196
+        CP-01 - AHP-199
+        New minor release
+
     3.26.9:
       backend:
         image: aixpand/backend:release-3.37.14
