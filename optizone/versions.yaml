@@ -9,6 +9,15 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.27.2:
+      backend:
+        image: aixpand/backend:release-3.37.16
+      frontend:
+        image: aixpand/investigator:optizone-0.89.2
+      summary: |
+        DrMax support
+        reporting improvements
+
     3.27.1:
       backend:
         image: aixpand/backend:release-3.37.15
