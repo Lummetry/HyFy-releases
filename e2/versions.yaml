@@ -8,6 +8,11 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    5.1.30:
+      summary: |
+        Feat: Major release and migration to latest base image
+
+
     4.2.380:
       summary: |
         Fix: VAC02 permissions issue
