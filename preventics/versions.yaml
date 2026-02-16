@@ -9,6 +9,14 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.27.3:
+      backend:
+        image: aixpand/backend:release-3.37.19
+      frontend:
+        image: aixpand/investigator:banksight-0.89.4
+      summary: |
+        HikVision drivers
+
     3.27.2:
       backend:
         image: aixpand/backend:release-3.37.16
