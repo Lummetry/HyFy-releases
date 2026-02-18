@@ -8,6 +8,11 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    5.1.40:
+      summary: |
+        AHP-203, AHP-119
+        various other issues and improvements
+
     5.1.30:
       summary: |
         Feat: Major release and migration to latest base image
