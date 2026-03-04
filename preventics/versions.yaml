@@ -9,6 +9,15 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.1:
+      backend:
+        image: aixpand/backend:release-3.38.0
+      frontend:
+        image: aixpand/investigator:banksight-0.89.6
+      summary: |
+        logging for comms
+
+
     3.27.9:
       backend:
         image: aixpand/backend:release-3.37.28
