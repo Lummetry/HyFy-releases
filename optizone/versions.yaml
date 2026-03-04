@@ -9,6 +9,15 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.27.7:
+      backend:
+        image: aixpand/backend:release-3.37.26
+      frontend:
+        image: aixpand/investigator:optizone-0.89.6
+      summary: |
+        hikvision options
+
+
     3.27.6:
       backend:
         image: aixpand/backend:release-3.37.25
