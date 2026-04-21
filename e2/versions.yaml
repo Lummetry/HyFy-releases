@@ -8,6 +8,10 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    5.1.150:
+      summary: |
+        sync staging to 5.1.150 image
+
     5.1.140:
       summary: |
         sync staging to 5.1.140 image
