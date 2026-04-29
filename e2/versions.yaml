@@ -8,6 +8,12 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    5.1.200:
+      summary: |
+        sync staging to 5.1.200 image
+        fixes SMS/email
+        fixes ATM obturation
+
     5.1.180:
       summary: |
         sync staging to 5.1.180 image
