@@ -8,6 +8,12 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    5.1.210:
+      summary: |
+        sync staging to 5.1.210 image
+        fixes ATM bag watcher false-positive triage
+        adds luggage/ATM original-image payload support
+
     5.1.200:
       summary: |
         sync staging to 5.1.200 image
