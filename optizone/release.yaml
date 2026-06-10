@@ -5,10 +5,10 @@ application:
     version: 3.28.18
   - info: QA
     name: qa
-    version: 3.28.16
+    version: 3.28.18
   - info: Preprod
     name: preprod
-    version: 3.28.16
+    version: 3.28.18
   - info: Prod
     name: prod
     version: 3.28.16
