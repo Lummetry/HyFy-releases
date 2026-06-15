@@ -9,6 +9,10 @@ application:
   envs: [staging]
 
   versions:
+    1.0.2:
+      backend:
+        image: aixpand/deploy-app:1.0.2
+      summary: "update release manager to 1.0.2"
     0.9.0:
       backend:
         image: aixpand/deploy-app:0.9.0
@@ -61,4 +65,3 @@ application:
       backend:
         image: aixpand/deploy-app:0.7.3
       summary: "feat: enable versioned images in docker hub"
-

@@ -2,7 +2,7 @@ application:
   envs:
   - info: staging environment
     name: staging
-    version: 5.1.360
+    version: 5.1.370
   - info: qa environment
     name: qa
     version: 5.1.360
