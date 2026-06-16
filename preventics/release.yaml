@@ -5,10 +5,10 @@ application:
     version: 3.28.19
   - info: qa environment
     name: qa
-    version: 3.28.18
+    version: 3.28.19
   - info: preprod environment
     name: preprod
-    version: 3.28.18
+    version: 3.28.19
   - info: Production environment
     name: prod
     version: 3.18.0
