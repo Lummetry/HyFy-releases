@@ -9,6 +9,16 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.23:
+      backend:
+        image: aixpand/backend:release-3.39.21
+      frontend:
+        image: aixpand/investigator:optizone-0.89.19
+      summary: |
+        fix camera backend LMS->FFMPEG flip on edit
+        add node-scoped "Reset all cameras" special command
+        backend release-3.39.21, frontend 0.89.19
+
     3.28.22:
       backend:
         # ESM boot-crash hotfix. CONFIRM the actual tag produced by the hotfix
