@@ -9,14 +9,31 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.22:
+      backend:
+        # ESM boot-crash hotfix. CONFIRM the actual tag produced by the hotfix
+        # PR merge before releasing — 3.39.20 is the expected next tag.
+        image: aixpand/backend:release-3.39.20
+      frontend:
+        image: aixpand/investigator:banksight-0.89.18
+      summary: |
+        supersedes BUGGED 3.28.21 — backend ESM boot-crash hotfix
+        update backend to 3.39.20 (do NOT use release-3.39.18/19)
+        frontend 0.89.18 unchanged
+
     3.28.21:
+      # BUGGED: backend release-3.39.19 crash-loops at boot (ESM circular
+      # dependency). Frozen per the release ledger — superseded by 3.28.22.
+      # No environment must point here; the deploy loader only fetches versions
+      # referenced by a release.yaml env pointer.
+      bugged: true
       backend:
         image: aixpand/backend:release-3.39.19
       frontend:
         image: aixpand/investigator:banksight-0.89.18
       summary: |
-        update backend to 3.39.19
-        update frontend to 0.89.18
+        BUGGED — backend release-3.39.19 boot crash (ESM circular dep). Do not deploy.
+        Superseded by 3.28.22.
 
     3.28.20:
       backend:
