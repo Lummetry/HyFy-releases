@@ -2,13 +2,13 @@ application:
   envs:
   - info: Staging
     name: staging
-    version: 3.28.21
+    version: 3.28.20
   - info: QA
     name: qa
-    version: 3.28.21
+    version: 3.28.20
   - info: Preprod
     name: preprod
-    version: 3.28.21
+    version: 3.28.20
   - info: Prod
     name: prod
     version: 3.28.20
