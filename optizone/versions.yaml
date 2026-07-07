@@ -9,6 +9,15 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.24:
+      backend:
+        image: aixpand/backend:release-3.39.21
+      frontend:
+        image: aixpand/investigator:optizone-0.89.20
+      summary: |
+        fix "Reset all cameras": move to Device List toolbar + list REGISTERED nodes
+        backend release-3.39.21 (unchanged), frontend 0.89.20
+
     3.28.23:
       backend:
         image: aixpand/backend:release-3.39.21
