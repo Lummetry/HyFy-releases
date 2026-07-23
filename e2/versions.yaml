@@ -8,6 +8,11 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    5.1.430:
+      summary: |
+        promote PC/amd64-only E2 5.1.430 to staging and qa
+        add Optizone BAG_WATCHER and OBTURATION_WATCHER runtime aliases
+
     5.1.420:
       summary: |
         sync staging to 5.1.420 image

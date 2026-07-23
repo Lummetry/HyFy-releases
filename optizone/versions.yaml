@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.25:
+      backend:
+        image: aixpand/backend:release-3.39.24
+      frontend:
+        image: aixpand/investigator:optizone-0.89.22
+      summary: |
+        enable AI plugin grouping in Optizone with consistency and authorization fixes
+        add Optizone bag and obturation watcher aliases
+        add durable stale-node dashboard suppression with automatic online return
+        backend release-3.39.24, frontend 0.89.22
+
     3.28.24:
       backend:
         image: aixpand/backend:release-3.39.21
