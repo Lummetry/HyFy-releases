@@ -9,6 +9,19 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.26:
+      backend:
+        image: aixpand/backend:release-3.40.0
+      frontend:
+        image: aixpand/investigator:optizone-0.89.22
+      summary: |
+        add configurable node-command encryption wire format (jsclient 4.2.0
+        dual-format: tolerant decrypt + 'flagged' python-parity encrypt) —
+        fixes silently dropped BE->E2 commands on current-SDK nodes; deploy
+        staging with AIXPAND_BC_ENCRYPT_FORMAT=flagged
+        fix: use normalized NET_MON time for node suppression
+        backend release-3.40.0, frontend 0.89.22 (unchanged)
+
     3.28.25:
       backend:
         image: aixpand/backend:release-3.39.24

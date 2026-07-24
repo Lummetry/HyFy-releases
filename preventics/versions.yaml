@@ -9,6 +9,19 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.26:
+      backend:
+        image: aixpand/backend:release-3.40.0
+      frontend:
+        image: aixpand/investigator:banksight-0.89.22
+      summary: |
+        add configurable node-command encryption wire format (jsclient 4.2.0
+        dual-format: tolerant decrypt + 'flagged' python-parity encrypt);
+        inert while Preventics runs AIXPAND_BC_ENCRYPT=0 but keeps the
+        backend fleet consistent and ready for encrypted commands
+        fix: use normalized NET_MON time for node suppression
+        backend release-3.40.0, frontend 0.89.22 (unchanged)
+
     3.28.25:
       backend:
         image: aixpand/backend:release-3.39.24
