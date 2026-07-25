@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.27:
+      backend:
+        image: aixpand/backend:release-3.40.1
+      frontend:
+        image: aixpand/investigator:optizone-0.89.22
+      summary: |
+        default node-command encryption wire format to 'flagged' in backend
+        config (no env var needed; explicit 'legacy' override remains for
+        old-SDK fleets) — completes the jsclient 4.2.0 dual-format fix
+        backend release-3.40.1, frontend unchanged
+
     3.28.26:
       backend:
         image: aixpand/backend:release-3.40.0
