@@ -8,6 +8,13 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    5.1.440:
+      summary: |
+        promote PC/amd64-only E2 5.1.440 to staging and qa
+        add opt-in uniform-color staff exclusion to PEOPLE_COUNTING_02 and the
+        people-presence plugin family with DISABLED/SHADOW/ACTIVE modes,
+        raw/excluded/unknown audit counters, and calibration witness annotations
+
     5.1.430:
       summary: |
         promote PC/amd64-only E2 5.1.430 to staging and qa

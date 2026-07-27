@@ -9,6 +9,26 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.28:
+      backend:
+        image: aixpand/backend:release-3.41.2
+      frontend:
+        image: aixpand/investigator:banksight-0.90.2
+      summary: |
+        add ONLINE/LOST STATUS dashboard filtering, restrict dashboard suppression
+        to exact LOST STATUS nodes, and copy individual log cards
+        make plugin metadata cleanup durable, tenant-safe, and exact-session correlated
+        expose PEOPLE_PRESENCE_01
+        add the HSV color-range picker and backend schemas for opt-in uniform-color
+        staff exclusion across PEOPLE_COUNTING_02 and people-presence plugins;
+        runtime activation requires a separate E2 semantic release containing
+        the color-exclusion runtime
+        show FE/BE versions on login and improve browser credential autofill
+        reconcile camera state after E2 pipeline failures and redact URL credentials
+        live Oracle migration validation is required before promotion to any
+        Oracle-backed environment
+        backend release-3.41.2, frontend 0.90.2
+
     3.28.27:
       backend:
         image: aixpand/backend:release-3.40.1
