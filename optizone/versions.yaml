@@ -9,6 +9,19 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.29:
+      backend:
+        image: aixpand/backend:release-3.41.3
+      frontend:
+        image: aixpand/investigator:optizone-0.90.3
+      summary: |
+        accept SDK no-command results for runtime-neutral plugin-group topology
+        changes while keeping published E2 acknowledgements fail-closed
+        add ticket-ready operator diagnostics with copy-all logs, UTC and
+        application/runtime context, structured plugin-group operation details,
+        secret and URL-query redaction, and correct empty HTTP error handling
+        backend release-3.41.3, frontend 0.90.3
+
     3.28.28:
       backend:
         image: aixpand/backend:release-3.41.2
