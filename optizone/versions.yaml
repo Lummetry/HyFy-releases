@@ -9,6 +9,19 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.31:
+      backend:
+        image: aixpand/backend:release-3.43.0
+      frontend:
+        image: aixpand/investigator:optizone-0.93.0
+      summary: |
+        make the left navigation collapsible to an 86px icon rail, with the
+        active section's subitems shown as nested icons and the expanded or
+        collapsed choice remembered across sessions
+        add the cropped-clone meta-stream capture front-end (frontend 0.92.0,
+        not previously released)
+        backend release-3.43.0 unchanged, frontend 0.93.0
+
     3.28.30:
       backend:
         image: aixpand/backend:release-3.43.0
