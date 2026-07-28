@@ -9,6 +9,21 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.30:
+      backend:
+        image: aixpand/backend:release-3.43.0
+      frontend:
+        image: aixpand/investigator:banksight-0.91.0
+      summary: |
+        add camera area-of-interest cropping with a snapshot rectangle picker,
+        strict FE/BE crop validation, backend-specific E2 stream configuration,
+        and confirmed camera relaunch when crop geometry changes
+        add localized EN/RO tooltips and accessible labels for operator-facing
+        icon controls across the application
+        live Oracle migration validation remains required before promotion to
+        any Oracle-backed environment
+        backend release-3.43.0, frontend 0.91.0; E2 unchanged
+
     3.28.29:
       backend:
         image: aixpand/backend:release-3.41.3
