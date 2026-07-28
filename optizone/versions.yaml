@@ -9,6 +9,23 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.32:
+      backend:
+        image: aixpand/backend:release-3.44.1
+      frontend:
+        image: aixpand/investigator:optizone-1.0.0
+      summary: |
+        first 1.x front-end release
+        add a "Click for node commands" hint on the node dashboard, whose node
+        name cell was actionable with no visible affordance
+        resolve 16 operator-facing labels that rendered as raw keys such as
+        en:collapse_navigation_menu; translations are served by the backend
+        from its own definitions, so these required backend release-3.44.1 and
+        could not be fixed in the front-end
+        supersedes 3.28.31, whose side-nav collapse control shipped without a
+        resolvable tooltip label
+        backend release-3.44.1, frontend 1.0.0
+
     3.28.31:
       backend:
         image: aixpand/backend:release-3.44.0
