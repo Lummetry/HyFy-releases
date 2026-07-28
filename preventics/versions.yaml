@@ -11,7 +11,7 @@ application:
   versions:
     3.28.31:
       backend:
-        image: aixpand/backend:release-3.43.0
+        image: aixpand/backend:release-3.44.0
       frontend:
         image: aixpand/investigator:banksight-0.93.0
       summary: |
@@ -20,7 +20,10 @@ application:
         collapsed choice remembered across sessions
         add the cropped-clone meta-stream capture front-end (frontend 0.92.0,
         not previously released)
-        backend release-3.43.0 unchanged, frontend 0.93.0
+        backend release-3.44.0 supplies the clone_as_cropped_camera label that
+        release-3.43.0 lacked; translations are served by the backend, so the
+        front-end alone cannot resolve that string
+        backend release-3.44.0, frontend 0.93.0
 
     3.28.30:
       backend:
