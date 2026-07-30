@@ -1,5 +1,7 @@
 # Hyfy Releases Repository README.md
 
+> Internal yet public repo of Hyperfy
+
 ## Grant Announcement
 
 This repository was made possible through the generous support of the research grant obtained from the project:
