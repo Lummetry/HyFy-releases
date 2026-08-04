@@ -9,6 +9,26 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.33:
+      backend:
+        image: aixpand/backend:release-3.44.5
+      frontend:
+        image: aixpand/investigator:banksight-1.0.2
+      summary: |
+        complete cropped-clone camera capture across FE, BE, and E2 with strict
+        crop-region handling, live-view session recovery, and bounded cleanup
+        add ticket-ready operator diagnostics that retain actionable backend
+        and E2 failure reasons while redacting credentials
+        harden camera, plugin-group, and pipeline lifecycle mutations with
+        shared edge locking, strict acknowledgements, transactional metadata
+        and status writes, correlated archive handling, and bounded retries
+        cumulative over backend 3.44.2-3.44.5 and frontend 1.0.1-1.0.2
+        requires E2 5.1.460 on the target node before cropped-clone cameras are
+        created
+        live Oracle validation remains required before promotion to an
+        Oracle-backed environment
+        backend release-3.44.5, frontend 1.0.2
+
     3.28.32:
       backend:
         image: aixpand/backend:release-3.44.1

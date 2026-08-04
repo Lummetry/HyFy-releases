@@ -8,6 +8,17 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    5.1.460:
+      summary: |
+        add the same-node CropMetaStream runtime used by cropped-clone cameras,
+        avoiding a second RTSP session and decode for each crop
+        validate and safely clamp crop bounds, drop unusable frames, preserve
+        downstream crop geometry, and copy slices to avoid retaining full
+        parent frames in plugin queues
+        harden degraded-crop reporting and credential-safe FFMPEG URL handling
+        include and supersede the unpublished 5.1.450 runtime
+        promote PC/amd64-only E2 5.1.460 to staging and qa
+
     5.1.440:
       summary: |
         promote PC/amd64-only E2 5.1.440 to staging and qa
