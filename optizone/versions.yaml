@@ -9,6 +9,19 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.34:
+      backend:
+        image: aixpand/backend:release-3.44.6
+      frontend:
+        image: aixpand/investigator:optizone-1.0.4
+      summary: |
+        open the crop rectangle picker immediately when a camera is cloned as a
+        cropped camera, instead of leaving the operator on an empty coordinate
+        form
+        default a location's timezone when none is supplied so partition
+        scheduling resolves consistently
+        backend release-3.44.6, frontend 1.0.4
+
     3.28.33:
       backend:
         image: aixpand/backend:release-3.44.5
