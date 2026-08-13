@@ -9,6 +9,23 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.35:
+      backend:
+        image: aixpand/backend:release-3.44.9
+      frontend:
+        image: aixpand/investigator:optizone-1.0.7
+      summary: |
+        add tenant-scoped WhatsApp group delivery for AI-plugin alerts, with
+        signed webhooks, bounded retry, duplicate and cooldown controls,
+        paired raise/all-clear delivery, and first-taker acknowledgement
+        add WhatsApp group selection to plugin configuration; delivery remains
+        disabled until the backend receives explicit Meta credentials and
+        WHATSAPP_ENABLED=1, and still requires live Meta API validation
+        restore the AI Plugins Cameras list when a non-threaded E2 meta stream
+        reports numeric RUNSTATS instead of a text status log
+        cumulative over backend 3.44.7-3.44.9 and frontend 1.0.5-1.0.7
+        backend release-3.44.9, frontend 1.0.7; E2 unchanged
+
     3.28.34:
       backend:
         image: aixpand/backend:release-3.44.6
