@@ -9,6 +9,19 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.36:
+      backend:
+        image: aixpand/backend:release-3.44.10
+      frontend:
+        image: aixpand/investigator:optizone-1.0.8
+      summary: |
+        show field-level equipment and equipment-action validation failures in
+        the existing operator log cards, including HTTP status and request path
+        retain bounded, redacted backend validation details while excluding raw
+        DTO values and stack traces from the copied diagnostic
+        label copied log-card detail as Description for ticket-ready output
+        backend release-3.44.10, frontend 1.0.8; E2 unchanged
+
     3.28.35:
       backend:
         image: aixpand/backend:release-3.44.9
