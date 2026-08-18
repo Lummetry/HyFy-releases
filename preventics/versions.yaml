@@ -9,6 +9,25 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.37:
+      backend:
+        image: aixpand/backend:release-3.44.11
+      frontend:
+        image: aixpand/investigator:banksight-1.0.8
+      summary: |
+        keep a partition zone's schedule metadata in sync when the partition is
+        repointed at another schedule, so editing one schedule can no longer
+        rewrite the working hours of a partition that uses a different one
+        make live partition membership the ownership authority in the schedule
+        listener instead of the denormalized copy on the plugin marker
+        skip absent runtime instances in all schedule-update loops and in the
+        delete-service artefact sync, which previously aborted the whole batch
+        persist the partition row before reconciling its zones and report a
+        reconciliation failure instead of dropping it
+        data migration realigns already-diverged plugin schedule metadata;
+        the Oracle migration was executed against Oracle XE 21 before release
+        backend release-3.44.11, frontend 1.0.8 unchanged; E2 unchanged
+
     3.28.36:
       backend:
         image: aixpand/backend:release-3.44.10
