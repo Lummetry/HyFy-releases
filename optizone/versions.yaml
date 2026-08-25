@@ -9,6 +9,21 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.38:
+      backend:
+        image: aixpand/backend:release-3.44.13
+      frontend:
+        image: aixpand/investigator:optizone-1.0.9
+      summary: |
+        add the first warehouse plugin, Warehouse Corridor Safety, backed by a
+        dedicated single-class warehouse-object detector
+        require an operator-drawn target zone in the UI and use the standard
+        CVPlugin zone-intersection and ALERTER confirmation-time contracts
+        default alert raise/lower confirmation to 15/10 seconds
+        requires E2 5.1.480 and the canonical warehouse model object before
+        warehouse plugin instances are activated on target nodes
+        backend release-3.44.13, frontend 1.0.9
+
     3.28.37:
       backend:
         image: aixpand/backend:release-3.44.11

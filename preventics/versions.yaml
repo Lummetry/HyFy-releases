@@ -9,6 +9,19 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.38:
+      backend:
+        image: aixpand/backend:release-3.44.13
+      frontend:
+        image: aixpand/investigator:banksight-1.0.9
+      summary: |
+        keep Preventics staging and qa aligned with the shared backend and
+        frontend warehouse release pair
+        include the generic UI save gate for schema-required target polygons;
+        Warehouse Corridor Safety remains hidden because its backend schema is
+        explicitly tagged for Optizone only
+        backend release-3.44.13, frontend 1.0.9
+
     3.28.37:
       backend:
         image: aixpand/backend:release-3.44.11

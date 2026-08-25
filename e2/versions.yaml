@@ -8,6 +8,16 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    5.1.480:
+      summary: |
+        add the dedicated warehouse-object TorchScript serving process and the
+        first Warehouse Corridor Safety business plugin
+        use the standard CVPlugin zone-intersection and ALERTER contracts with
+        15-second raise and 10-second lower confirmation defaults
+        load the canonical 20260825_102509_hyfy_whod_y26_v5m.ths model from
+        the WAREHOUSE model namespace
+        promote PC/amd64-only E2 5.1.480 to staging and qa
+
     5.1.460:
       summary: |
         add the same-node CropMetaStream runtime used by cropped-clone cameras,
