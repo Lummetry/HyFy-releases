@@ -9,6 +9,34 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.39:
+      backend:
+        image: aixpand/backend:release-3.44.17
+      frontend:
+        image: aixpand/investigator:optizone-1.0.11
+      summary: |
+        complete the WhatsApp alert-group lifecycle: asynchronous Meta group
+        creation with durable request-id correlation and lifecycle buffering,
+        approval-required joins decided against the tenant allowlist,
+        revision-guarded allowlist edits with fail-closed membership
+        remediation, a leased durable webhook inbox and an outbound delivery
+        ledger with provider status and first-taker acknowledgement
+        add operator recovery paths: invite-link fallback through the Groups
+        API, abandon of a submitted group whose lifecycle result never
+        arrived, archive of a group known at Meta but missing its link, and
+        count-only evidence of inbound group messages (no message content is
+        stored)
+        add the tenant-scoped WhatsApp groups settings screen and editor, and
+        a per-alert WhatsApp delivery-status view on the alerts list, in the
+        investigator UI
+        delivery stays disabled until the backend receives the four Meta
+        secrets and WHATSAPP_ENABLED=1; database migrations run on backend
+        start
+        released as a pair with Preventics 3.28.39 on the same backend image;
+        the staging WhatsApp pilot itself runs on Optizone only
+        cumulative over backend 3.44.14-3.44.17 and frontend 1.0.10-1.0.11
+        backend release-3.44.17, frontend 1.0.11; E2 unchanged
+
     3.28.38:
       backend:
         image: aixpand/backend:release-3.44.13
