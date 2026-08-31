@@ -9,6 +9,20 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.40:
+      backend:
+        image: aixpand/backend:release-3.45.0
+      frontend:
+        image: aixpand/investigator:banksight-1.0.11
+      summary: |
+        keep Preventics staging and qa aligned with the shared backend
+        release pair
+        stop the WhatsApp webhook handlers from returning the live Express
+        response (per-delivery serializer errors) and add the transient
+        direct-message echo reply; both inert while WHATSAPP_ENABLED=0
+        no schema changes
+        backend release-3.45.0, frontend 1.0.11 unchanged; E2 unchanged
+
     3.28.39:
       backend:
         image: aixpand/backend:release-3.44.17

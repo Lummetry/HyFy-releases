@@ -9,6 +9,24 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.40:
+      backend:
+        image: aixpand/backend:release-3.45.0
+      frontend:
+        image: aixpand/investigator:optizone-1.0.11
+      summary: |
+        stop the WhatsApp webhook handlers from returning the live Express
+        response, which made the global serializer throw and double-finish
+        the reply on every Meta delivery
+        reply to any text sent directly to the business number with
+        '[number] send "..." to Hyfy Agent.' — transient only: the sender's
+        number and text are never persisted or logged, redeliveries are
+        deduplicated via a hashed Redis claim, and the reply never delays
+        Meta's acknowledgement
+        no schema changes; delivery remains disabled without the four Meta
+        secrets and WHATSAPP_ENABLED=1
+        backend release-3.45.0, frontend 1.0.11 unchanged; E2 unchanged
+
     3.28.39:
       backend:
         image: aixpand/backend:release-3.44.17
