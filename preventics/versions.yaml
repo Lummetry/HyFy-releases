@@ -9,6 +9,21 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.41:
+      backend:
+        image: aixpand/backend:release-3.45.1
+      frontend:
+        image: aixpand/investigator:banksight-1.0.11
+      summary: |
+        keep Preventics staging and qa aligned with the shared backend
+        release pair
+        send WhatsApp Cloud API messages form-encoded instead of JSON — Meta's
+        JSON request pipeline rejects this account's sends with an internal
+        error while the identical form-encoded request is accepted
+        retain the numeric provider error code from failed delivery status
+        webhooks; no schema changes; delivery inert while WHATSAPP_ENABLED=0
+        backend release-3.45.1, frontend 1.0.11 unchanged; E2 unchanged
+
     3.28.40:
       backend:
         image: aixpand/backend:release-3.45.0

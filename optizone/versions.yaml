@@ -9,6 +9,22 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.41:
+      backend:
+        image: aixpand/backend:release-3.45.1
+      frontend:
+        image: aixpand/investigator:optizone-1.0.11
+      summary: |
+        send WhatsApp Cloud API messages form-encoded instead of JSON — Meta's
+        JSON request pipeline rejects this account's sends with an internal
+        error while the identical form-encoded request is accepted
+        retain the numeric provider error code from failed delivery status
+        webhooks (code-only log plus durable inbox payload) so delivery
+        failures are diagnosable; the ledger failureReason stays within its
+        existing contract
+        no schema changes; delivery behavior otherwise unchanged
+        backend release-3.45.1, frontend 1.0.11 unchanged; E2 unchanged
+
     3.28.40:
       backend:
         image: aixpand/backend:release-3.45.0
