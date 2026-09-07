@@ -9,6 +9,27 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.44:
+      backend:
+        image: aixpand/backend:release-3.46.2
+      frontend:
+        image: aixpand/investigator:optizone-1.0.13
+      summary: |
+        always show the WhatsApp indicator beside each Alert witness, grey
+        with a safe explanation when delivery history is absent or unavailable;
+        existing authorized history remains accessible regardless of configuration
+        record nullable routing-state evidence for new Alerts without inventing
+        historical reasons for legacy rows; isolate WhatsApp history lookup
+        failures so they cannot break the core Alert list
+        correct WABA group management and plugin-picker tenant queries so
+        unrestricted administration works and empty or disjoint authorization
+        returns no rows instead of a PostgreSQL invalid-UUID query error
+        add a nullable Alert routing-state column; backend startup runs the
+        driver-specific migration before serving requests
+        no change to Meta eligibility, message sending or witness retention;
+        existing missing witness metadata is not restored
+        backend release-3.46.2, frontend 1.0.13; E2 unchanged
+
     3.28.43:
       backend:
         image: aixpand/backend:release-3.46.1

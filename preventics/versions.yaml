@@ -9,6 +9,28 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.44:
+      backend:
+        image: aixpand/backend:release-3.46.2
+      frontend:
+        image: aixpand/investigator:banksight-1.0.13
+      summary: |
+        keep Preventics staging and qa aligned with the shared WhatsApp
+        availability and tenant-query correction release pair
+        always show the WhatsApp indicator beside each Alert witness, grey
+        with a safe explanation when history is absent or unavailable;
+        existing authorized history remains accessible regardless of configuration
+        record nullable routing-state evidence for new Alerts, keep legacy
+        reasons unknown, and isolate history lookup failures from Alert listing
+        correct WABA group management and plugin-picker tenant scoping;
+        empty or disjoint authorization returns no rows without a UUID sentinel
+        add a nullable Alert routing-state column; backend startup runs the
+        driver-specific migration before serving requests
+        PostgreSQL execution and Oracle query generation are tested;
+        actual Oracle execution remains unverified
+        Meta eligibility, message sending and witness retention are unchanged
+        backend release-3.46.2, frontend 1.0.13; E2 unchanged
+
     3.28.43:
       backend:
         image: aixpand/backend:release-3.46.1
