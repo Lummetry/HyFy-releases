@@ -9,6 +9,27 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.43:
+      backend:
+        image: aixpand/backend:release-3.46.1
+      frontend:
+        image: aixpand/investigator:banksight-1.0.12
+      summary: |
+        keep Preventics staging and qa aligned with the shared alert-evidence
+        and WhatsApp delivery-visibility release pair
+        preserve Event and image references while a retained Alert still uses
+        them, preventing shorter Event retention from removing Alert witnesses
+        show WhatsApp delivery status only when the alert has delivery history
+        visible to the current operator, including failed or suppressed sends
+        keep the perimeter witness action visible but disabled with an explicit
+        missing-reference hint when no stored image reference survives; existing
+        stored images remain viewable independently of E2 availability
+        align history authorization queries and bound message-ID lookups for
+        PostgreSQL and Oracle; no schema changes or retention-duration changes
+        Oracle SQL generation is tested; live Oracle execution remains unverified
+        already deleted image references are not restored by this release
+        backend release-3.46.1, frontend 1.0.12; E2 unchanged
+
     3.28.42:
       backend:
         image: aixpand/backend:release-3.46.0
