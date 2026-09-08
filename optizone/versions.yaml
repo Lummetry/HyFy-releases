@@ -9,6 +9,31 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.45:
+      backend:
+        image: aixpand/backend:release-3.47.0
+      frontend:
+        image: aixpand/investigator:optizone-1.1.0
+      summary: |
+        add Home as the default dashboard after login and session restore,
+        preserving explicit deep links and existing navigation
+        show permission- and tenant-scoped alive registered execution engines
+        and fleet percentage, running application pipelines, connected
+        CCTV cameras, configured plugins and active tenants
+        count raised and lowered alerts and events over exact rolling windows
+        of 25 hours, 7 days and 30 days using a shared UTC reference time
+        distinguish genuine zero counts from partial, stale or unavailable data;
+        hide forbidden data and retain offline nodes in the fleet denominator
+        share a cached cluster summary between Home and Cluster Monitoring,
+        keeping missing container state unknown and retaining detail on refresh failure
+        support both themes and narrow screens with an accessible log drawer;
+        preserve existing log cards and clipboard copying, deduplicating repeated
+        Home refresh failures into one card per failure episode
+        no new migration, environment setting, telemetry producer or E2 change
+        PostgreSQL execution and Oracle query generation are tested;
+        actual Oracle execution and live fleet acceptance remain unverified
+        backend release-3.47.0, frontend 1.1.0; E2 unchanged
+
     3.28.44:
       backend:
         image: aixpand/backend:release-3.46.2
