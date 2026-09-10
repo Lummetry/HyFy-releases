@@ -9,6 +9,38 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.46:
+      backend:
+        image: aixpand/backend:release-3.49.0
+      frontend:
+        image: aixpand/investigator:optizone-1.2.2
+      summary: |
+        refresh Home with compact aligned inventory cards, a fleet ring,
+        camera and cluster health meters, meaningful status colors and
+        reduced-motion-aware transitions; preserve exact counts and permissions
+        compare raised/lowered alerts on their own common scale, keeping
+        Events as an exact independent total and retaining the full activity
+        table for 25 hours, 7 days and 30 days without extra period-switch requests
+        distinguish offline, unknown, stale and unavailable data; prioritize
+        freshness and withhold unavailable values instead of implying health
+        keep theme, language and logs controls grouped in a compact shared
+        header; repair mobile language positioning and dropdown focus/cleanup
+        improve both themes, narrow layouts, localized large values and the
+        shared Cluster summary while preserving existing log-card copying
+        include the controller-scoped Moxa Programs dialog and matching API:
+        saved-action schedules, revision-checked apply, enable/disable with
+        delayed-action draining, and latest correlated primary/delayed feedback
+        preserve draft/error states and distinguish configuration acceptance
+        and device replies from physical movement or program-wide success
+        restore dialog Back handling compatibility with production Flutter 3.22
+        managed Moxa Save & Apply requires E2 5.1.482+ in the 5.1 family;
+        it is rejected before writes on the unchanged E2 catalog version 5.1.480
+        no new database migration or environment setting; E2 promotion and
+        deployed Moxa/hardware acceptance remain separate gates
+        local Home/render and Moxa regression evidence is available;
+        live staging/qa and actual Oracle execution remain unverified
+        backend release-3.49.0, frontend 1.2.2; E2 unchanged
+
     3.28.45:
       backend:
         image: aixpand/backend:release-3.47.0
