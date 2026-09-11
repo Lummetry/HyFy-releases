@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.48:
+      backend:
+        image: aixpand/backend:release-3.49.1
+      frontend:
+        image: aixpand/investigator:banksight-1.2.3
+      summary: |
+        Fix Moxa program saves on E2 versions carrying the [legacy] GPU suffix.
+        Require E2 5.1.482+ in the 5.1 family; unknown suffixes remain rejected.
+        BE 3.49.1; FE 1.2.3 unchanged; no migration or new settings.
+        Keep existing image channels; no E2 rebuild or scheduler change.
+
     3.28.47:
       backend:
         image: aixpand/backend:release-3.49.0
