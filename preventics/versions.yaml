@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.49:
+      backend:
+        image: aixpand/backend:release-3.49.2
+      frontend:
+        image: aixpand/investigator:banksight-1.2.3
+      summary: |
+        Fix partition membership, zone edits and plugin deletion consistency.
+        Await edge outcomes; reconcile schedules without false final states.
+        BE 3.49.2; FE 1.2.3 and E2 unchanged; no migration or new settings.
+        Existing orphan members and deleted detection coverage need separate repair.
+
     3.28.48:
       backend:
         image: aixpand/backend:release-3.49.1
