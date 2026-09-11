@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.47:
+      backend:
+        image: aixpand/backend:release-3.49.0
+      frontend:
+        image: aixpand/investigator:optizone-1.2.3
+      summary: |
+        Always open Home after login or session restore, ignoring the prior page.
+        Preserve password recovery, autofill and normal authenticated navigation.
+        FE 1.2.3; BE 3.49.0 unchanged; no new settings or migration.
+        Moxa Save & Apply still requires E2 5.1.482+ (5.1 family); E2 unchanged.
+
     3.28.46:
       backend:
         image: aixpand/backend:release-3.49.0
