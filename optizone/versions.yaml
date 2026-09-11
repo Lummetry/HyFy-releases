@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.51:
+      backend:
+        image: aixpand/backend:release-3.49.4
+      frontend:
+        image: aixpand/investigator:optizone-1.2.3
+      summary: |
+        Keep partition schedule/status scans independent of slow E2 commands.
+        Recover missed schedule changes; prevent stale disarm and endless PENDING.
+        BE 3.49.4; FE 1.2.3/E2 unchanged. Adds PG/Oracle intent-time migrations.
+        Hold manual/schedule controls until all old BE replicas have exited.
+
     3.28.50:
       backend:
         image: aixpand/backend:release-3.49.3
