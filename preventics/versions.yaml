@@ -9,6 +9,16 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.50:
+      backend:
+        image: aixpand/backend:release-3.49.3
+      frontend:
+        image: aixpand/investigator:banksight-1.2.3
+      summary: |
+        Fix CAVI2 heartbeat version loss that blocked Moxa program apply.
+        Keep the E2 5.1.482+ (5.1 family) requirement and image channels.
+        BE 3.49.3; FE 1.2.3 and E2 unchanged; no migration or new settings.
+
     3.28.49:
       backend:
         image: aixpand/backend:release-3.49.2
