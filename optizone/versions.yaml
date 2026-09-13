@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.52:
+      backend:
+        image: aixpand/backend:release-3.49.6
+      frontend:
+        image: aixpand/investigator:optizone-1.2.5
+      summary: |
+        Adopt native Moxa programs and normalize explicit enable values.
+        Refresh Home status summaries and filtered equipment/alert drilldowns.
+        BE 3.49.6 / FE 1.2.5; Moxa fixes need E2 5.1.500, including legacy.
+        No new migration; core rollback risk remains, validate on simulator.
+
     3.28.51:
       backend:
         image: aixpand/backend:release-3.49.4

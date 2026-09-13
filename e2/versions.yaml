@@ -8,6 +8,13 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    5.1.500:
+      summary: |
+        Add persistent Moxa schedules, native adoption and flexible enable values.
+        Harden relay results; add simulator and opt-in video tracking export.
+        Fix blur-worker settings; PC/amd64 only, legacy updates separately.
+        Core rollback may enable a never-accepted Moxa program; risk remains.
+
     5.1.480:
       summary: |
         add the dedicated warehouse-object TorchScript serving process and the
