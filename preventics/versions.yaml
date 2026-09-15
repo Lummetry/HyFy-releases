@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.53:
+      backend:
+        image: aixpand/backend:release-3.49.8
+      frontend:
+        image: aixpand/investigator:banksight-1.2.10
+      summary: |
+        Keep delayed Moxa feedback visible after an unchanged disable finishes.
+        Optimize tables, labels and live-view rendering; correct visual regressions.
+        BE 3.49.8 / FE 1.2.10; no new migration or E2 release change.
+        Validate managed/native Moxa and browser flows on the staging simulator.
+
     3.28.52:
       backend:
         image: aixpand/backend:release-3.49.6
