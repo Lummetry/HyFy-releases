@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.55:
+      backend:
+        image: aixpand/backend:release-3.49.10
+      frontend:
+        image: aixpand/investigator:optizone-1.2.14
+      summary: |
+        Enforce tenant isolation for pipeline inventory, including empty scope.
+        BE 3.49.10 / FE 1.2.14; no new migration or E2 release change.
+        Existing camera metadata and missing-plugin recovery remain pending.
+        Native Moxa feedback needs E2 5.1.520; full acceptance remains pending.
+
     3.28.54:
       backend:
         image: aixpand/backend:release-3.49.9
