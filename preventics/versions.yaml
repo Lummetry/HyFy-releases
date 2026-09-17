@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.54:
+      backend:
+        image: aixpand/backend:release-3.49.9
+      frontend:
+        image: aixpand/investigator:banksight-1.2.14
+      summary: |
+        Correlate native Moxa batch feedback, including unchanged disable/drain.
+        Correct pipeline status, camera rendering and cropped-clone names.
+        BE 3.49.9 / FE 1.2.14; native feedback needs E2 5.1.520; no migration.
+        E2 release unchanged; full staging simulator acceptance remains pending.
+
     3.28.53:
       backend:
         image: aixpand/backend:release-3.49.8
