@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.56:
+      backend:
+        image: aixpand/backend:release-3.49.11
+      frontend:
+        image: aixpand/investigator:banksight-1.2.14
+      summary: |
+        Fix location timezone lookup for newly created scheduled plugins.
+        BE 3.49.11 / FE 1.2.14; no migration; existing schedules unchanged.
+        Telegram configuration requires a bot token and upgraded E2 plugins.
+        E2 release unchanged; Moxa staging acceptance remains pending.
+
     3.28.55:
       backend:
         image: aixpand/backend:release-3.49.10
