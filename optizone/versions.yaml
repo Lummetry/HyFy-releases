@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.57:
+      backend:
+        image: aixpand/backend:release-3.49.11
+      frontend:
+        image: aixpand/investigator:optizone-1.2.15
+      summary: |
+        Optimize fixed-height rows in alerts, events, equipment and partitions.
+        FE 1.2.15 / BE 3.49.11; no migration or E2 release change.
+        Moxa staging acceptance remains pending; existing schedules unchanged.
+        Telegram still requires a bot token and upgraded E2 plugins.
+
     3.28.56:
       backend:
         image: aixpand/backend:release-3.49.11
