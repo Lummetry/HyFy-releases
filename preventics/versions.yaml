@@ -9,6 +9,16 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.58:
+      backend:
+        image: aixpand/backend:release-3.49.12
+      frontend:
+        image: aixpand/investigator:banksight-1.2.16
+      summary: |
+        Fix full-HB checking and clarify dashboard health totals.
+        FE 1.2.16 / BE 3.49.12; no migration.
+        Moxa acceptance and Telegram rollout risks remain tracked separately.
+
     3.28.57:
       backend:
         image: aixpand/backend:release-3.49.11
