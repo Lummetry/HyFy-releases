@@ -9,6 +9,27 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.60:
+      backend:
+        image: aixpand/backend:release-3.50.0
+      frontend:
+        image: aixpand/investigator:optizone-1.3.0
+      summary: |
+        Add Telegram service support and group picker release.
+        FE 1.3.0 / BE 3.50.0; no migration or E2 release change.
+        Rollout still requires bot token and cluster egress validation.
+
+    3.28.59:
+      backend:
+        image: aixpand/backend:release-3.49.13
+      frontend:
+        image: aixpand/investigator:optizone-1.2.16
+      summary: |
+        Scope native Moxa Programs to the selected controller.
+        Preserve unresolved-target write guards and fresh apply readback.
+        BE 3.49.13 / FE 1.2.16; no migration or E2 release change.
+        Final staging simulator acceptance remains pending.
+
     3.28.58:
       backend:
         image: aixpand/backend:release-3.49.12
