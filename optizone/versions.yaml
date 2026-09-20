@@ -9,6 +9,16 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.61:
+      backend:
+        image: aixpand/backend:release-3.50.1
+      frontend:
+        image: aixpand/investigator:optizone-1.3.1
+      summary: |
+        Stabilize Telegram polling and assignment-aware chat status display.
+        FE 1.3.1 / BE 3.50.1; E2 5.1.550 prepared in this handoff.
+        Rollout still requires bot token, cluster egress and Telegram discovery validation.
+
     3.28.60:
       backend:
         image: aixpand/backend:release-3.50.0

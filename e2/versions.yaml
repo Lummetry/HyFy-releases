@@ -8,6 +8,12 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    5.1.550:
+      summary: |
+        Promote E2 5.1.550 to staging and qa.
+        Includes latest Moxa programmer fixes over 5.1.540.
+        Validate native Moxa acceptance and Telegram runtime paths after rollout.
+
     5.1.540:
       summary: |
         Promote E2 5.1.540 to staging and qa.
