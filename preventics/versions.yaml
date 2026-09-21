@@ -9,6 +9,16 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.63:
+      backend:
+        image: aixpand/backend:release-3.51.1
+      frontend:
+        image: aixpand/investigator:banksight-1.4.1
+      summary: |
+        Apply latest Telegram follow-up fixes for bot-handle flows.
+        BE 3.51.1 / FE 1.4.1; E2 remains 5.1.550.
+        Validate Telegram bot identity and group assignment state after rollout.
+
     3.28.62:
       backend:
         image: aixpand/backend:release-3.50.2
