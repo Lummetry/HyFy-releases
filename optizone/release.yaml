@@ -2,10 +2,10 @@ application:
   envs:
   - info: Staging
     name: staging
-    version: 3.28.63
+    version: 3.28.64
   - info: QA
     name: qa
-    version: 3.28.63
+    version: 3.28.64
   - info: Preprod
     name: preprod
     version: 3.28.63
