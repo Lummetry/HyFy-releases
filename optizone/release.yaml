@@ -11,6 +11,6 @@ application:
     version: 3.28.66
   - info: Prod
     name: prod
-    version: 3.28.64
+    version: 3.28.66
   name: Optizone
   type: k8s
