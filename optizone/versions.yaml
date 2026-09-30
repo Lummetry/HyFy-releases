@@ -9,6 +9,16 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.67:
+      backend:
+        image: aixpand/backend:release-3.52.2
+      frontend:
+        image: aixpand/investigator:optizone-1.5.1
+      summary: |
+        Fix Moxa Programs deletion and improve the programmer UI.
+        BE 3.52.2 / FE 1.5.1; BE keeps @hyfy/jsclient 4.2.3.
+        E2 unchanged; validate Moxa delete and apply flows after rollout.
+
     3.28.66:
       backend:
         image: aixpand/backend:release-3.52.1
