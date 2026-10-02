@@ -8,6 +8,13 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    5.1.570:
+      summary: |
+        Diagnose Moxa REST failures and preserve uncertain command outcomes.
+        Add simulator Disable REST mode; no automatic simulator rollout.
+        PC/amd64 only; gts-staging uses the separately built legacy image.
+        Validate alongside BE 3.52.3 / FE 1.5.2 before further promotion.
+
     5.1.550:
       summary: |
         Promote E2 5.1.550 to staging and qa.

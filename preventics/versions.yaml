@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.68:
+      backend:
+        image: aixpand/backend:release-3.52.3
+      frontend:
+        image: aixpand/investigator:banksight-1.5.2
+      summary: |
+        Show Moxa deletion blockers and support guarded native-program removal.
+        Correlate manual command outcomes without replay or false success.
+        BE 3.52.3 / FE 1.5.2; validate alongside E2 5.1.570.
+        Simulator REST-off tests require a separate simulator upgrade.
+
     3.28.67:
       backend:
         image: aixpand/backend:release-3.52.2
