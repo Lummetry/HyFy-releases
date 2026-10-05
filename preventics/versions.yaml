@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.69:
+      backend:
+        image: aixpand/backend:release-3.52.4
+      frontend:
+        image: aixpand/investigator:banksight-1.5.3
+      summary: |
+        Guard controller deletion and expose scoped orphan-program recovery.
+        BE 3.52.4 / FE 1.5.3; paired with E2 5.1.580.
+        Validate deletion, uncertain removal and controller recreation after rollout.
+        Simulator upgrade and guarded live acceptance remain separate gates.
+
     3.28.68:
       backend:
         image: aixpand/backend:release-3.52.3

@@ -8,6 +8,13 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    5.1.580:
+      summary: |
+        Accept Moxa counter-mode DI rows without fabricating a binary status.
+        Keep normal digital-input validation and native counter fields intact.
+        PC/amd64 only; gts-staging uses the separately built legacy image.
+        Validate alongside BE 3.52.4 / FE 1.5.3; simulator rollout remains separate.
+
     5.1.570:
       summary: |
         Diagnose Moxa REST failures and preserve uncertain command outcomes.
