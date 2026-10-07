@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.70:
+      backend:
+        image: aixpand/backend:release-3.52.6
+      frontend:
+        image: aixpand/investigator:banksight-1.5.5
+      summary: |
+        Isolate Moxa program pipelines and enforce tenant-scoped equipment mutations.
+        Preserve programmer drafts and recover deleted program selections.
+        BE 3.52.6 / FE 1.5.5; paired with E2 5.1.610.
+        Legacy migration is explicit; validate recovery and concurrent programs after rollout.
+
     3.28.69:
       backend:
         image: aixpand/backend:release-3.52.4

@@ -8,6 +8,13 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    5.1.610:
+      summary: |
+        Serialize local Moxa delivery and support isolated programmer pipelines.
+        Recover compatible pre-upgrade caches without replaying uncertain commands.
+        PC/amd64 only; gts-staging uses a separately built legacy image.
+        Use with BE 3.52.6 / FE 1.5.5; validate simulator flows after rollout.
+
     5.1.580:
       summary: |
         Accept Moxa counter-mode DI rows without fabricating a binary status.
