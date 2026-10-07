@@ -8,7 +8,7 @@ application:
     version: 5.1.580
   - info: preprod environment
     name: preprod
-    version: 5.1.550
+    version: 5.1.580
   - info: prod environment
     name: prod
     version: 5.1.420
