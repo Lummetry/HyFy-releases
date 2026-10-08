@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.73:
+      backend:
+        image: aixpand/backend:release-3.52.9
+      frontend:
+        image: aixpand/investigator:banksight-1.5.8
+      summary: |
+        Show selected Moxa program context with exact pipeline identity.
+        Keep requested Enabled separate from runtime; pending/read failures show Unknown.
+        BE 3.52.9 / FE 1.5.8; run settings DB migrations before BE startup.
+        E2 5.1.610 unchanged; validate layout and re-prove rollout security.
+
     3.28.72:
       backend:
         image: aixpand/backend:release-3.52.8
