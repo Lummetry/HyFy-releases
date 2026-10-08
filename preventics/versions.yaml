@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.72:
+      backend:
+        image: aixpand/backend:release-3.52.8
+      frontend:
+        image: aixpand/investigator:banksight-1.5.7
+      summary: |
+        Add named Moxa Programs workspace and explicit disabled/drained migration.
+        Add super-admin REST_CUSTOM_EXEC_01 defaults for future pipelines.
+        BE 3.52.8 / FE 1.5.7; run settings DB migrations before BE startup.
+        Defaults preserve existing pipelines; re-prove security and validate settings/migration.
+
     3.28.71:
       backend:
         image: aixpand/backend:release-3.52.7
