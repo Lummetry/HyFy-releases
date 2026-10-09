@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.74:
+      backend:
+        image: aixpand/backend:release-3.52.9
+      frontend:
+        image: aixpand/investigator:optizone-1.5.9
+      summary: |
+        Fix Moxa Follow-up actions freezing newly inserted Delay controls.
+        Polish Programs action outlines, selection and accessible context rows.
+        FE 1.5.9; BE 3.52.9 / E2 5.1.610 remain unchanged.
+        Prior settings DB migrations required; security/live acceptance remain gated.
+
     3.28.73:
       backend:
         image: aixpand/backend:release-3.52.9
