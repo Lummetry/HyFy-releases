@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.75:
+      backend:
+        image: aixpand/backend:release-3.52.10
+      frontend:
+        image: aixpand/investigator:banksight-1.5.10
+      summary: |
+        Show still-open alerts opened in the last 48h plus retained overall backlog.
+        Preserve tenant-scoped drilldowns and UTC dates across paging/history.
+        BE 3.52.10 / FE 1.5.10; roll out BE first; E2 remains 5.1.610.
+        Run prior settings DB migrations before BE; security/live acceptance remain gated.
+
     3.28.74:
       backend:
         image: aixpand/backend:release-3.52.9
