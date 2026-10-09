@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.76:
+      backend:
+        image: aixpand/backend:release-3.52.11
+      frontend:
+        image: aixpand/investigator:banksight-1.5.11
+      summary: |
+        Exclude VIEW_SCENE from new partition choices; preserve snapshots and legacy removal.
+        Explain Moxa action labels and show selected relay writes inline, not live relay state.
+        BE 3.52.11 / FE 1.5.11; E2 remains 5.1.610.
+        Prior settings DB migrations required; security/live acceptance remain gated.
+
     3.28.75:
       backend:
         image: aixpand/backend:release-3.52.10
