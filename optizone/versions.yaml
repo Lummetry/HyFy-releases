@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.78:
+      backend:
+        image: aixpand/backend:release-3.52.14
+      frontend:
+        image: aixpand/investigator:optizone-1.5.12
+      summary: |
+        Fix plugin schema ranges, save errors and refresh feedback.
+        Verify fresh runtime baselines; unchanged saves send no config command.
+        BE 3.52.14 / FE 1.5.12; edited saves require strict ACKs; pair E2 5.1.630.
+        Prior DB migrations; trusted cross-tenant Cavi publishers only; security/live gates remain.
+
     3.28.77:
       backend:
         image: aixpand/backend:release-3.52.13
