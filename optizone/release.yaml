@@ -8,9 +8,9 @@ application:
     version: 3.28.79
   - info: Preprod
     name: preprod
-    version: 3.28.78
+    version: 3.28.79
   - info: Prod
     name: prod
-    version: 3.28.78
+    version: 3.28.79
   name: Optizone
   type: k8s
