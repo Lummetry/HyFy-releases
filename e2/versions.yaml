@@ -8,6 +8,13 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    5.1.640:
+      summary: |
+        Default to 100 SHM slots per worker with core 7.7.330 strict lifecycle support.
+        Budget about 1.14 GiB logical SHM per worker; verify aggregate host/container limits.
+        PC/amd64 only; legacy GTS separate. Pair with BE 3.52.15 / FE 1.5.12.
+        Verify effective settings and cleanup; live/performance and physical acceptance remain gated.
+
     5.1.630:
       summary: |
         Rebuild E2 5.1.630 from main; retain safe Moxa PUT diagnostics.
