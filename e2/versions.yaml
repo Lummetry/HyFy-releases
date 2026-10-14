@@ -8,6 +8,13 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    5.1.620:
+      summary: |
+        Add monotonic Moxa PUT duration and safe UUID-bound outcome diagnostics.
+        Keep relay requests, outcome/context contracts and no-retry behavior unchanged.
+        PC/amd64 only; legacy GTS image remains separate. Pair with BE 3.52.13.
+        Verify installed core provenance; simulator/live acceptance remain gated.
+
     5.1.610:
       summary: |
         Serialize local Moxa delivery and support isolated programmer pipelines.

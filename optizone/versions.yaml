@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.77:
+      backend:
+        image: aixpand/backend:release-3.52.13
+      frontend:
+        image: aixpand/investigator:optizone-1.5.11
+      summary: |
+        Repair trusted Cavi MQTT actions and correlate receipts with Moxa command feedback.
+        Pair BE 3.52.13 / FE 1.5.11 with E2 5.1.620 safe PUT timing and outcome logs.
+        Restrict Cavi publishing to trusted cross-tenant principals; no physical-state proof.
+        Prior settings DB migrations required; security/live acceptance remain gated.
+
     3.28.76:
       backend:
         image: aixpand/backend:release-3.52.11
