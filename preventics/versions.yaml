@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.79:
+      backend:
+        image: aixpand/backend:release-3.52.15
+      frontend:
+        image: aixpand/investigator:banksight-1.5.12
+      summary: |
+        Accept unambiguous legacy Moxa ip metadata; preserve known pre-send rejection.
+        Avoid stale partition duplicate writes and show bounded mutation-lock failures.
+        BE 3.52.15 / FE 1.5.12; semantic E2 remains 5.1.630.
+        Prior DB migrations; trusted cross-tenant Cavi publishers only; security/live gates remain.
+
     3.28.78:
       backend:
         image: aixpand/backend:release-3.52.14
