@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.80:
+      backend:
+        image: aixpand/backend:release-3.53.0
+      frontend:
+        image: aixpand/investigator:banksight-1.5.14
+      summary: |
+        Add Second Opinion lifecycle UI/BE and align FE production Flutter builds.
+        Apply prior and SOA DB migrations; deploy BE 3.53.0 before FE 1.5.14.
+        E2 remains 5.1.640; SOA activation needs newer E2 plugins; analysis unavailable.
+        Retain SOA audit on rollback; trusted Cavi publishers only; security/live gates remain.
+
     3.28.79:
       backend:
         image: aixpand/backend:release-3.52.15
