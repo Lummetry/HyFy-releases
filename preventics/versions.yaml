@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.81:
+      backend:
+        image: aixpand/backend:release-3.53.1
+      frontend:
+        image: aixpand/investigator:banksight-1.5.15
+      summary: |
+        Rename Second Opinion to AI Assessment; preserve legacy API, storage and pending operations.
+        BE 3.53.1 before FE 1.5.15; prior migrations required; no new schema migration.
+        E2 stays 5.1.640; matching plugins before activation; analysis unavailable.
+        Confirm shutdown before rollback; retain audit; trusted Cavi only; security/live gates remain.
+
     3.28.80:
       backend:
         image: aixpand/backend:release-3.53.0
