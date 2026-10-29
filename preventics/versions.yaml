@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.83:
+      backend:
+        image: aixpand/backend:release-3.53.3
+      frontend:
+        image: aixpand/investigator:banksight-1.5.17
+      summary: |
+        Make barrier status pins optional/editable; preserve required action GPIO wiring.
+        BE 3.53.3 before FE 1.5.17; reopen equipment dialogs; no new migration.
+        Prior migrations apply; E2 5.1.640 needs matching AI Assessment plugins before activation.
+        Retain audit; trusted Cavi only; existing rollout and live/physical acceptance gates remain.
+
     3.28.82:
       backend:
         image: aixpand/backend:release-3.53.2
