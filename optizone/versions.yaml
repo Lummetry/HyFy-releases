@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.84:
+      backend:
+        image: aixpand/backend:release-3.53.4
+      frontend:
+        image: aixpand/investigator:optizone-1.5.18
+      summary: |
+        Add scoped E2 Hz statistics, tenant Activate/Deactivate controls and AI Assessment copy cleanup.
+        BE 3.53.4 before FE 1.5.18; tenant deactivation does not stop E2 pipelines.
+        No new migration; prior migrations required; E2 5.1.640 needs matching plugins before activation.
+        Retain audit; trusted Cavi only; analysis unavailable; live/physical acceptance gates remain.
+
     3.28.83:
       backend:
         image: aixpand/backend:release-3.53.3
