@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.82:
+      backend:
+        image: aixpand/backend:release-3.53.2
+      frontend:
+        image: aixpand/investigator:banksight-1.5.17
+      summary: |
+        Inspect selected E2 readiness; new installs use ai_assessment and <SIGNATURE>-DEFAULT IDs.
+        Disable removes the owned pipeline; BE 3.53.2 before FE 1.5.17; one tenant per E2.
+        E2 5.1.640 unchanged; canonical/window plugins needed before activation; prior migrations required.
+        Retain audit; analysis UI unavailable; trusted Cavi only; rapid-click/live acceptance unverified.
+
     3.28.81:
       backend:
         image: aixpand/backend:release-3.53.1
