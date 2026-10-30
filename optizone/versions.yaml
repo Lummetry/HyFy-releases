@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.85:
+      backend:
+        image: aixpand/backend:release-3.53.5
+      frontend:
+        image: aixpand/investigator:optizone-1.5.19
+      summary: |
+        Move E2 Hz summaries to Home; fix tenant node enumeration; compact AI Assessment status.
+        BE before FE; prior migrations required; match E2 plugins before AI Assessment activation.
+        Known Romanian 390px badge wrapping; keyboard disclosure remains unverified.
+        Retain audit; trusted Cavi only; analysis unavailable; tenant deactivation does not stop E2.
+
     3.28.84:
       backend:
         image: aixpand/backend:release-3.53.4
