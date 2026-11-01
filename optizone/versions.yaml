@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.86:
+      backend:
+        image: aixpand/backend:release-3.53.8
+      frontend:
+        image: aixpand/investigator:optizone-1.5.22
+      summary: |
+        Add AI Assessment receipt dashboard, readiness fixes and safe Moxa conversion/GPIO edits.
+        Apply prior + results-table migration before BE; BE before FE; pair E2 5.1.670.
+        Retain audit/results; trusted Cavi only; unknown native delivery blocks conversion.
+        PC/amd64 E2; legacy GTS separate; live/physical acceptance remains pending.
+
     3.28.85:
       backend:
         image: aixpand/backend:release-3.53.5

@@ -8,6 +8,13 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    5.1.670:
+      summary: |
+        Add canonical/legacy AI Assessment plugins, window input and preserved response fields.
+        Support inactive/shared Moxa schedules and guarded conversion; unknown delivery blocks.
+        PC/amd64 only; legacy GTS separate. Pair with BE 3.53.8 / FE 1.5.22.
+        Verify deployed capabilities and SHM budget; live/physical acceptance remains pending.
+
     5.1.640:
       summary: |
         Default to 100 SHM slots per worker with core 7.7.330 strict lifecycle support.
