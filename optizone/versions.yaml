@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.87:
+      backend:
+        image: aixpand/backend:release-3.53.9
+      frontend:
+        image: aixpand/investigator:optizone-1.5.23
+      summary: |
+        Add meta-horn groups; fix Moxa migration recovery and AI Assessment readiness.
+        BE before FE; no new migration; prior migrations required; retain audit/results.
+        E2 stays 5.1.670; horn groups support manual/Cavi only, not edge automation.
+        Trusted Cavi only; unknown native delivery blocks conversion; live acceptance pending.
+
     3.28.86:
       backend:
         image: aixpand/backend:release-3.53.8
