@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.89:
+      backend:
+        image: aixpand/backend:release-3.53.10
+      frontend:
+        image: aixpand/investigator:optizone-1.5.24
+      summary: |
+        Group Moxa action source and relay details into one passive information box.
+        FE-only update; selection/save/commands unchanged; BE 3.53.10 and E2 5.1.670 retained.
+        No new migration; prior migrations required; retain audit/results; trusted Cavi only.
+        Retained copies/unknown delivery need separate recovery; live acceptance pending.
+
     3.28.88:
       backend:
         image: aixpand/backend:release-3.53.10
