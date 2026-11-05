@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.90:
+      backend:
+        image: aixpand/backend:release-3.53.12
+      frontend:
+        image: aixpand/investigator:banksight-1.5.24
+      summary: |
+        Send meta-horn commands as one batch with backend-owned acknowledgements.
+        SDK remains 4.2.3; handler ACKs do not prove playback; no automatic retry.
+        FE 1.5.24 and E2 unchanged; no new migration; prior migrations required.
+        Manual/Cavi groups only; trusted Cavi; staged browser/HTTP acceptance pending.
+
     3.28.89:
       backend:
         image: aixpand/backend:release-3.53.10
