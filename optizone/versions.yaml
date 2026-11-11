@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.92:
+      backend:
+        image: aixpand/backend:release-3.53.15
+      frontend:
+        image: aixpand/investigator:optizone-1.5.26
+      summary: |
+        Defer stale-view removals; hide redundant conversion for dedicated native Moxa programs.
+        Retain queued jobs, migration reconciliation and strict ACKs; no immediate retry.
+        BE before FE; SDK 4.2.3 unchanged; retain audit; no new migration; prior migrations required.
+        Pair E2 5.1.690; trusted Cavi only; no replay; live/physical acceptance pending.
+
     3.28.91:
       backend:
         image: aixpand/backend:release-3.53.14

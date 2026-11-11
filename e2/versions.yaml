@@ -8,6 +8,13 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    5.1.690:
+      summary: |
+        Rebuild E2 5.1.690 from main; version-only repository delta.
+        Verify installed core provenance; source comparison does not prove packaged core changes.
+        PC/amd64 only; legacy GTS separate. Pair with BE 3.53.15 / FE 1.5.26.
+        Retain audit/no replay; verify SHM budget; live/physical acceptance pending.
+
     5.1.680:
       summary: |
         Separate native Moxa retirement readiness from historical outcomes; preserve audit/no replay.
