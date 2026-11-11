@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.91:
+      backend:
+        image: aixpand/backend:release-3.53.14
+      frontend:
+        image: aixpand/investigator:banksight-1.5.25
+      summary: |
+        Resolve native Moxa ownership by driver UUID; add authorized shared-address navigation.
+        BE before FE; no new migration; prior migrations required; retain audit/results.
+        Pair E2 5.1.680 for local-retirement readiness; pending work still blocks retirement.
+        No replay or physical-success claim; trusted Cavi only; live acceptance pending.
+
     3.28.90:
       backend:
         image: aixpand/backend:release-3.53.12
