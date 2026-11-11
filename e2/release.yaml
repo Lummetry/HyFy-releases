@@ -11,6 +11,6 @@ application:
     version: 5.1.680
   - info: prod environment
     name: prod
-    version: 5.1.630
+    version: 5.1.680
   name: Execution Engine
   type: edge
