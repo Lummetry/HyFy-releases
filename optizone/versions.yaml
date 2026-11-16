@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.94:
+      backend:
+        image: aixpand/backend:release-3.54.1
+      frontend:
+        image: aixpand/investigator:optizone-1.5.27
+      summary: |
+        Add trusted CAVI AI Assessment bridge, integration topics and recent receipts in FE.
+        Require publisher/reply ACLs, Redis no-eviction and generated non-sensitive pilot data.
+        Old/cache-lost generations need confirmed Disable + fresh Enable; timeouts stay unconfirmed.
+        BE before FE; no replay; QR reader 0.1.1 and prior migrations required; live checks pending.
+
     3.28.93:
       backend:
         image: aixpand/backend:release-3.54.0
