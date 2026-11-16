@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.93:
+      backend:
+        image: aixpand/backend:release-3.54.0
+      frontend:
+        image: aixpand/investigator:banksight-1.5.26
+      summary: |
+        Fix tenant-scoped result/filter queries; register QR/barcode reader for Optizone.
+        QR needs reader 0.1.1 + zxing-cpp 3.1.1; catalog E2 5.1.690 has reader 0.1.0.
+        FE 1.5.26 / SDK 4.2.3 unchanged; no new migration; prior migrations required.
+        Oracle raw-data policy unchanged; no decoded-content actions; live acceptance pending.
+
     3.28.92:
       backend:
         image: aixpand/backend:release-3.53.15
