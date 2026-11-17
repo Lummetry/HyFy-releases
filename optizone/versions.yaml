@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.95:
+      backend:
+        image: aixpand/backend:release-3.54.2
+      frontend:
+        image: aixpand/investigator:optizone-1.5.27
+      summary: |
+        Default AI Assessment uncertainty notice: 30 seconds -> 30 minutes; configurable per deployment.
+        Keep BE timeouts consistent; CAVI wait must exceed them (31 minutes for the default).
+        Timeout does not cancel/replay work or free its slot; exact late results remain accepted.
+        FE/SDK/E2 unchanged; no new migration or pipeline reset; prior ACL/Redis/QR prerequisites remain.
+
     3.28.94:
       backend:
         image: aixpand/backend:release-3.54.1
