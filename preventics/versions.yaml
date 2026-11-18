@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.96:
+      backend:
+        image: aixpand/backend:release-3.54.4
+      frontend:
+        image: aixpand/investigator:banksight-1.5.28
+      summary: |
+        CAVI replies add beVersion and e2Version (null if unknown); targets accept exact E2 names.
+        FE examples use columnar 0.2.0 input. Only canonical ACTIONs work; old aliases are rejected.
+        Pause CAVI sends; deploy BE before FE and switch inputs only with a compatible E2.
+        Accept 0.1.6 and 0.2.0 results. No migration or replay; prior ACL/Redis/QR rules still apply.
+
     3.28.95:
       backend:
         image: aixpand/backend:release-3.54.2
