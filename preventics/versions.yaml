@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.97:
+      backend:
+        image: aixpand/backend:release-3.54.7
+      frontend:
+        image: aixpand/investigator:banksight-1.5.29
+      summary: |
+        Require explicit choices for mandatory plugin settings in the editor.
+        BE reads AI Assessment 0.3.0 results and retains 0.1.6/0.2.0 support; no DB migration.
+        Deploy BE and CAVI readers before a 0.3.0 writer; E2 5.1.730 still writes 0.2.0.
+        Pause assessment sends during the switch; use canonical ACTIONs and columnar inputs.
+
     3.28.96:
       backend:
         image: aixpand/backend:release-3.54.4

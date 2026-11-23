@@ -8,6 +8,13 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    5.1.730:
+      summary: |
+        PC/amd64: improve FFmpeg backlog handling and reconnects; legacy images are separate.
+        Assessment uses canonical ACTIONs and 0.2.0 columns; SECOND_OPINION_AGENT aliases are retired.
+        Pause sends and check pipeline signatures and CAVI compatibility before switching.
+        Set QR or BARCODE and matching formats on mixed/default readers before upgrading.
+
     5.1.690:
       summary: |
         Rebuild E2 5.1.690 from main; version-only repository delta.

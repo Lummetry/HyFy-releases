@@ -9,6 +9,17 @@ application:
   envs: [staging, qa, preprod, prod]
 
   versions:
+    3.28.97:
+      backend:
+        image: aixpand/backend:release-3.54.7
+      frontend:
+        image: aixpand/investigator:optizone-1.5.29
+      summary: |
+        Choose QR or Barcode in the camera editor, including on cropped cameras.
+        Before upgrading E2, set an explicit mode and matching formats on mixed or unset readers.
+        BE reads AI Assessment 0.3.0 and legacy results; E2 5.1.730 still writes 0.2.0.
+        Deploy BE and CAVI readers before a 0.3.0 writer; no DB migration.
+
     3.28.96:
       backend:
         image: aixpand/backend:release-3.54.4
