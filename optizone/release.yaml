@@ -8,7 +8,7 @@ application:
     version: 3.28.97
   - info: Preprod
     name: preprod
-    version: 3.28.91
+    version: 3.28.97
   - info: Prod
     name: prod
     version: 3.28.91
