@@ -8,6 +8,13 @@ application:
   type: edge
   envs: [staging, qa, preprod, prod]
   versions:
+    5.1.740:
+      summary: |
+        Reader 0.3.0 adds optional Code 128 recovery on cropped cameras; off by default.
+        Enable only in BARCODE mode with Code128 as the sole format.
+        Recovery requires matching bytes on two fresh frames and emits the confirming crop.
+        Check CPU load and event latency before enabling additional cameras.
+
     5.1.730:
       summary: |
         PC/amd64: improve FFmpeg backlog handling and reconnects; legacy images are separate.
